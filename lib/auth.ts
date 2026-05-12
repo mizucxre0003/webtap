@@ -84,3 +84,24 @@ export async function validateAdminPassword(email: string, password: string) {
   const valid = await bcrypt.compare(password, admin.passwordHash);
   return valid ? admin : null;
 }
+
+export async function validateOrBootstrapAdmin(email: string, password: string) {
+  const admin = await validateAdminPassword(email, password);
+  if (admin) return admin;
+
+  const existingAdmins = await prisma.adminUser.count();
+  if (existingAdmins > 0) return null;
+
+  const envEmail = process.env.ADMIN_EMAIL;
+  const envPassword = process.env.ADMIN_PASSWORD;
+  if (!envEmail || !envPassword) return null;
+  if (email !== envEmail || password !== envPassword) return null;
+
+  return prisma.adminUser.create({
+    data: {
+      email: envEmail,
+      passwordHash: await bcrypt.hash(envPassword, 12),
+      name: "WebTap Admin",
+    },
+  });
+}

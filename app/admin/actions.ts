@@ -7,7 +7,7 @@ import {
   createSession,
   requireAdmin,
   setSessionCookie,
-  validateAdminPassword,
+  validateOrBootstrapAdmin,
 } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { advancePaymentDate } from "@/lib/finance";
@@ -38,7 +38,7 @@ export async function loginAction(formData: FormData) {
   const parsed = loginSchema.safeParse(values(formData));
   if (!parsed.success) redirect("/admin/login?error=invalid");
 
-  const admin = await validateAdminPassword(parsed.data.email, parsed.data.password);
+  const admin = await validateOrBootstrapAdmin(parsed.data.email, parsed.data.password);
   if (!admin) redirect("/admin/login?error=credentials");
 
   const token = await createSession({ adminId: admin.id, email: admin.email });
