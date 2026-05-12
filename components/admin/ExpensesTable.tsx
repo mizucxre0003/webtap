@@ -1,3 +1,5 @@
+import { deleteExpenseAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { formatDate, formatKzt } from "@/lib/utils";
 
@@ -18,7 +20,7 @@ export function ExpensesTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[860px]">
+      <table className="admin-table min-w-[960px]">
         <thead>
           <tr>
             <th>Клиент</th>
@@ -27,6 +29,7 @@ export function ExpensesTable({
             <th>Сумма</th>
             <th>Дата</th>
             <th>Комментарий</th>
+            <th>Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +41,14 @@ export function ExpensesTable({
               <td className="font-black text-red-600">{formatKzt(expense.amount)}</td>
               <td>{formatDate(expense.spentAt)}</td>
               <td>{expense.comment ?? "—"}</td>
+              <td>
+                <DeleteButton
+                  id={expense.id}
+                  action={deleteExpenseAction}
+                  compact
+                  confirmText="Удалить расход? Прибыль пересчитается."
+                />
+              </td>
             </tr>
           ))}
         </tbody>

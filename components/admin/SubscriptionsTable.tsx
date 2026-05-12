@@ -1,4 +1,5 @@
-import { updateSubscriptionStatusAction } from "@/app/admin/actions";
+import { deleteSubscriptionAction, updateSubscriptionStatusAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
@@ -23,7 +24,7 @@ export function SubscriptionsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[960px]">
+      <table className="admin-table min-w-[1040px]">
         <thead>
           <tr>
             <th>Клиент</th>
@@ -57,6 +58,12 @@ export function SubscriptionsTable({
                     </Select>
                     <Button variant="secondary" className="min-h-10 px-3">OK</Button>
                   </form>
+                  <DeleteButton
+                    id={subscription.id}
+                    action={deleteSubscriptionAction}
+                    compact
+                    confirmText="Удалить обслуживание и связанные напоминания?"
+                  />
                 </div>
               </td>
             </tr>

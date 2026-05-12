@@ -84,6 +84,12 @@ enum ReminderStatus {
   cancelled
 }
 
+enum RecurringExpenseStatus {
+  active
+  paused
+  cancelled
+}
+
 model AdminUser {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -128,6 +134,7 @@ model Client {
   payments      Payment[]
   expenses      Expense[]
   reminders     Reminder[]
+  recurringExpenses RecurringExpense[]
   noteItems     Note[]
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
@@ -154,6 +161,7 @@ model Project {
   payments        Payment[]
   expenses        Expense[]
   reminders       Reminder[]
+  recurringExpenses RecurringExpense[]
   noteItems       Note[]
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
@@ -218,6 +226,8 @@ model Expense {
   client    Client?         @relation(fields: [clientId], references: [id], onDelete: SetNull)
   projectId String?
   project   Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  recurringExpenseId String?
+  recurringExpense   RecurringExpense? @relation(fields: [recurringExpenseId], references: [id], onDelete: SetNull)
   category  ExpenseCategory @default(other)
   amount    Int
   currency  String          @default("KZT")
@@ -228,8 +238,35 @@ model Expense {
 
   @@index([clientId])
   @@index([projectId])
+  @@index([recurringExpenseId])
   @@index([category])
   @@index([spentAt])
+}
+
+model RecurringExpense {
+  id                 String                 @id @default(cuid())
+  clientId           String
+  client             Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  projectId          String
+  project            Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  category           ExpenseCategory        @default(other)
+  amount             Int
+  currency           String                 @default("KZT")
+  dayOfMonth         Int                    @default(1)
+  nextExpenseDate    DateTime
+  reminderDaysBefore Int                    @default(3)
+  status             RecurringExpenseStatus @default(active)
+  comment            String?
+  expenses           Expense[]
+  reminders          Reminder[]
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([category])
+  @@index([status])
+  @@index([nextExpenseDate])
 }
 
 model Reminder {
@@ -240,6 +277,8 @@ model Reminder {
   project        Project?       @relation(fields: [projectId], references: [id], onDelete: SetNull)
   subscriptionId String?
   subscription   Subscription?  @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  recurringExpenseId String?
+  recurringExpense   RecurringExpense? @relation(fields: [recurringExpenseId], references: [id], onDelete: SetNull)
   title          String
   description    String?
   remindAt       DateTime
@@ -252,6 +291,7 @@ model Reminder {
   @@index([clientId])
   @@index([projectId])
   @@index([subscriptionId])
+  @@index([recurringExpenseId])
   @@index([type])
   @@index([status])
   @@index([remindAt])

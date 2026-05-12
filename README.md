@@ -21,11 +21,10 @@ WHATSAPP_PHONE="77000000000"
 
 ## NeonSQL / Neon PostgreSQL
 
-1. Зайдите в Neon и создайте новый проект PostgreSQL.
-2. Создайте базу данных, например `webtap`.
-3. Откройте раздел подключения и скопируйте `DATABASE_URL`.
-4. Используйте строку формата `postgresql://...neon.tech/...?...sslmode=require`.
-5. Добавьте этот `DATABASE_URL` локально в `.env` и позже в Koyeb.
+1. Создать проект PostgreSQL в Neon.
+2. Создать базу, например `webtap`.
+3. Скопировать `DATABASE_URL` в формате `postgresql://...neon.tech/...?...sslmode=require`.
+4. Добавить `DATABASE_URL` локально в `.env` и в Koyeb environment variables.
 
 ## Локальный запуск
 
@@ -33,19 +32,15 @@ WHATSAPP_PHONE="77000000000"
 npm install
 npm run prisma:generate
 npm run prisma:migrate
-npm run prisma:seed
+npm run admin:bootstrap
 npm run dev
 ```
 
-После запуска:
+Админка: `http://localhost:3000/admin`.
 
-- публичный сайт: `http://localhost:3000`
-- админка: `http://localhost:3000/admin`
+Если таблица `AdminUser` пустая, первый успешный вход с `ADMIN_EMAIL` и `ADMIN_PASSWORD` создаст администратора автоматически. Пароль хранится только в виде hash.
 
-Администратор создаётся seed-скриптом из `ADMIN_EMAIL` и `ADMIN_PASSWORD`.
-Если таблица `AdminUser` пустая, первый успешный вход в `/admin` с `ADMIN_EMAIL` и `ADMIN_PASSWORD` также создаст администратора автоматически. Пароль хранится только в виде hash.
-
-## Prisma migrations
+## Prisma
 
 Для разработки:
 
@@ -59,26 +54,26 @@ npm run prisma:migrate
 npm run prisma:deploy
 ```
 
-Seed:
-
-```bash
-npm run prisma:seed
-```
-
 Создать или обновить только администратора из env:
 
 ```bash
 npm run admin:bootstrap
 ```
 
+Seed с demo-данными:
+
+```bash
+npm run prisma:seed
+```
+
 ## Деплой на Koyeb
 
 1. Создать базу данных в NeonSQL / Neon PostgreSQL.
-2. Скопировать `DATABASE_URL` из Neon.
+2. Скопировать `DATABASE_URL`.
 3. Создать проект на Koyeb.
-4. Подключить GitHub репозиторий с этим проектом.
+4. Подключить GitHub репозиторий.
 5. Выбрать деплой через Dockerfile.
-6. Добавить environment variables в Koyeb:
+6. Добавить environment variables:
    - `DATABASE_URL`
    - `AUTH_SECRET`
    - `APP_URL`
@@ -86,20 +81,18 @@ npm run admin:bootstrap
    - `ADMIN_PASSWORD`
    - `WHATSAPP_PHONE`
 7. Выполнить Prisma migrations. В Dockerfile уже есть `npx prisma migrate deploy` перед стартом приложения.
-8. Создать администратора через Koyeb console/job или локально с production `DATABASE_URL`: `npm run admin:bootstrap`.
-   Для demo-данных можно отдельно выполнить `npm run prisma:seed`.
-9. Задеплоить приложение на Koyeb.
-10. Открыть `/admin` и войти под `ADMIN_EMAIL` / `ADMIN_PASSWORD`.
+8. Создать администратора через Koyeb console/job: `npm run admin:bootstrap`.
+9. Открыть `/admin` и войти.
 
-## Cron для напоминаний
+## Автоматизации CRM
 
-Функция `generatePaymentReminders` запускается при открытии Dashboard и страницы напоминаний. Также есть endpoint:
-
-```text
-GET /api/cron/payment-reminders?secret=AUTH_SECRET
-```
-
-На Koyeb можно настроить cron/job или внешний cron-сервис, который будет дергать этот endpoint. Автоматические WhatsApp-сообщения не отправляются: CRM создаёт задачу и кнопку “Открыть WhatsApp”.
+- Dashboard и страница напоминаний запускают генерацию напоминаний автоматически.
+- Endpoint для внешнего cron: `GET /api/cron/payment-reminders?secret=AUTH_SECRET`.
+- Обслуживание клиента создаёт напоминания за 3 дня, в день оплаты и при просрочке.
+- В проекте можно настроить ежемесячный расход: хостинг, домен, софт, подрядчика.
+- По ежемесячным расходам CRM создаёт напоминания и даёт кнопку `Оплачено`.
+- Кнопка `Оплачено` сама создаёт расход за текущий месяц и переносит следующую дату.
+- WhatsApp-сообщения автоматически не отправляются, CRM только создаёт задачу и кнопку WhatsApp.
 
 ## Что реализовано
 
@@ -108,8 +101,10 @@ GET /api/cron/payment-reminders?secret=AUTH_SECRET
 - защищённая админка `/admin`;
 - один администратор с hash-паролем;
 - заявки, клиенты, проекты, оплаты, расходы, обслуживание, напоминания, настройки;
+- удаление заявок, клиентов, проектов, оплат, расходов, обслуживаний и напоминаний;
 - расчёт остатка оплаты запуска;
 - расчёт дохода, расходов и прибыли;
-- перенос `nextPaymentDate` после месячной или годовой оплаты обслуживания;
-- автоматические напоминания за 3 дня, в день оплаты и при просрочке;
+- перенос `nextPaymentDate` после оплаты обслуживания;
+- автоматические напоминания по обслуживанию и ежемесячным проектным расходам;
+- favicon из `Images/favicon.png`;
 - Dockerfile для Koyeb.

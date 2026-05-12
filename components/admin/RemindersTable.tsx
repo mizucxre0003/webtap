@@ -1,4 +1,5 @@
-import { updateReminderStatusAction } from "@/app/admin/actions";
+import { deleteReminderAction, updateReminderStatusAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
@@ -23,7 +24,7 @@ export function RemindersTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[960px]">
+      <table className="admin-table min-w-[1040px]">
         <thead>
           <tr>
             <th>Задача</th>
@@ -55,6 +56,12 @@ export function RemindersTable({
                     <input type="hidden" name="status" value="done" />
                     <Button variant="secondary" className="min-h-10 px-3">Готово</Button>
                   </form>
+                  <DeleteButton
+                    id={reminder.id}
+                    action={deleteReminderAction}
+                    compact
+                    confirmText="Удалить напоминание?"
+                  />
                 </div>
               </td>
             </tr>

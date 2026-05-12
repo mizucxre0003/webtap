@@ -51,6 +51,7 @@ export const reminderTypes = [
   "custom",
 ] as const;
 export const reminderStatuses = ["pending", "done", "cancelled"] as const;
+export const recurringExpenseStatuses = ["active", "paused", "cancelled"] as const;
 
 export const publicLeadSchema = z.object({
   name: z.string().trim().min(2, "Укажите имя"),
@@ -121,6 +122,7 @@ export const paymentSchema = z.object({
 export const expenseSchema = z.object({
   clientId: optionalText,
   projectId: optionalText,
+  recurringExpenseId: optionalText,
   category: z.enum(expenseCategories),
   amount: z.coerce.number().int().positive("Введите сумму"),
   currency: z.string().default("KZT"),
@@ -143,11 +145,25 @@ export const reminderSchema = z.object({
   clientId: optionalText,
   projectId: optionalText,
   subscriptionId: optionalText,
+  recurringExpenseId: optionalText,
   title: z.string().trim().min(2, "Введите заголовок"),
   description: optionalText,
   remindAt: requiredDate,
   type: z.enum(reminderTypes).default("custom"),
   status: z.enum(reminderStatuses).default("pending"),
+});
+
+export const recurringExpenseSchema = z.object({
+  clientId: z.string().min(1),
+  projectId: z.string().min(1),
+  category: z.enum(expenseCategories),
+  amount: z.coerce.number().int().positive("Введите сумму"),
+  currency: z.string().default("KZT"),
+  dayOfMonth: z.coerce.number().int().min(1).max(28).default(1),
+  nextExpenseDate: requiredDate,
+  reminderDaysBefore: z.coerce.number().int().min(0).max(14).default(3),
+  status: z.enum(recurringExpenseStatuses).default("active"),
+  comment: optionalText,
 });
 
 export const settingsSchema = z.object({

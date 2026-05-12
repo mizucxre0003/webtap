@@ -3,14 +3,14 @@ import { RemindersTable } from "@/components/admin/RemindersTable";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Form";
 import { prisma } from "@/lib/prisma";
-import { generatePaymentReminders } from "@/lib/reminders";
+import { generateAutomationReminders } from "@/lib/reminders";
 
 export default async function RemindersPage({
   searchParams,
 }: {
   searchParams: Promise<{ status?: string }>;
 }) {
-  await generatePaymentReminders();
+  await generateAutomationReminders();
   const params = await searchParams;
   const status = params.status;
   const [reminders, clients, projects, subscriptions] = await Promise.all([

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { addNoteAction, updateClientAction } from "@/app/admin/actions";
+import { addNoteAction, deleteClientAction, updateClientAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
@@ -42,6 +43,11 @@ export default async function ClientDetailsPage({
         <div className="flex gap-2">
           <StatusBadge value={client.status} />
           <WhatsAppButton phone={client.whatsapp ?? client.phone} />
+          <DeleteButton
+            id={client.id}
+            action={deleteClientAction}
+            confirmText="Удалить клиента и связанные проекты, оплаты, расходы и напоминания?"
+          />
         </div>
       </div>
 

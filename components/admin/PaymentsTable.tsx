@@ -1,3 +1,5 @@
+import { deletePaymentAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { formatDate, formatKzt } from "@/lib/utils";
@@ -20,7 +22,7 @@ export function PaymentsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[900px]">
+      <table className="admin-table min-w-[980px]">
         <thead>
           <tr>
             <th>Клиент</th>
@@ -30,6 +32,7 @@ export function PaymentsTable({
             <th>Дата</th>
             <th>Способ</th>
             <th>Комментарий</th>
+            <th>Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +45,14 @@ export function PaymentsTable({
               <td>{formatDate(payment.paidAt)}</td>
               <td>{payment.method}</td>
               <td>{payment.comment ?? "—"}</td>
+              <td>
+                <DeleteButton
+                  id={payment.id}
+                  action={deletePaymentAction}
+                  compact
+                  confirmText="Удалить оплату? Финансовые расчёты обновятся."
+                />
+              </td>
             </tr>
           ))}
         </tbody>

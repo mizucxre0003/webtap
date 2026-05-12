@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { deleteClientAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -24,7 +26,7 @@ export function ClientsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[900px]">
+      <table className="admin-table min-w-[980px]">
         <thead>
           <tr>
             <th>Клиент</th>
@@ -51,11 +53,19 @@ export function ClientsTable({
                 <td><StatusBadge value={client.status} /></td>
                 <td className="font-black">{formatKzt(income - expenses)}</td>
                 <td>{formatDate(client.createdAt)}</td>
-                <td className="flex gap-2">
-                  <WhatsAppButton phone={client.whatsapp ?? client.phone} />
-                  <Link href={`/admin/clients/${client.id}`} className="rounded-2xl bg-brand-mist px-4 py-2 text-sm font-bold text-brand-dark">
-                    Открыть
-                  </Link>
+                <td>
+                  <div className="flex flex-wrap gap-2">
+                    <WhatsAppButton phone={client.whatsapp ?? client.phone} />
+                    <Link href={`/admin/clients/${client.id}`} className="rounded-2xl bg-brand-mist px-4 py-2 text-sm font-bold text-brand-dark">
+                      Открыть
+                    </Link>
+                    <DeleteButton
+                      id={client.id}
+                      action={deleteClientAction}
+                      compact
+                      confirmText="Удалить клиента и связанные проекты, оплаты, расходы и напоминания?"
+                    />
+                  </div>
                 </td>
               </tr>
             );

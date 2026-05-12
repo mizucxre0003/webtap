@@ -2,8 +2,10 @@ import { notFound } from "next/navigation";
 import {
   addNoteAction,
   createClientFromLeadAction,
+  deleteLeadAction,
   updateLeadStatusAction,
 } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
@@ -35,6 +37,11 @@ export default async function LeadDetailsPage({
         <div className="flex gap-2">
           <StatusBadge value={lead.status} />
           <WhatsAppButton phone={lead.phone} />
+          <DeleteButton
+            id={lead.id}
+            action={deleteLeadAction}
+            confirmText="Удалить заявку вместе с заметками?"
+          />
         </div>
       </div>
 

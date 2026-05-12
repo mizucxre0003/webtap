@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { deleteProjectAction } from "@/app/admin/actions";
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { formatDate, formatKzt } from "@/lib/utils";
@@ -21,7 +23,7 @@ export function ProjectsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="admin-table min-w-[960px]">
+      <table className="admin-table min-w-[1040px]">
         <thead>
           <tr>
             <th>Проект</th>
@@ -31,6 +33,7 @@ export function ProjectsTable({
             <th>Остаток</th>
             <th>Дата запуска</th>
             <th>Сайт</th>
+            <th>Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +66,19 @@ export function ProjectsTable({
                       открыть
                     </a>
                   ) : "—"}
+                </td>
+                <td>
+                  <div className="flex flex-wrap gap-2">
+                    <Link href={`/admin/projects/${project.id}`} className="rounded-2xl bg-brand-mist px-4 py-2 text-sm font-bold text-brand-dark">
+                      Открыть
+                    </Link>
+                    <DeleteButton
+                      id={project.id}
+                      action={deleteProjectAction}
+                      compact
+                      confirmText="Удалить проект вместе с оплатами, расходами, обслуживанием и напоминаниями?"
+                    />
+                  </div>
                 </td>
               </tr>
             );

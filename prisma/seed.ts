@@ -134,6 +134,21 @@ async function main() {
     },
   });
 
+  await prisma.recurringExpense.create({
+    data: {
+      clientId: client.id,
+      projectId: project.id,
+      category: "hosting",
+      amount: 4990,
+      currency: "KZT",
+      dayOfMonth: 5,
+      nextExpenseDate: addDays(new Date(), 5),
+      reminderDaysBefore: 3,
+      status: "active",
+      comment: "Демо: ежемесячный хостинг проекта.",
+    },
+  });
+
   await prisma.reminder.create({
     data: {
       clientId: client.id,

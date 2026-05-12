@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: "WebTap — сайты для бизнеса под заявки",
   description:
     "WebTap создаёт понятные сайты и страницы для услуг, экспертов и малого бизнеса с заявками в WhatsApp.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

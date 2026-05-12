@@ -6,11 +6,11 @@ import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { getDashboardData } from "@/lib/finance";
-import { generatePaymentReminders } from "@/lib/reminders";
+import { generateAutomationReminders } from "@/lib/reminders";
 import { formatDate, formatKzt } from "@/lib/utils";
 
 export default async function AdminDashboardPage() {
-  await generatePaymentReminders();
+  await generateAutomationReminders();
   const data = await getDashboardData();
 
   return (

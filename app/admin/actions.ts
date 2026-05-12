@@ -11,6 +11,7 @@ import {
 } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { advancePaymentDate } from "@/lib/finance";
+import { nextRecurringExpenseDate } from "@/lib/reminders";
 import {
   clientSchema,
   expenseSchema,
@@ -20,6 +21,7 @@ import {
   paymentSchema,
   projectSchema,
   publicLeadSchema,
+  recurringExpenseSchema,
   reminderSchema,
   settingsSchema,
   subscriptionSchema,
@@ -210,6 +212,109 @@ export async function createExpenseAction(formData: FormData) {
   withToast("/admin/expenses", "created");
 }
 
+export async function createProjectExpenseAction(formData: FormData) {
+  await requireAdmin();
+  const projectId = String(formData.get("projectId") ?? "");
+  const project = await prisma.project.findUnique({
+    where: { id: projectId },
+    select: { id: true, title: true, clientId: true },
+  });
+  if (!project) redirect("/admin/projects");
+
+  const data = expenseSchema.parse({
+    ...values(formData),
+    clientId: project.clientId,
+    projectId: project.id,
+  });
+
+  const expense = await prisma.expense.create({ data });
+  const remindAtRaw = String(formData.get("remindAt") ?? "").trim();
+
+  if (remindAtRaw) {
+    await prisma.reminder.create({
+      data: {
+        clientId: project.clientId,
+        projectId: project.id,
+        type: "project_task",
+        status: "pending",
+        title: `Проверить расход по проекту ${project.title}`,
+        description: `Расход ${expense.category} на ${expense.amount} ₸. ${expense.comment ?? ""}`.trim(),
+        remindAt: new Date(remindAtRaw),
+      },
+    });
+  }
+
+  revalidatePath(`/admin/projects/${project.id}`);
+  revalidatePath("/admin/expenses");
+  withToast(`/admin/projects/${project.id}`, "created");
+}
+
+export async function createRecurringExpenseAction(formData: FormData) {
+  await requireAdmin();
+  const projectId = String(formData.get("projectId") ?? "");
+  const project = await prisma.project.findUnique({
+    where: { id: projectId },
+    select: { id: true, clientId: true },
+  });
+  if (!project) redirect("/admin/projects");
+
+  const data = recurringExpenseSchema.parse({
+    ...values(formData),
+    clientId: project.clientId,
+    projectId: project.id,
+  });
+
+  await prisma.recurringExpense.create({ data });
+  revalidatePath(`/admin/projects/${project.id}`);
+  withToast(`/admin/projects/${project.id}`, "created");
+}
+
+export async function markRecurringExpensePaidAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const item = await prisma.recurringExpense.findUnique({
+    where: { id },
+    include: { project: true },
+  });
+  if (!item) redirect("/admin/projects");
+
+  await prisma.$transaction([
+    prisma.expense.create({
+      data: {
+        clientId: item.clientId,
+        projectId: item.projectId,
+        recurringExpenseId: item.id,
+        category: item.category,
+        amount: item.amount,
+        currency: item.currency,
+        spentAt: item.nextExpenseDate,
+        comment: item.comment
+          ? `${item.comment} · регулярный расход`
+          : "Регулярный расход",
+      },
+    }),
+    prisma.recurringExpense.update({
+      where: { id: item.id },
+      data: {
+        nextExpenseDate: nextRecurringExpenseDate(item.nextExpenseDate, item.dayOfMonth),
+        status: "active",
+      },
+    }),
+    prisma.reminder.updateMany({
+      where: {
+        recurringExpenseId: item.id,
+        status: "pending",
+        remindAt: { lte: item.nextExpenseDate },
+      },
+      data: { status: "done" },
+    }),
+  ]);
+
+  revalidatePath(`/admin/projects/${item.projectId}`);
+  revalidatePath("/admin/expenses");
+  withToast(`/admin/projects/${item.projectId}`, "created");
+}
+
 export async function createReminderAction(formData: FormData) {
   await requireAdmin();
   const data = reminderSchema.parse(values(formData));
@@ -240,4 +345,154 @@ export async function updateSettingsAction(formData: FormData) {
 
   revalidatePath("/admin/settings");
   withToast("/admin/settings", "updated");
+}
+
+export async function deleteLeadAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.lead.delete({ where: { id } });
+  revalidatePath("/admin/leads");
+  withToast("/admin/leads", "deleted");
+}
+
+export async function deleteClientAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const [projects, subscriptions, recurringExpenses] = await Promise.all([
+    prisma.project.findMany({ where: { clientId: id }, select: { id: true } }),
+    prisma.subscription.findMany({ where: { clientId: id }, select: { id: true } }),
+    prisma.recurringExpense.findMany({ where: { clientId: id }, select: { id: true } }),
+  ]);
+  const projectIds = projects.map((item) => item.id);
+  const subscriptionIds = subscriptions.map((item) => item.id);
+  const recurringExpenseIds = recurringExpenses.map((item) => item.id);
+
+  await prisma.$transaction([
+    prisma.reminder.deleteMany({
+      where: {
+        OR: [
+          { clientId: id },
+          { projectId: { in: projectIds } },
+          { subscriptionId: { in: subscriptionIds } },
+          { recurringExpenseId: { in: recurringExpenseIds } },
+        ],
+      },
+    }),
+    prisma.expense.deleteMany({
+      where: {
+        OR: [
+          { clientId: id },
+          { projectId: { in: projectIds } },
+          { recurringExpenseId: { in: recurringExpenseIds } },
+        ],
+      },
+    }),
+    prisma.payment.deleteMany({
+      where: {
+        OR: [
+          { clientId: id },
+          { projectId: { in: projectIds } },
+          { subscriptionId: { in: subscriptionIds } },
+        ],
+      },
+    }),
+    prisma.subscription.deleteMany({ where: { clientId: id } }),
+    prisma.recurringExpense.deleteMany({ where: { clientId: id } }),
+    prisma.note.deleteMany({ where: { clientId: id } }),
+    prisma.project.deleteMany({ where: { clientId: id } }),
+    prisma.client.delete({ where: { id } }),
+  ]);
+
+  revalidatePath("/admin/clients");
+  withToast("/admin/clients", "deleted");
+}
+
+export async function deleteProjectAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const [subscriptions, recurringExpenses] = await Promise.all([
+    prisma.subscription.findMany({ where: { projectId: id }, select: { id: true } }),
+    prisma.recurringExpense.findMany({ where: { projectId: id }, select: { id: true } }),
+  ]);
+  const subscriptionIds = subscriptions.map((item) => item.id);
+  const recurringExpenseIds = recurringExpenses.map((item) => item.id);
+
+  await prisma.$transaction([
+    prisma.reminder.deleteMany({
+      where: {
+        OR: [
+          { projectId: id },
+          { subscriptionId: { in: subscriptionIds } },
+          { recurringExpenseId: { in: recurringExpenseIds } },
+        ],
+      },
+    }),
+    prisma.expense.deleteMany({
+      where: {
+        OR: [{ projectId: id }, { recurringExpenseId: { in: recurringExpenseIds } }],
+      },
+    }),
+    prisma.payment.deleteMany({
+      where: {
+        OR: [{ projectId: id }, { subscriptionId: { in: subscriptionIds } }],
+      },
+    }),
+    prisma.subscription.deleteMany({ where: { projectId: id } }),
+    prisma.recurringExpense.deleteMany({ where: { projectId: id } }),
+    prisma.note.deleteMany({ where: { projectId: id } }),
+    prisma.project.delete({ where: { id } }),
+  ]);
+
+  revalidatePath("/admin/projects");
+  withToast("/admin/projects", "deleted");
+}
+
+export async function deletePaymentAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.payment.delete({ where: { id } });
+  revalidatePath("/admin/payments");
+  withToast("/admin/payments", "deleted");
+}
+
+export async function deleteExpenseAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.expense.delete({ where: { id } });
+  revalidatePath("/admin/expenses");
+  withToast("/admin/expenses", "deleted");
+}
+
+export async function deleteSubscriptionAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.$transaction([
+    prisma.reminder.deleteMany({ where: { subscriptionId: id } }),
+    prisma.subscription.delete({ where: { id } }),
+  ]);
+  revalidatePath("/admin/subscriptions");
+  withToast("/admin/subscriptions", "deleted");
+}
+
+export async function deleteReminderAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.reminder.delete({ where: { id } });
+  revalidatePath("/admin/reminders");
+  withToast("/admin/reminders", "deleted");
+}
+
+export async function deleteRecurringExpenseAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const item = await prisma.recurringExpense.findUnique({ where: { id } });
+  if (!item) redirect("/admin/projects");
+
+  await prisma.$transaction([
+    prisma.reminder.deleteMany({ where: { recurringExpenseId: id } }),
+    prisma.recurringExpense.delete({ where: { id } }),
+  ]);
+
+  revalidatePath(`/admin/projects/${item.projectId}`);
+  withToast(`/admin/projects/${item.projectId}`, "deleted");
 }
