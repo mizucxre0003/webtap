@@ -1,0 +1,288 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  new
+  contacted
+  in_progress
+  won
+  lost
+}
+
+enum ClientStatus {
+  active
+  paused
+  archived
+}
+
+enum ProjectStatus {
+  brief
+  design
+  development
+  waiting_payment
+  launched
+  support
+  paused
+  closed
+}
+
+enum SubscriptionType {
+  monthly
+  yearly
+  none
+}
+
+enum SubscriptionStatus {
+  active
+  overdue
+  paused
+  cancelled
+}
+
+enum PaymentType {
+  launch_payment
+  monthly_support
+  yearly_support
+  extra_work
+  other
+}
+
+enum PaymentMethod {
+  cash
+  kaspi
+  bank_transfer
+  other
+}
+
+enum ExpenseCategory {
+  domain
+  hosting
+  design_assets
+  advertising
+  subcontractor
+  software
+  other
+}
+
+enum ReminderType {
+  payment_due
+  payment_overdue
+  contact_client
+  project_task
+  custom
+}
+
+enum ReminderStatus {
+  pending
+  done
+  cancelled
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("WebTap Admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Lead {
+  id            String     @id @default(cuid())
+  name          String
+  phone         String
+  businessNiche String
+  siteType      String
+  budgetRange   String
+  comment       String?
+  status        LeadStatus @default(new)
+  notes         Note[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Client {
+  id            String        @id @default(cuid())
+  name          String
+  businessName  String?
+  contactPerson String?
+  phone         String
+  whatsapp      String?
+  instagram     String?
+  email         String?
+  niche         String?
+  city          String?
+  status        ClientStatus  @default(active)
+  notes         String?
+  projects      Project[]
+  subscriptions Subscription[]
+  payments      Payment[]
+  expenses      Expense[]
+  reminders     Reminder[]
+  noteItems     Note[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Project {
+  id              String          @id @default(cuid())
+  clientId        String
+  client          Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?
+  status          ProjectStatus   @default(brief)
+  launchPrice     Int             @default(49990)
+  launchStartedAt DateTime?
+  launchedAt      DateTime?
+  websiteUrl      String?
+  domain          String?
+  hosting         String?
+  notes           String?
+  subscriptions   Subscription[]
+  payments        Payment[]
+  expenses        Expense[]
+  reminders       Reminder[]
+  noteItems       Note[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([clientId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([launchedAt])
+}
+
+model Subscription {
+  id              String             @id @default(cuid())
+  clientId        String
+  client          Client             @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  projectId       String?
+  project         Project?           @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  type            SubscriptionType   @default(monthly)
+  amount          Int                @default(4990)
+  startDate       DateTime
+  nextPaymentDate DateTime?
+  status          SubscriptionStatus @default(active)
+  notes           String?
+  payments        Payment[]
+  reminders       Reminder[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([type])
+  @@index([status])
+  @@index([nextPaymentDate])
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  clientId       String
+  client         Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  projectId      String?
+  project        Project?      @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  type           PaymentType
+  amount         Int
+  currency       String        @default("KZT")
+  paidAt         DateTime
+  method         PaymentMethod @default(kaspi)
+  comment        String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([subscriptionId])
+  @@index([type])
+  @@index([paidAt])
+}
+
+model Expense {
+  id        String          @id @default(cuid())
+  clientId  String?
+  client    Client?         @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  projectId String?
+  project   Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  category  ExpenseCategory @default(other)
+  amount    Int
+  currency  String          @default("KZT")
+  spentAt   DateTime
+  comment   String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([category])
+  @@index([spentAt])
+}
+
+model Reminder {
+  id             String         @id @default(cuid())
+  clientId       String?
+  client         Client?        @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  projectId      String?
+  project        Project?       @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  subscriptionId String?
+  subscription   Subscription?  @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  title          String
+  description    String?
+  remindAt       DateTime
+  type           ReminderType   @default(custom)
+  status         ReminderStatus @default(pending)
+  dedupeKey      String?        @unique
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([subscriptionId])
+  @@index([type])
+  @@index([status])
+  @@index([remindAt])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  body      String
+  leadId    String?
+  lead      Lead?    @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  clientId  String?
+  client    Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([clientId])
+  @@index([projectId])
+  @@index([createdAt])
+}
+
+model Settings {
+  id                         String   @id @default(cuid())
+  brandName                  String   @default("WebTap")
+  defaultLaunchPrice         Int      @default(49990)
+  defaultMonthlySupportPrice Int      @default(4990)
+  defaultYearlySupportPrice  Int      @default(51990)
+  whatsapp                   String?
+  email                      String?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+}
