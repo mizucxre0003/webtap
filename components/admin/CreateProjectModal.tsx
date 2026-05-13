@@ -1,7 +1,8 @@
 import { createProjectAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import { projectStatusOptions } from "@/lib/admin-labels";
 import { toDateInput } from "@/lib/utils";
 
 export function CreateProjectModal({
@@ -27,14 +28,9 @@ export function CreateProjectModal({
         <Label>
           Статус
           <Select name="status" defaultValue="brief">
-            <option value="brief">brief</option>
-            <option value="design">design</option>
-            <option value="development">development</option>
-            <option value="waiting_payment">waiting_payment</option>
-            <option value="launched">launched</option>
-            <option value="support">support</option>
-            <option value="paused">paused</option>
-            <option value="closed">closed</option>
+            {projectStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label>Стоимость запуска<Input name="launchPrice" type="number" defaultValue={49990} min={0} /></Label>

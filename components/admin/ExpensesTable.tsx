@@ -1,6 +1,7 @@
 import { deleteExpenseAction } from "@/app/admin/actions";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { expenseCategoryLabels, labelFrom } from "@/lib/admin-labels";
 import { formatDate, formatKzt } from "@/lib/utils";
 
 export function ExpensesTable({
@@ -37,7 +38,7 @@ export function ExpensesTable({
             <tr key={expense.id}>
               <td>{expense.client?.businessName ?? expense.client?.name ?? "—"}</td>
               <td>{expense.project?.title ?? "—"}</td>
-              <td className="font-bold">{expense.category}</td>
+              <td className="font-bold">{labelFrom(expenseCategoryLabels, expense.category)}</td>
               <td className="font-black text-red-600">{formatKzt(expense.amount)}</td>
               <td>{formatDate(expense.spentAt)}</td>
               <td>{expense.comment ?? "—"}</td>

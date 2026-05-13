@@ -2,6 +2,7 @@ import { CreateExpenseModal } from "@/components/admin/CreateExpenseModal";
 import { ExpensesTable } from "@/components/admin/ExpensesTable";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Form";
+import { expenseCategoryOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 
 export default async function ExpensesPage({
@@ -29,16 +30,12 @@ export default async function ExpensesPage({
       </div>
       <CreateExpenseModal clients={clients} projects={projects} />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[260px_140px]">
           <Select name="category" defaultValue={category ?? ""}>
             <option value="">Все категории</option>
-            <option value="domain">domain</option>
-            <option value="hosting">hosting</option>
-            <option value="design_assets">design_assets</option>
-            <option value="advertising">advertising</option>
-            <option value="subcontractor">subcontractor</option>
-            <option value="software">software</option>
-            <option value="other">other</option>
+            {expenseCategoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

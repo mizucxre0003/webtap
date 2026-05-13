@@ -1,7 +1,13 @@
 import { createPaymentAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import {
+  labelFrom,
+  paymentMethodOptions,
+  paymentTypeOptions,
+  subscriptionTypeLabels,
+} from "@/lib/admin-labels";
 import { toDateInput } from "@/lib/utils";
 
 export function CreatePaymentModal({
@@ -40,7 +46,7 @@ export function CreatePaymentModal({
             <option value="">Без обслуживания</option>
             {subscriptions.map((subscription) => (
               <option key={subscription.id} value={subscription.id}>
-                {subscription.type} · {subscription.amount} ₸
+                {labelFrom(subscriptionTypeLabels, subscription.type)} · {subscription.amount} ₸
               </option>
             ))}
           </Select>
@@ -48,11 +54,9 @@ export function CreatePaymentModal({
         <Label>
           Тип оплаты
           <Select name="type" defaultValue="launch_payment">
-            <option value="launch_payment">launch_payment</option>
-            <option value="monthly_support">monthly_support</option>
-            <option value="yearly_support">yearly_support</option>
-            <option value="extra_work">extra_work</option>
-            <option value="other">other</option>
+            {paymentTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label>Сумма<Input name="amount" type="number" required min={1} /></Label>
@@ -60,10 +64,9 @@ export function CreatePaymentModal({
         <Label>
           Способ
           <Select name="method" defaultValue="kaspi">
-            <option value="kaspi">kaspi</option>
-            <option value="cash">cash</option>
-            <option value="bank_transfer">bank_transfer</option>
-            <option value="other">other</option>
+            {paymentMethodOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <input type="hidden" name="currency" value="KZT" />

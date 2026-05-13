@@ -1,7 +1,8 @@
 import { createExpenseAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import { expenseCategoryOptions } from "@/lib/admin-labels";
 import { toDateInput } from "@/lib/utils";
 
 export function CreateExpenseModal({
@@ -35,13 +36,9 @@ export function CreateExpenseModal({
         <Label>
           Категория
           <Select name="category" defaultValue="domain">
-            <option value="domain">domain</option>
-            <option value="hosting">hosting</option>
-            <option value="design_assets">design_assets</option>
-            <option value="advertising">advertising</option>
-            <option value="subcontractor">subcontractor</option>
-            <option value="software">software</option>
-            <option value="other">other</option>
+            {expenseCategoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label>Сумма<Input name="amount" type="number" min={1} required /></Label>

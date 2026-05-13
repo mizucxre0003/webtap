@@ -1,33 +1,25 @@
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
+import {
+  clientStatusLabels,
+  labelFrom,
+  leadStatusLabels,
+  paymentTypeLabels,
+  projectStatusLabels,
+  reminderStatusLabels,
+  reminderTypeLabels,
+  subscriptionStatusLabels,
+  subscriptionTypeLabels,
+} from "@/lib/admin-labels";
 
-const labels: Record<string, string> = {
-  new: "новая",
-  contacted: "связался",
-  in_progress: "в работе",
-  won: "клиент",
-  lost: "отказ",
-  active: "активен",
-  paused: "пауза",
-  archived: "архив",
-  brief: "бриф",
-  design: "дизайн",
-  development: "сборка",
-  waiting_payment: "ждёт оплату",
-  launched: "запущен",
-  support: "обслуживание",
-  closed: "закрыт",
-  overdue: "просрочено",
-  cancelled: "отменено",
-  pending: "ожидает",
-  done: "готово",
-  monthly: "месяц",
-  yearly: "год",
-  none: "нет",
-  launch_payment: "запуск",
-  monthly_support: "месячное",
-  yearly_support: "годовое",
-  extra_work: "доработки",
-  other: "другое",
+const labels = {
+  ...leadStatusLabels,
+  ...clientStatusLabels,
+  ...projectStatusLabels,
+  ...subscriptionTypeLabels,
+  ...subscriptionStatusLabels,
+  ...paymentTypeLabels,
+  ...reminderTypeLabels,
+  ...reminderStatusLabels,
 };
 
 const tones: Record<string, BadgeTone> = {
@@ -53,5 +45,5 @@ const tones: Record<string, BadgeTone> = {
 };
 
 export function StatusBadge({ value }: { value: string }) {
-  return <Badge tone={tones[value] ?? "gray"}>{labels[value] ?? value}</Badge>;
+  return <Badge tone={tones[value] ?? "gray"}>{labelFrom(labels, value)}</Badge>;
 }

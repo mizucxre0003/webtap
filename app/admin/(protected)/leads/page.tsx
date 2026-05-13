@@ -2,6 +2,7 @@ import { CreateLeadModal } from "@/components/admin/CreateLeadModal";
 import { LeadsTable } from "@/components/admin/LeadsTable";
 import { Card } from "@/components/ui/Card";
 import { Input, Select } from "@/components/ui/Form";
+import { leadStatusOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 
 export default async function LeadsPage({
@@ -37,15 +38,13 @@ export default async function LeadsPage({
       </div>
       <CreateLeadModal />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[1fr_220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[1fr_260px_140px]">
           <Input name="q" defaultValue={q} placeholder="Поиск по имени, телефону, нише" />
           <Select name="status" defaultValue={status ?? ""}>
             <option value="">Все статусы</option>
-            <option value="new">new</option>
-            <option value="contacted">contacted</option>
-            <option value="in_progress">in_progress</option>
-            <option value="won">won</option>
-            <option value="lost">lost</option>
+            {leadStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

@@ -11,6 +11,7 @@ import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Select, Textarea } from "@/components/ui/Form";
+import { leadStatusOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 
@@ -61,11 +62,9 @@ export default async function LeadDetailsPage({
           <form action={updateLeadStatusAction} className="mt-5 flex gap-2">
             <input type="hidden" name="id" value={lead.id} />
             <Select name="status" defaultValue={lead.status}>
-              <option value="new">new</option>
-              <option value="contacted">contacted</option>
-              <option value="in_progress">in_progress</option>
-              <option value="won">won</option>
-              <option value="lost">lost</option>
+              {leadStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
             </Select>
             <Button variant="secondary">OK</Button>
           </form>

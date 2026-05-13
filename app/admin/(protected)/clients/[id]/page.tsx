@@ -7,6 +7,12 @@ import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
+import {
+  clientStatusOptions,
+  labelFrom,
+  projectStatusLabels,
+  subscriptionTypeLabels,
+} from "@/lib/admin-labels";
 import { getClientProfit } from "@/lib/finance";
 import { prisma } from "@/lib/prisma";
 import { formatDate, formatKzt } from "@/lib/utils";
@@ -73,9 +79,9 @@ export default async function ClientDetailsPage({
           <Label>
             Статус
             <Select name="status" defaultValue={client.status}>
-              <option value="active">active</option>
-              <option value="paused">paused</option>
-              <option value="archived">archived</option>
+              {clientStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
             </Select>
           </Label>
           <Label className="md:col-span-2">Заметки<Textarea name="notes" defaultValue={client.notes ?? ""} /></Label>
@@ -90,7 +96,9 @@ export default async function ClientDetailsPage({
             {client.projects.map((project) => (
               <Link key={project.id} href={`/admin/projects/${project.id}`} className="block rounded-2xl bg-brand-mist p-4">
                 <p className="font-black text-brand-ink">{project.title}</p>
-                <p className="mt-1 text-sm text-black/55">{formatKzt(project.launchPrice)} · {project.status}</p>
+                <p className="mt-1 text-sm text-black/55">
+                  {formatKzt(project.launchPrice)} · {labelFrom(projectStatusLabels, project.status)}
+                </p>
               </Link>
             ))}
           </div>
@@ -100,7 +108,9 @@ export default async function ClientDetailsPage({
           <div className="space-y-3">
             {client.subscriptions.map((subscription) => (
               <div key={subscription.id} className="rounded-2xl bg-brand-mist p-4">
-                <p className="font-black">{formatKzt(subscription.amount)} · {subscription.type}</p>
+                <p className="font-black">
+                  {formatKzt(subscription.amount)} · {labelFrom(subscriptionTypeLabels, subscription.type)}
+                </p>
                 <p className="mt-1 text-sm text-black/55">Следующая оплата: {formatDate(subscription.nextPaymentDate)}</p>
               </div>
             ))}

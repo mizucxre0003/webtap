@@ -2,6 +2,7 @@ import { CreatePaymentModal } from "@/components/admin/CreatePaymentModal";
 import { PaymentsTable } from "@/components/admin/PaymentsTable";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Form";
+import { paymentTypeOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 
 export default async function PaymentsPage({
@@ -19,7 +20,10 @@ export default async function PaymentsPage({
     }),
     prisma.client.findMany({ orderBy: { name: "asc" } }),
     prisma.project.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.subscription.findMany({ where: { status: { in: ["active", "overdue"] } }, orderBy: { nextPaymentDate: "asc" } }),
+    prisma.subscription.findMany({
+      where: { status: { in: ["active", "overdue"] } },
+      orderBy: { nextPaymentDate: "asc" },
+    }),
   ]);
 
   return (
@@ -30,14 +34,12 @@ export default async function PaymentsPage({
       </div>
       <CreatePaymentModal clients={clients} projects={projects} subscriptions={subscriptions} />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[260px_140px]">
           <Select name="type" defaultValue={type ?? ""}>
             <option value="">Все типы</option>
-            <option value="launch_payment">launch_payment</option>
-            <option value="monthly_support">monthly_support</option>
-            <option value="yearly_support">yearly_support</option>
-            <option value="extra_work">extra_work</option>
-            <option value="other">other</option>
+            {paymentTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

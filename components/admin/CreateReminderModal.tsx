@@ -1,7 +1,8 @@
 import { createReminderAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import { labelFrom, reminderTypeOptions, subscriptionTypeLabels } from "@/lib/admin-labels";
 import { toDateInput } from "@/lib/utils";
 
 export function CreateReminderModal({
@@ -39,18 +40,18 @@ export function CreateReminderModal({
           <Select name="subscriptionId" defaultValue="">
             <option value="">Без обслуживания</option>
             {subscriptions.map((subscription) => (
-              <option key={subscription.id} value={subscription.id}>{subscription.type} · {subscription.amount} ₸</option>
+              <option key={subscription.id} value={subscription.id}>
+                {labelFrom(subscriptionTypeLabels, subscription.type)} · {subscription.amount} ₸
+              </option>
             ))}
           </Select>
         </Label>
         <Label>
           Тип
           <Select name="type" defaultValue="custom">
-            <option value="custom">custom</option>
-            <option value="payment_due">payment_due</option>
-            <option value="payment_overdue">payment_overdue</option>
-            <option value="contact_client">contact_client</option>
-            <option value="project_task">project_task</option>
+            {reminderTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label className="md:col-span-2">Заголовок<Input name="title" required /></Label>

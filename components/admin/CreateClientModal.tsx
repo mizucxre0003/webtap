@@ -1,7 +1,8 @@
 import { createClientAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import { clientStatusOptions } from "@/lib/admin-labels";
 
 export function CreateClientModal() {
   return (
@@ -19,9 +20,9 @@ export function CreateClientModal() {
         <Label>
           Статус
           <Select name="status" defaultValue="active">
-            <option value="active">active</option>
-            <option value="paused">paused</option>
-            <option value="archived">archived</option>
+            {clientStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label className="md:col-span-2">Заметки<Textarea name="notes" /></Label>

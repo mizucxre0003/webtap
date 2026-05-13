@@ -15,9 +15,14 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
+import {
+  expenseCategoryLabels,
+  expenseCategoryOptions,
+  labelFrom,
+  projectStatusOptions,
+} from "@/lib/admin-labels";
 import { getLaunchSummary, getProjectProfit } from "@/lib/finance";
 import { prisma } from "@/lib/prisma";
-import { expenseCategories } from "@/lib/validations";
 import { formatDate, formatKzt, toDateInput } from "@/lib/utils";
 
 export default async function ProjectDetailsPage({
@@ -87,8 +92,8 @@ export default async function ProjectDetailsPage({
             <Label>
               Категория
               <Select name="category" defaultValue="hosting">
-                {expenseCategories.map((category) => (
-                  <option key={category} value={category}>{category}</option>
+                {expenseCategoryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
               </Select>
             </Label>
@@ -113,8 +118,8 @@ export default async function ProjectDetailsPage({
             <Label>
               Категория
               <Select name="category" defaultValue="hosting">
-                {expenseCategories.map((category) => (
-                  <option key={category} value={category}>{category}</option>
+                {expenseCategoryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
               </Select>
             </Label>
@@ -142,7 +147,7 @@ export default async function ProjectDetailsPage({
                 <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-black text-brand-ink">{item.category}</p>
+                      <p className="font-black text-brand-ink">{labelFrom(expenseCategoryLabels, item.category)}</p>
                       <StatusBadge value={item.status} />
                     </div>
                     <p className="mt-1 text-sm text-black/55">
@@ -190,14 +195,9 @@ export default async function ProjectDetailsPage({
           <Label>
             Статус
             <Select name="status" defaultValue={project.status}>
-              <option value="brief">brief</option>
-              <option value="design">design</option>
-              <option value="development">development</option>
-              <option value="waiting_payment">waiting_payment</option>
-              <option value="launched">launched</option>
-              <option value="support">support</option>
-              <option value="paused">paused</option>
-              <option value="closed">closed</option>
+              {projectStatusOptions.map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
             </Select>
           </Label>
           <Label>Стоимость запуска<Input name="launchPrice" type="number" defaultValue={project.launchPrice} min={0} /></Label>
@@ -229,7 +229,7 @@ export default async function ProjectDetailsPage({
           <div className="space-y-3">
             {project.expenses.map((expense) => (
               <div key={expense.id} className="rounded-2xl bg-red-50 p-4">
-                <p className="font-black text-red-700">{formatKzt(expense.amount)} · {expense.category}</p>
+                <p className="font-black text-red-700">{formatKzt(expense.amount)} · {labelFrom(expenseCategoryLabels, expense.category)}</p>
                 <p className="mt-1 text-sm text-red-700/70">
                   {formatDate(expense.spentAt)} · {monthLabel(expense.spentAt)}
                 </p>

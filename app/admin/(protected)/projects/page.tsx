@@ -2,6 +2,7 @@ import { CreateProjectModal } from "@/components/admin/CreateProjectModal";
 import { ProjectsTable } from "@/components/admin/ProjectsTable";
 import { Card } from "@/components/ui/Card";
 import { Input, Select } from "@/components/ui/Form";
+import { projectStatusOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 
 export default async function ProjectsPage({
@@ -42,18 +43,13 @@ export default async function ProjectsPage({
       </div>
       <CreateProjectModal clients={clients} />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[1fr_220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[1fr_260px_140px]">
           <Input name="q" defaultValue={q} placeholder="Поиск по проекту, домену, клиенту" />
           <Select name="status" defaultValue={status ?? ""}>
             <option value="">Все статусы</option>
-            <option value="brief">brief</option>
-            <option value="design">design</option>
-            <option value="development">development</option>
-            <option value="waiting_payment">waiting_payment</option>
-            <option value="launched">launched</option>
-            <option value="support">support</option>
-            <option value="paused">paused</option>
-            <option value="closed">closed</option>
+            {projectStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

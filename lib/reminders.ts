@@ -1,5 +1,6 @@
 import "server-only";
 
+import { expenseCategoryLabels, labelFrom } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 import { addMonths, dateKey, formatDate, formatKzt, startOfDay } from "@/lib/utils";
 
@@ -100,7 +101,7 @@ export async function generateRecurringExpenseReminders(now = new Date()) {
         type: "project_task",
         remindAt: dueDate,
         title: `Оплатить расход по проекту ${item.project.title}`,
-        description: `Запланированный расход ${formatKzt(item.amount)} (${item.category}). Дата оплаты: ${formatDate(dueDate)}.`,
+        description: `Запланированный расход ${formatKzt(item.amount)} (${labelFrom(expenseCategoryLabels, item.category)}). Дата оплаты: ${formatDate(dueDate)}.`,
         dedupeKey: `${item.id}:expense_due:${dateKey(dueDate)}`,
       });
       if (wasCreated) created += 1;
@@ -114,7 +115,7 @@ export async function generateRecurringExpenseReminders(now = new Date()) {
         type: "project_task",
         remindAt: today,
         title: `Просрочен расход по проекту ${item.project.title}`,
-        description: `Нужно оплатить или отметить расход ${formatKzt(item.amount)} (${item.category}). Плановая дата: ${formatDate(dueDate)}.`,
+        description: `Нужно оплатить или отметить расход ${formatKzt(item.amount)} (${labelFrom(expenseCategoryLabels, item.category)}). Плановая дата: ${formatDate(dueDate)}.`,
         dedupeKey: `${item.id}:expense_overdue:${dateKey(today)}`,
       });
       if (wasCreated) created += 1;

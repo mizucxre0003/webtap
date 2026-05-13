@@ -1,8 +1,8 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import {
-  ArrowRight,
   BadgeCheck,
-  Bot,
-  Clock3,
   Eye,
   MessageCircle,
   MousePointerClick,
@@ -10,41 +10,61 @@ import {
   Zap,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-import { Card, Container, SectionShell } from "@/components/ui/Card";
+import { Container, SectionShell } from "@/components/ui/Card";
 
 const flow = [
   {
     title: "Увидел услугу",
-    text: "первый экран сразу отвечает, чем вы полезны",
+    text: "Первый экран сразу отвечает, что вы предлагаете и кому это подходит.",
     icon: Eye,
+    chip: "Услуга",
+    heading: "Понятно за 5 секунд",
+    body: "Клиент сразу видит, чем вы полезны, без поиска по постам и сторис.",
   },
   {
     title: "Понял условия",
-    text: "цены, процесс и ответы не спрятаны по постам",
+    text: "Цена, формат работы и ответы на частые вопросы показаны в нужный момент.",
     icon: BadgeCheck,
+    chip: "Условия",
+    heading: "Цена и процесс на виду",
+    body: "Не нужно переписываться, чтобы узнать базовые условия и следующий шаг.",
   },
   {
     title: "Поверил",
-    text: "фото, отзывы, FAQ и факты собирают доверие",
+    text: "Отзывы, кейсы и блоки доверия помогают принять решение спокойнее.",
     icon: Sparkles,
+    chip: "Доверие",
+    heading: "Есть причины написать",
+    body: "Страница показывает, почему вам можно доверять и что произойдёт дальше.",
   },
   {
     title: "Написал",
-    text: "WhatsApp открыт в один тап без лишних шагов",
+    text: "Заявка и WhatsApp открываются в один тап, без лишних шагов.",
     icon: MessageCircle,
+    chip: "Заявка",
+    heading: "Контакт в один тап",
+    body: "Когда человек готов, ему не приходится ничего искать или додумывать.",
   },
 ];
 
-const signals = [
-  ["Понятный оффер", "0.4 сек"],
-  ["Кнопка заявки", "видна сразу"],
-  ["Доверие", "до цены"],
-  ["FAQ", "до возражения"],
-];
+const microSignals = ["Цена на виду", "WhatsApp в 1 тап", "FAQ без хаоса"];
 
 export function TapFlowSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const preview = previewRef.current;
+    if (!preview) return;
+
+    preview.scrollTo({
+      top: activeIndex * 176,
+      behavior: "smooth",
+    });
+  }, [activeIndex]);
+
   return (
-    <SectionShell className="relative overflow-hidden bg-brand-ink text-white">
+    <SectionShell id="tap-flow" className="relative overflow-hidden bg-brand-ink text-white">
       <div className="pointer-events-none absolute inset-0 opacity-35">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.08)_1px,transparent_1px)] bg-[size:44px_44px]" />
         <div className="absolute left-1/2 top-0 h-80 w-[42rem] -translate-x-1/2 rounded-full bg-brand/30 blur-3xl" />
@@ -54,88 +74,144 @@ export function TapFlowSection() {
           <div>
             <Badge className="bg-white text-brand-ink">WebTap tap-flow</Badge>
             <h2 className="mt-5 text-3xl font-black sm:text-5xl">
-              Один тап — и клиент понял, куда идти дальше
+              Один тап, и клиент понимает, куда идти дальше
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/65">
               Мы проектируем страницу как короткий маршрут: от первого взгляда до
               сообщения в WhatsApp. Без лишних переходов, сложных слов и хаоса в
               контенте.
             </p>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
-              {signals.map(([label, value]) => (
-                <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.08] p-4">
-                  <p className="text-xs font-black uppercase tracking-[0.16em] text-white/40">{label}</p>
-                  <p className="mt-2 text-xl font-black">{value}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              {microSignals.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-full border border-white/10 bg-white/[0.08] px-4 py-2 text-sm font-black text-white/85"
+                >
+                  {item}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute -right-8 -top-8 hidden rounded-3xl border border-white/10 bg-white/[0.08] p-4 shadow-glow backdrop-blur md:block">
-              <div className="flex items-center gap-2 text-sm font-black">
-                <Bot className="size-5 text-brand" />
-                Структура собрана
-              </div>
-              <p className="mt-2 text-xs text-white/50">оффер · доверие · заявка</p>
-            </div>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-4 shadow-glow backdrop-blur">
-              <div className="grid gap-4 md:grid-cols-[0.85fr_1.15fr]">
-                <div className="rounded-[1.6rem] bg-white p-4 text-brand-ink">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full bg-brand-mist px-3 py-1 text-xs font-black text-brand-dark">
-                      mobile preview
-                    </span>
-                    <MousePointerClick className="size-5 text-brand" />
-                  </div>
-                  <div className="rounded-3xl bg-brand-ink p-4 text-white">
-                    <p className="text-xs text-white/45">услуга</p>
-                    <p className="mt-2 text-2xl font-black leading-tight">Понятно за 5 секунд</p>
-                    <div className="mt-4 h-2 rounded-full bg-white/15">
-                      <div className="h-2 w-4/5 rounded-full bg-brand" />
-                    </div>
-                  </div>
-                  <div className="mt-3 grid grid-cols-2 gap-3">
-                    <div className="rounded-2xl bg-brand-mist p-3">
-                      <Clock3 className="mb-2 size-4 text-brand" />
-                      <p className="text-xs font-black">от 5 дней</p>
-                    </div>
-                    <div className="rounded-2xl bg-emerald-50 p-3">
-                      <MessageCircle className="mb-2 size-4 text-emerald-600" />
-                      <p className="text-xs font-black">WhatsApp</p>
-                    </div>
-                  </div>
-                  <button className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-3 text-sm font-black text-white">
-                    Написать
-                    <ArrowRight className="size-4" />
-                  </button>
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-4 shadow-glow backdrop-blur">
+            <div className="grid gap-4 md:grid-cols-[0.88fr_1.12fr]">
+              <div className="rounded-[1.6rem] bg-white p-4 text-brand-ink">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full bg-brand-mist px-3 py-1 text-xs font-black text-brand-dark">
+                    mobile preview
+                  </span>
+                  <MousePointerClick className="size-5 text-brand" />
                 </div>
 
-                <div className="grid content-between gap-3">
-                  {flow.map((item, index) => (
-                    <div key={item.title} className="group rounded-3xl border border-white/10 bg-white/[0.08] p-4 transition hover:bg-white/[0.14]">
-                      <div className="flex items-start gap-4">
-                        <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand text-white">
-                          <item.icon className="size-5" />
+                <div className="rounded-[1.8rem] bg-brand-ink p-3 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
+                  <div className="mb-3 flex justify-center">
+                    <div className="h-1.5 w-16 rounded-full bg-white/15" />
+                  </div>
+                  <div
+                    ref={previewRef}
+                    className="h-[24rem] space-y-3 overflow-y-auto scroll-smooth rounded-[1.35rem] bg-white/[0.04] p-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    style={{ scrollbarWidth: "none" }}
+                  >
+                    {flow.map((item, index) => (
+                      <div
+                        key={item.title}
+                        className={`rounded-[1.35rem] border p-4 transition ${
+                          activeIndex === index
+                            ? "border-brand/70 bg-white text-brand-ink shadow-[0_18px_40px_rgba(147,112,219,0.18)]"
+                            : "border-white/10 bg-white/[0.06] text-white"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span
+                            className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] ${
+                              activeIndex === index
+                                ? "bg-brand-mist text-brand-dark"
+                                : "bg-white/10 text-white/70"
+                            }`}
+                          >
+                            {item.chip}
+                          </span>
+                          <item.icon className={`size-4 ${activeIndex === index ? "text-brand" : "text-white/70"}`} />
                         </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-black text-white/35">
-                              0{index + 1}
-                            </span>
-                            <h3 className="font-black">{item.title}</h3>
-                          </div>
-                          <p className="mt-1 text-sm leading-6 text-white/55">{item.text}</p>
+                        <p className="mt-4 text-xl font-black leading-tight">{item.heading}</p>
+                        <p
+                          className={`mt-3 text-sm leading-6 ${
+                            activeIndex === index ? "text-black/60" : "text-white/65"
+                          }`}
+                        >
+                          {item.body}
+                        </p>
+                        <div
+                          className={`mt-4 h-2 rounded-full ${
+                            activeIndex === index ? "bg-brand/15" : "bg-white/10"
+                          }`}
+                        >
+                          <div
+                            className={`h-2 rounded-full ${
+                              activeIndex === index ? "bg-brand" : "bg-white/45"
+                            }`}
+                            style={{ width: `${72 + index * 6}%` }}
+                          />
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
+
+              <div className="grid content-start gap-3">
+                {flow.map((item, index) => (
+                  <button
+                    key={item.title}
+                    type="button"
+                    className={`group rounded-3xl border p-4 text-left transition ${
+                      activeIndex === index
+                        ? "border-brand/70 bg-white text-brand-ink shadow-[0_18px_40px_rgba(147,112,219,0.18)]"
+                        : "border-white/10 bg-white/[0.08] text-white hover:bg-white/[0.14]"
+                    }`}
+                    onClick={() => setActiveIndex(index)}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div
+                        className={`flex size-11 shrink-0 items-center justify-center rounded-2xl ${
+                          activeIndex === index
+                            ? "bg-brand text-white"
+                            : "bg-white/10 text-white"
+                        }`}
+                      >
+                        <item.icon className="size-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-xs font-black ${
+                              activeIndex === index ? "text-brand/70" : "text-white/35"
+                            }`}
+                          >
+                            0{index + 1}
+                          </span>
+                          <h3 className="font-black">{item.title}</h3>
+                        </div>
+                        <p
+                          className={`mt-1 text-sm leading-6 ${
+                            activeIndex === index ? "text-black/60" : "text-white/55"
+                          }`}
+                        >
+                          {item.text}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
+
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {["быстро", "ясно", "в заявку"].map((word) => (
-                <div key={word} className="flex items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-black text-brand-ink">
+                <div
+                  key={word}
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-black text-brand-ink"
+                >
                   <Zap className="size-4 text-brand" />
                   {word}
                 </div>

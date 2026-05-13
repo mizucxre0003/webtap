@@ -1,7 +1,8 @@
 import { createSubscriptionAction } from "@/app/admin/actions";
+import { FormPanel } from "@/components/admin/FormPanel";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-import { FormPanel } from "@/components/admin/FormPanel";
+import { subscriptionStatusOptions, subscriptionTypeOptions } from "@/lib/admin-labels";
 import { toDateInput } from "@/lib/utils";
 
 export function CreateSubscriptionModal({
@@ -35,9 +36,9 @@ export function CreateSubscriptionModal({
         <Label>
           Тип
           <Select name="type" defaultValue="monthly">
-            <option value="monthly">monthly</option>
-            <option value="yearly">yearly</option>
-            <option value="none">none</option>
+            {subscriptionTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label>Сумма<Input name="amount" type="number" defaultValue={4990} min={0} /></Label>
@@ -46,10 +47,9 @@ export function CreateSubscriptionModal({
         <Label>
           Статус
           <Select name="status" defaultValue="active">
-            <option value="active">active</option>
-            <option value="overdue">overdue</option>
-            <option value="paused">paused</option>
-            <option value="cancelled">cancelled</option>
+            {subscriptionStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
         </Label>
         <Label className="md:col-span-2">Заметки<Textarea name="notes" /></Label>

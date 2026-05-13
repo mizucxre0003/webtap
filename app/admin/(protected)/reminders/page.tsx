@@ -2,6 +2,7 @@ import { CreateReminderModal } from "@/components/admin/CreateReminderModal";
 import { RemindersTable } from "@/components/admin/RemindersTable";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Form";
+import { reminderStatusOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 import { generateAutomationReminders } from "@/lib/reminders";
 
@@ -32,12 +33,12 @@ export default async function RemindersPage({
       </div>
       <CreateReminderModal clients={clients} projects={projects} subscriptions={subscriptions} />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[260px_140px]">
           <Select name="status" defaultValue={status ?? ""}>
             <option value="">Все статусы</option>
-            <option value="pending">pending</option>
-            <option value="done">done</option>
-            <option value="cancelled">cancelled</option>
+            {reminderStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

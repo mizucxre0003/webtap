@@ -2,6 +2,7 @@ import { CreateSubscriptionModal } from "@/components/admin/CreateSubscriptionMo
 import { SubscriptionsTable } from "@/components/admin/SubscriptionsTable";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Form";
+import { subscriptionStatusOptions } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 
 export default async function SubscriptionsPage({
@@ -29,13 +30,12 @@ export default async function SubscriptionsPage({
       </div>
       <CreateSubscriptionModal clients={clients} projects={projects} />
       <Card className="p-4">
-        <form className="grid gap-3 md:grid-cols-[220px_140px]">
+        <form className="grid gap-3 md:grid-cols-[260px_140px]">
           <Select name="status" defaultValue={status ?? ""}>
             <option value="">Все статусы</option>
-            <option value="active">active</option>
-            <option value="overdue">overdue</option>
-            <option value="paused">paused</option>
-            <option value="cancelled">cancelled</option>
+            {subscriptionStatusOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </Select>
           <button className="rounded-2xl bg-brand-ink px-4 text-sm font-bold text-white">Фильтр</button>
         </form>

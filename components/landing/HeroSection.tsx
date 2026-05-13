@@ -1,54 +1,160 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import {
-  ArrowRight,
   CheckCircle2,
+  Menu,
   MessageCircle,
   MousePointerClick,
   Phone,
   TrendingUp,
+  X,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { Container, SectionShell } from "@/components/ui/Card";
 
 const trustItems = [
-  "Запуск от 5 дней",
+  "Любой дизайн",
   "Кнопка WhatsApp",
   "Адаптация под телефон",
   "Поддержка после запуска",
 ];
 
+const navLinks = [
+  ["Главная", "#home"],
+  ["Для кого", "#audience"],
+  ["Что мы делаем", "#tap-flow"],
+  ["Условия", "#pricing"],
+  ["Заявка", "#lead-form"],
+  ["FAQ", "#faq"],
+  ["Контакты", "#contacts"],
+] as const;
+
 export function HeroSection() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setIsScrolled(window.scrollY > 72);
+    }
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <SectionShell id="home" className="overflow-hidden pb-10 pt-6 sm:pt-8">
       <Container>
-        <header className="mb-10 flex items-center justify-between rounded-full border border-black/5 bg-white/80 px-4 py-3 shadow-sm backdrop-blur">
-          <a href="#home" className="flex items-center gap-2 font-black tracking-tight text-brand-ink">
-            <span className="flex size-10 items-center justify-center rounded-2xl bg-brand text-white">
-              <MousePointerClick className="size-5" />
-            </span>
-            WebTap
-          </a>
-          <nav className="hidden items-center gap-5 text-sm font-semibold text-black/60 lg:flex">
-            <a href="#audience">Для кого</a>
-            <a href="#features">Что входит</a>
-            <a href="#skills">Скиллы</a>
-            <a href="#examples">Примеры</a>
-            <a href="#pricing">Стоимость</a>
-            <a href="#process">Процесс</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contacts">Контакты</a>
-          </nav>
-          <a
-            href="#lead-form"
-            className="inline-flex min-h-10 items-center justify-center rounded-full bg-brand-ink px-4 text-sm font-bold text-white transition hover:bg-brand-dark"
+        <div className="relative z-40 h-[4.5rem]">
+          <header
+            className={`fixed inset-x-4 top-4 z-40 mx-auto flex items-center justify-between rounded-full border border-black/5 bg-white/88 px-4 py-3 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
+              isScrolled ? "max-w-[4.5rem] px-3" : "max-w-7xl"
+            }`}
           >
-            Заявка
-          </a>
-        </header>
+            <a
+              href="#home"
+              className={`items-center gap-2 font-black tracking-tight text-brand-ink ${
+                isScrolled ? "hidden" : "flex"
+              }`}
+            >
+              <span className="flex size-10 items-center justify-center rounded-2xl bg-brand text-white">
+                <MousePointerClick className="size-5" />
+              </span>
+              <span
+                className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+                  isScrolled ? "max-w-0 opacity-0" : "max-w-40 opacity-100"
+                }`}
+              >
+                WebTap
+              </span>
+            </a>
 
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+            <nav
+              className={`items-center gap-5 text-sm font-semibold text-black/60 transition-all duration-300 ${
+                isScrolled ? "!hidden pointer-events-none opacity-0" : "hidden opacity-100 lg:flex"
+              }`}
+            >
+              {navLinks.map(([label, href]) => (
+                <a key={label} href={href} className="transition hover:text-brand-ink">
+                  {label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
+              <a
+                href="#lead-form"
+                className={`inline-flex min-h-10 items-center justify-center rounded-full bg-brand-ink px-4 text-sm font-bold text-white transition hover:bg-brand-dark ${
+                  isScrolled ? "hidden" : "lg:inline-flex"
+                }`}
+              >
+                Оставить заявку
+              </a>
+
+              <button
+                type="button"
+                aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-expanded={menuOpen}
+                className={`inline-flex size-11 items-center justify-center rounded-full bg-brand-ink text-white transition hover:bg-brand-dark ${
+                  isScrolled ? "" : "lg:hidden"
+                }`}
+                onClick={() => setMenuOpen((current) => !current)}
+              >
+                {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+              </button>
+            </div>
+          </header>
+
+          {menuOpen ? (
+            <div className="fixed inset-0 z-50 bg-brand-ink/25 backdrop-blur-sm" onClick={closeMenu}>
+              <div
+                className="absolute right-4 top-20 w-[min(22rem,calc(100vw-2rem))] rounded-[2rem] border border-black/5 bg-white p-4 shadow-[0_30px_80px_rgba(17,16,24,0.22)]"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="mb-3 flex items-center justify-between px-2">
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-brand">
+                    Навигация
+                  </p>
+                  <button
+                    type="button"
+                    className="inline-flex size-10 items-center justify-center rounded-full bg-brand-mist text-brand-ink transition hover:bg-brand/15"
+                    onClick={closeMenu}
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="grid gap-2">
+                  {navLinks.map(([label, href]) => (
+                    <a
+                      key={label}
+                      href={href}
+                      className="rounded-2xl px-4 py-3 text-sm font-bold text-brand-ink transition hover:bg-brand-mist"
+                      onClick={closeMenu}
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] lg:pt-10">
           <div className="animate-fade-up">
-            <Badge className="mb-5">Запуск сайта от 49 990 ₸</Badge>
             <h1 className="max-w-4xl text-4xl font-black leading-[1.04] tracking-normal text-brand-ink sm:text-6xl lg:text-7xl">
               Сайт для бизнеса, который помогает получать заявки
             </h1>
@@ -58,17 +164,10 @@ export function HeroSection() {
               в WhatsApp.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="#lead-form">
-                Обсудить проект
-                <ArrowRight className="size-4" />
-              </LinkButton>
-              <LinkButton href="#lead-form" variant="secondary">
+              <LinkButton href="#lead-form" className="sm:min-w-56">
                 Оставить заявку
               </LinkButton>
             </div>
-            <p className="mt-4 text-sm font-semibold text-brand-dark">
-              Далее обслуживание от 4 990 ₸/мес
-            </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {trustItems.map((item) => (
@@ -81,11 +180,6 @@ export function HeroSection() {
           </div>
 
           <div className="relative mx-auto w-full max-w-xl animate-float">
-            <div className="absolute -left-8 top-16 hidden rounded-3xl bg-white p-4 shadow-glow md:block">
-              <p className="text-xs font-bold text-black/45">Новая заявка</p>
-              <p className="mt-1 font-black text-brand-ink">Айдана, beauty</p>
-              <p className="text-xs text-black/50">Хочу страницу для записи</p>
-            </div>
             <div className="absolute -right-5 bottom-16 hidden rounded-3xl bg-white p-4 shadow-glow md:block">
               <div className="flex items-center gap-2 text-emerald-600">
                 <MessageCircle className="size-5" />
@@ -113,8 +207,8 @@ export function HeroSection() {
                       <p className="font-black">от 4 990 ₸</p>
                     </div>
                     <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-xs text-white/55">Запуск</p>
-                      <p className="font-black">от 5 дней</p>
+                      <p className="text-xs text-white/55">Дизайн</p>
+                      <p className="font-black">любой формат</p>
                     </div>
                   </div>
                 </div>

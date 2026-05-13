@@ -5,12 +5,11 @@ import { ownerWhatsappUrl } from "@/lib/whatsapp";
 const links = [
   ["Главная", "#home"],
   ["Для кого", "#audience"],
-  ["Что входит", "#features"],
-  ["Скиллы", "#skills"],
-  ["Примеры", "#examples"],
-  ["Стоимость", "#pricing"],
-  ["Процесс", "#process"],
+  ["Что мы делаем", "#tap-flow"],
+  ["Условия", "#pricing"],
+  ["Заявка", "#lead-form"],
   ["FAQ", "#faq"],
+  ["Контакты", "#contacts"],
 ] as const;
 
 export function Footer() {

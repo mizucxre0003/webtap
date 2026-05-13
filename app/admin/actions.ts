@@ -9,6 +9,7 @@ import {
   setSessionCookie,
   validateOrBootstrapAdmin,
 } from "@/lib/auth";
+import { expenseCategoryLabels, labelFrom } from "@/lib/admin-labels";
 import { prisma } from "@/lib/prisma";
 import { advancePaymentDate } from "@/lib/finance";
 import { nextRecurringExpenseDate } from "@/lib/reminders";
@@ -229,6 +230,7 @@ export async function createProjectExpenseAction(formData: FormData) {
 
   const expense = await prisma.expense.create({ data });
   const remindAtRaw = String(formData.get("remindAt") ?? "").trim();
+  const expenseCategoryLabel = labelFrom(expenseCategoryLabels, expense.category);
 
   if (remindAtRaw) {
     await prisma.reminder.create({
@@ -238,7 +240,7 @@ export async function createProjectExpenseAction(formData: FormData) {
         type: "project_task",
         status: "pending",
         title: `Проверить расход по проекту ${project.title}`,
-        description: `Расход ${expense.category} на ${expense.amount} ₸. ${expense.comment ?? ""}`.trim(),
+        description: `Расход ${expenseCategoryLabel} на ${expense.amount} ₸. ${expense.comment ?? ""}`.trim(),
         remindAt: new Date(remindAtRaw),
       },
     });

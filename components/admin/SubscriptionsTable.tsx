@@ -5,6 +5,7 @@ import { WhatsAppButton } from "@/components/admin/WhatsAppButton";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Select } from "@/components/ui/Form";
+import { subscriptionStatusOptions } from "@/lib/admin-labels";
 import { formatDate, formatKzt } from "@/lib/utils";
 
 export function SubscriptionsTable({
@@ -51,10 +52,9 @@ export function SubscriptionsTable({
                   <form action={updateSubscriptionStatusAction} className="flex gap-2">
                     <input type="hidden" name="id" value={subscription.id} />
                     <Select name="status" defaultValue={subscription.status} className="min-h-10 w-36 py-2">
-                      <option value="active">active</option>
-                      <option value="overdue">overdue</option>
-                      <option value="paused">paused</option>
-                      <option value="cancelled">cancelled</option>
+                      {subscriptionStatusOptions.map((option) => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
                     </Select>
                     <Button variant="secondary" className="min-h-10 px-3">OK</Button>
                   </form>

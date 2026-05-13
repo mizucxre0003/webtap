@@ -30,7 +30,7 @@ export function LeadFormSection() {
       }
       setState({
         status: "success",
-        message: "Заявка отправлена. Я свяжусь с вами в WhatsApp.",
+        message: "Заявка отправлена. Мы свяжемся с вами в WhatsApp.",
       });
       const form = document.getElementById("webtap-lead-form") as HTMLFormElement | null;
       form?.reset();
@@ -44,10 +44,10 @@ export function LeadFormSection() {
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em] text-brand">Заявка</p>
             <h2 className="mt-3 text-3xl font-black text-brand-ink sm:text-5xl">
-              Расскажите, какой сайт нужен бизнесу
+              Расскажите, какой сайт нужен вашему бизнесу
             </h2>
             <p className="mt-5 text-lg leading-8 text-black/60">
-              Оставьте контакты и пару деталей. Я посмотрю нишу, задачу и подскажу
+              Оставьте контакты и пару деталей. Мы посмотрим нишу, задачу и подскажем
               примерную стоимость запуска.
             </p>
           </div>
@@ -99,7 +99,7 @@ export function LeadFormSection() {
               <div className="sm:col-span-2">
                 <Button disabled={isPending} className="w-full">
                   <Send className="size-4" />
-                  {isPending ? "Отправляю..." : "Оставить заявку"}
+                  {isPending ? "Отправляем..." : "Оставить заявку"}
                 </Button>
                 {state.message ? (
                   <p
