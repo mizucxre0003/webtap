@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import {
+  ArrowRight,
   CheckCircle2,
   Menu,
   MessageCircle,
@@ -33,23 +34,19 @@ const navLinks = [
 export function HeroSection() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const compact = isScrolled && !menuOpen;
 
   useEffect(() => {
     function onScroll() {
-      setIsScrolled(window.scrollY > 72);
+      const scrolled = window.scrollY > 72;
+      setIsScrolled(scrolled);
+      if (!scrolled) setMenuOpen(false);
     }
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
 
   function closeMenu() {
     setMenuOpen(false);
@@ -60,56 +57,63 @@ export function HeroSection() {
       <Container>
         <div className="relative z-40 h-[4.5rem]">
           <header
-            className={`fixed inset-x-4 top-4 z-40 mx-auto flex items-center justify-between rounded-full border border-black/5 bg-white/88 px-4 py-3 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
-              isScrolled ? "max-w-[4.5rem] px-3" : "max-w-7xl"
+            className={`fixed top-4 z-50 flex items-center border border-black/5 bg-white/88 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
+              compact
+                ? "left-4 w-16 justify-center rounded-[1.35rem] p-2"
+                : "left-4 right-4 mx-auto max-w-7xl flex-wrap justify-between gap-3 rounded-[2rem] px-4 py-3 sm:rounded-full"
             }`}
           >
             <a
               href="#home"
               className={`items-center gap-2 font-black tracking-tight text-brand-ink ${
-                isScrolled ? "hidden" : "flex"
+                compact ? "hidden" : "flex"
               }`}
+              onClick={closeMenu}
             >
               <span className="flex size-10 items-center justify-center rounded-2xl bg-brand text-white">
                 <MousePointerClick className="size-5" />
               </span>
-              <span
-                className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
-                  isScrolled ? "max-w-0 opacity-0" : "max-w-40 opacity-100"
-                }`}
-              >
-                WebTap
-              </span>
+              <span className="whitespace-nowrap">WebTap</span>
             </a>
 
             <nav
-              className={`items-center gap-5 text-sm font-semibold text-black/60 transition-all duration-300 ${
-                isScrolled ? "!hidden pointer-events-none opacity-0" : "hidden opacity-100 lg:flex"
+              className={`order-3 w-full text-sm font-semibold text-black/60 transition-all duration-300 lg:order-none lg:w-auto ${
+                compact
+                  ? "hidden"
+                  : menuOpen
+                    ? "grid gap-1 rounded-[1.5rem] bg-brand-mist p-2 sm:grid-cols-2 lg:flex lg:items-center lg:gap-5 lg:bg-transparent lg:p-0"
+                    : "hidden lg:flex lg:items-center lg:gap-5"
               }`}
             >
               {navLinks.map(([label, href]) => (
-                <a key={label} href={href} className="transition hover:text-brand-ink">
+                <a
+                  key={label}
+                  href={href}
+                  className="rounded-2xl px-3 py-2 transition hover:bg-white hover:text-brand-ink lg:px-0 lg:py-0 lg:hover:bg-transparent"
+                  onClick={closeMenu}
+                >
                   {label}
                 </a>
               ))}
             </nav>
 
-            <div className="flex items-center gap-2">
+            <div className={`flex items-center gap-2 ${compact ? "" : "ml-auto"}`}>
               <a
                 href="#lead-form"
-                className={`inline-flex min-h-10 items-center justify-center rounded-full bg-brand-ink px-4 text-sm font-bold text-white transition hover:bg-brand-dark ${
-                  isScrolled ? "hidden" : "lg:inline-flex"
+                className={`min-h-10 items-center justify-center rounded-full bg-brand-ink px-4 text-sm font-bold text-white transition hover:bg-brand-dark ${
+                  compact ? "hidden" : "hidden sm:inline-flex"
                 }`}
+                onClick={closeMenu}
               >
                 Оставить заявку
               </a>
 
               <button
                 type="button"
-                aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-label={menuOpen ? "Свернуть меню" : "Открыть меню"}
                 aria-expanded={menuOpen}
                 className={`inline-flex size-11 items-center justify-center rounded-full bg-brand-ink text-white transition hover:bg-brand-dark ${
-                  isScrolled ? "" : "lg:hidden"
+                  !isScrolled && !menuOpen ? "lg:hidden" : ""
                 }`}
                 onClick={() => setMenuOpen((current) => !current)}
               >
@@ -118,39 +122,15 @@ export function HeroSection() {
             </div>
           </header>
 
-          {menuOpen ? (
-            <div className="fixed inset-0 z-50 bg-brand-ink/25 backdrop-blur-sm" onClick={closeMenu}>
-              <div
-                className="absolute right-4 top-20 w-[min(22rem,calc(100vw-2rem))] rounded-[2rem] border border-black/5 bg-white p-4 shadow-[0_30px_80px_rgba(17,16,24,0.22)]"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <div className="mb-3 flex items-center justify-between px-2">
-                  <p className="text-sm font-black uppercase tracking-[0.16em] text-brand">
-                    Навигация
-                  </p>
-                  <button
-                    type="button"
-                    className="inline-flex size-10 items-center justify-center rounded-full bg-brand-mist text-brand-ink transition hover:bg-brand/15"
-                    onClick={closeMenu}
-                  >
-                    <X className="size-4" />
-                  </button>
-                </div>
-                <div className="grid gap-2">
-                  {navLinks.map(([label, href]) => (
-                    <a
-                      key={label}
-                      href={href}
-                      className="rounded-2xl px-4 py-3 text-sm font-bold text-brand-ink transition hover:bg-brand-mist"
-                      onClick={closeMenu}
-                    >
-                      {label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : null}
+          <a
+            href="#lead-form"
+            className={`fixed bottom-5 left-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark ${
+              isScrolled ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+            }`}
+          >
+            Оставить заявку
+            <ArrowRight className="size-4" />
+          </a>
         </div>
 
         <div className="grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] lg:pt-10">
