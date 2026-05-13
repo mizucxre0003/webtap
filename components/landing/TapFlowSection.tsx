@@ -94,7 +94,39 @@ export function TapFlowSection() {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-3 shadow-glow backdrop-blur sm:p-4">
+          <div className="grid gap-3 md:hidden">
+            {flow.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                className={`rounded-3xl border p-4 text-left transition ${
+                  activeIndex === index
+                    ? "border-brand/70 bg-white text-brand-ink"
+                    : "border-white/10 bg-white/[0.08] text-white"
+                }`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <div className="flex items-start gap-3">
+                  <div
+                    className={`grid size-10 shrink-0 place-items-center rounded-2xl ${
+                      activeIndex === index ? "bg-brand text-white" : "bg-white/10 text-white"
+                    }`}
+                  >
+                    <item.icon className="size-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-current/45">0{index + 1}</p>
+                    <h3 className="mt-1 font-black">{item.title}</h3>
+                    <p className={`mt-1 text-sm leading-6 ${activeIndex === index ? "text-black/60" : "text-white/60"}`}>
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden rounded-[2rem] border border-white/10 bg-white/[0.08] p-3 shadow-glow backdrop-blur sm:p-4 md:block">
             <div className="grid gap-4 md:grid-cols-[0.88fr_1.12fr]">
               <div className="rounded-[1.6rem] bg-white p-3 text-brand-ink sm:p-4">
                 <div className="mb-4 flex items-center justify-between">

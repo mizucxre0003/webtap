@@ -14,7 +14,7 @@ import { ownerWhatsappUrl } from "@/lib/whatsapp";
 export default function Home() {
   return (
     <main className="pb-20 sm:pb-0">
-      <HeroSection />
+      <HeroSection whatsappHref={ownerWhatsappUrl("Здравствуйте! Пишу с сайта WebTap.kz")} />
       <AudienceSection />
       <ProblemSection />
       <TapFlowSection />

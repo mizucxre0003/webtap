@@ -21,7 +21,7 @@ import type {
 import { cn } from "@/lib/utils";
 
 const field =
-  "min-h-11 w-full rounded-2xl border border-black/10 bg-white px-4 py-2.5 text-sm text-brand-ink outline-none transition placeholder:text-black/35 focus:border-brand focus:ring-4 focus:ring-brand/15";
+  "min-h-12 w-full max-w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-base text-brand-ink outline-none transition placeholder:text-black/35 focus:border-brand focus:ring-4 focus:ring-brand/15 sm:min-h-11 sm:py-2.5 sm:text-sm";
 
 type OptionProps = {
   value?: string | number;

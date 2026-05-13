@@ -14,9 +14,9 @@ const links = [
 
 export function Footer() {
   return (
-    <footer id="contacts" className="px-4 pb-8 pt-10 sm:px-6 lg:px-8">
+    <footer id="contacts" className="px-4 pb-24 pt-10 sm:px-6 sm:pb-8 lg:px-8">
       <Container>
-        <div className="grid gap-8 rounded-[2rem] bg-brand-ink p-8 text-white lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
+        <div className="grid gap-8 rounded-[1.5rem] bg-brand-ink p-5 text-white sm:rounded-[2rem] sm:p-8 lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
           <div>
             <p className="text-2xl font-black">WebTap</p>
             <p className="mt-4 max-w-md leading-7 text-white/60">
@@ -26,7 +26,7 @@ export function Footer() {
           </div>
           <div>
             <p className="mb-4 font-black">Разделы</p>
-            <div className="grid grid-cols-2 gap-2 text-sm text-white/65">
+            <div className="grid gap-2 text-sm text-white/65 sm:grid-cols-2">
               {links.map(([label, href]) => (
                 <a key={label} href={href} className="transition hover:text-white">
                   {label}
