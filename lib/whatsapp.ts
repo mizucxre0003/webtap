@@ -13,6 +13,6 @@ export function whatsappUrl(phone: string | null | undefined, text?: string) {
   return normalized ? `https://wa.me/${normalized}${query}` : "#";
 }
 
-export function ownerWhatsappUrl(text = "Здравствуйте! Хочу обсудить сайт для бизнеса.") {
+export function ownerWhatsappUrl(text = "Здравствуйте! Пишу с сайта WebTap.kz") {
   return whatsappUrl(process.env.WHATSAPP_PHONE, text);
 }

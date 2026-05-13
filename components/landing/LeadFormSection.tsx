@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Send } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, Container, SectionShell } from "@/components/ui/Card";
 import { Input, Label, Select, Textarea } from "@/components/ui/Form";
@@ -11,7 +11,7 @@ type FormState = {
   message?: string;
 };
 
-export function LeadFormSection() {
+export function LeadFormSection({ whatsappHref }: { whatsappHref: string }) {
   const [state, setState] = useState<FormState>({ status: "idle" });
   const [isPending, startTransition] = useTransition();
 
@@ -96,11 +96,22 @@ export function LeadFormSection() {
                 Комментарий
                 <Textarea name="comment" placeholder="Что важно показать на сайте?" />
               </Label>
-              <div className="sm:col-span-2">
+              <div className="grid gap-3 sm:col-span-2 sm:grid-cols-2">
                 <Button disabled={isPending} className="w-full">
                   <Send className="size-4" />
                   {isPending ? "Отправляем..." : "Оставить заявку"}
                 </Button>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_18px_48px_rgba(16,185,129,0.24)] transition hover:-translate-y-0.5 hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                >
+                  <MessageCircle className="size-4" />
+                  Написать в WhatsApp
+                </a>
+              </div>
+              <div className="sm:col-span-2">
                 {state.message ? (
                   <p
                     className={`mt-4 rounded-2xl px-4 py-3 text-sm font-semibold ${

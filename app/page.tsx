@@ -9,6 +9,7 @@ import { PricingSection } from "@/components/landing/PricingSection";
 import { ProblemSection } from "@/components/landing/ProblemSection";
 import { ProcessSection } from "@/components/landing/ProcessSection";
 import { TapFlowSection } from "@/components/landing/TapFlowSection";
+import { ownerWhatsappUrl } from "@/lib/whatsapp";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
       <FeaturesSection />
       <ProcessSection />
       <PricingSection />
-      <LeadFormSection />
+      <LeadFormSection whatsappHref={ownerWhatsappUrl("Здравствуйте! Пишу с сайта WebTap.kz")} />
       <FAQSection />
       <Footer />
     </main>
