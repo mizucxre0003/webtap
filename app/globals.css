@@ -34,6 +34,121 @@ a {
   background: rgba(147, 112, 219, 0.28);
 }
 
+.webtap-hero-bg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.webtap-hero-grid {
+  position: absolute;
+  inset: -2rem;
+  background:
+    linear-gradient(rgba(147, 112, 219, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 112, 219, 0.08) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 62%);
+  opacity: 0.45;
+  animation: webtapGridDrift 18s linear infinite;
+}
+
+.webtap-hero-orbit {
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 9999px;
+  filter: blur(42px);
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+}
+
+.webtap-hero-orbit-one {
+  right: 4%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(147, 112, 219, 0.42), rgba(91, 60, 168, 0));
+  animation: webtapAuraOne 11s ease-in-out infinite;
+}
+
+.webtap-hero-orbit-two {
+  left: 4%;
+  bottom: 2%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.22), rgba(147, 112, 219, 0));
+  animation: webtapAuraTwo 14s ease-in-out infinite;
+}
+
+.webtap-hero-line {
+  position: absolute;
+  height: 1px;
+  width: 42rem;
+  background: linear-gradient(90deg, transparent, rgba(147, 112, 219, 0.58), transparent);
+  opacity: 0.55;
+  transform-origin: center;
+}
+
+.webtap-hero-line-one {
+  right: -9rem;
+  top: 13rem;
+  transform: rotate(-18deg);
+  animation: webtapLineSweep 8s ease-in-out infinite;
+}
+
+.webtap-hero-line-two {
+  left: -12rem;
+  bottom: 9rem;
+  transform: rotate(14deg);
+  animation: webtapLineSweep 10s ease-in-out infinite reverse;
+}
+
+@keyframes webtapGridDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(46px, 46px, 0);
+  }
+}
+
+@keyframes webtapAuraOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2rem, 1.4rem, 0) scale(1.08);
+  }
+}
+
+@keyframes webtapAuraTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2rem, -1rem, 0) scale(1.12);
+  }
+}
+
+@keyframes webtapLineSweep {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: translate3d(-2rem, 0, 0) rotate(var(--line-rotation, -18deg));
+  }
+  50% {
+    opacity: 0.58;
+    transform: translate3d(2rem, 0, 0) rotate(var(--line-rotation, -18deg));
+  }
+}
+
+.webtap-hero-line-one {
+  --line-rotation: -18deg;
+}
+
+.webtap-hero-line-two {
+  --line-rotation: 14deg;
+}
+
 .admin-table {
   width: 100%;
   border-collapse: separate;

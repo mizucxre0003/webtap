@@ -53,8 +53,15 @@ export function HeroSection() {
   }
 
   return (
-    <SectionShell id="home" className="overflow-hidden pb-10 pt-6 sm:pt-8">
-      <Container>
+    <SectionShell id="home" className="relative overflow-hidden pb-10 pt-6 sm:pt-8">
+      <div className="webtap-hero-bg" aria-hidden="true">
+        <div className="webtap-hero-grid" />
+        <div className="webtap-hero-orbit webtap-hero-orbit-one" />
+        <div className="webtap-hero-orbit webtap-hero-orbit-two" />
+        <div className="webtap-hero-line webtap-hero-line-one" />
+        <div className="webtap-hero-line webtap-hero-line-two" />
+      </div>
+      <Container className="relative">
         <div className="relative z-40 h-[4.5rem]">
           <header
             className={`fixed top-4 z-50 flex items-center border border-black/5 bg-white/88 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
@@ -124,7 +131,7 @@ export function HeroSection() {
 
           <a
             href="#lead-form"
-            className={`fixed bottom-5 left-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark ${
+            className={`fixed bottom-5 left-20 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:left-6 ${
               isScrolled ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
             }`}
           >
