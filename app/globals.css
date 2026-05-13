@@ -149,6 +149,44 @@ a {
   --line-rotation: 14deg;
 }
 
+@media (max-width: 640px) {
+  .webtap-hero-grid {
+    background-size: 34px 34px;
+    opacity: 0.24;
+    animation-duration: 28s;
+    mask-image: radial-gradient(circle at 50% 12%, black 0%, transparent 58%);
+  }
+
+  .webtap-hero-orbit {
+    width: 18rem;
+    height: 18rem;
+    filter: blur(34px);
+    opacity: 0.28;
+  }
+
+  .webtap-hero-orbit-one {
+    right: -6rem;
+    top: 7rem;
+  }
+
+  .webtap-hero-orbit-two {
+    left: -7rem;
+    bottom: 8rem;
+  }
+
+  .webtap-hero-line {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .webtap-hero-grid,
+  .webtap-hero-orbit,
+  .webtap-hero-line {
+    animation: none;
+  }
+}
+
 .admin-table {
   width: 100%;
   border-collapse: separate;

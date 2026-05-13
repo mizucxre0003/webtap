@@ -13,7 +13,7 @@ import { ownerWhatsappUrl } from "@/lib/whatsapp";
 
 export default function Home() {
   return (
-    <main>
+    <main className="pb-20 sm:pb-0">
       <HeroSection />
       <AudienceSection />
       <ProblemSection />

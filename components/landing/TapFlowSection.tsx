@@ -56,9 +56,10 @@ export function TapFlowSection() {
   useEffect(() => {
     const preview = previewRef.current;
     if (!preview) return;
+    const step = window.innerWidth < 640 ? 148 : 176;
 
     preview.scrollTo({
-      top: activeIndex * 176,
+      top: activeIndex * step,
       behavior: "smooth",
     });
   }, [activeIndex]);
@@ -93,9 +94,9 @@ export function TapFlowSection() {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-4 shadow-glow backdrop-blur">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-3 shadow-glow backdrop-blur sm:p-4">
             <div className="grid gap-4 md:grid-cols-[0.88fr_1.12fr]">
-              <div className="rounded-[1.6rem] bg-white p-4 text-brand-ink">
+              <div className="rounded-[1.6rem] bg-white p-3 text-brand-ink sm:p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <span className="rounded-full bg-brand-mist px-3 py-1 text-xs font-black text-brand-dark">
                     mobile preview
@@ -109,13 +110,13 @@ export function TapFlowSection() {
                   </div>
                   <div
                     ref={previewRef}
-                    className="h-[24rem] space-y-3 overflow-y-auto scroll-smooth rounded-[1.35rem] bg-white/[0.04] p-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    className="h-[19rem] space-y-3 overflow-y-auto scroll-smooth rounded-[1.35rem] bg-white/[0.04] p-2 sm:h-[24rem] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     style={{ scrollbarWidth: "none" }}
                   >
                     {flow.map((item, index) => (
                       <div
                         key={item.title}
-                        className={`rounded-[1.35rem] border p-4 transition ${
+                        className={`rounded-[1.35rem] border p-3 transition sm:p-4 ${
                           activeIndex === index
                             ? "border-brand/70 bg-white text-brand-ink shadow-[0_18px_40px_rgba(147,112,219,0.18)]"
                             : "border-white/10 bg-white/[0.06] text-white"
@@ -133,9 +134,9 @@ export function TapFlowSection() {
                           </span>
                           <item.icon className={`size-4 ${activeIndex === index ? "text-brand" : "text-white/70"}`} />
                         </div>
-                        <p className="mt-4 text-xl font-black leading-tight">{item.heading}</p>
+                        <p className="mt-3 text-lg font-black leading-tight sm:mt-4 sm:text-xl">{item.heading}</p>
                         <p
-                          className={`mt-3 text-sm leading-6 ${
+                          className={`mt-2 text-sm leading-6 sm:mt-3 ${
                             activeIndex === index ? "text-black/60" : "text-white/65"
                           }`}
                         >
@@ -164,7 +165,7 @@ export function TapFlowSection() {
                   <button
                     key={item.title}
                     type="button"
-                    className={`group rounded-3xl border p-4 text-left transition ${
+                    className={`group rounded-3xl border p-3 text-left transition sm:p-4 ${
                       activeIndex === index
                         ? "border-brand/70 bg-white text-brand-ink shadow-[0_18px_40px_rgba(147,112,219,0.18)]"
                         : "border-white/10 bg-white/[0.08] text-white hover:bg-white/[0.14]"

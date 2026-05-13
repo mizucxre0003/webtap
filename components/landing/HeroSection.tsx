@@ -34,6 +34,7 @@ const navLinks = [
 export function HeroSection() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLeadFormVisible, setIsLeadFormVisible] = useState(false);
   const compact = isScrolled && !menuOpen;
 
   useEffect(() => {
@@ -48,12 +49,29 @@ export function HeroSection() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const leadForm = document.getElementById("lead-form");
+    if (!leadForm) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsLeadFormVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.2,
+      },
+    );
+
+    observer.observe(leadForm);
+    return () => observer.disconnect();
+  }, []);
+
   function closeMenu() {
     setMenuOpen(false);
   }
 
   return (
-    <SectionShell id="home" className="relative overflow-hidden pb-10 pt-6 sm:pt-8">
+    <SectionShell id="home" className="relative overflow-hidden pb-24 pt-6 sm:pb-10 sm:pt-8">
       <div className="webtap-hero-bg" aria-hidden="true">
         <div className="webtap-hero-grid" />
         <div className="webtap-hero-orbit webtap-hero-orbit-one" />
@@ -131,8 +149,20 @@ export function HeroSection() {
 
           <a
             href="#lead-form"
-            className={`fixed bottom-5 left-20 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:left-6 ${
-              isScrolled ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+            className={`fixed inset-x-4 bottom-4 z-40 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:hidden ${
+              isLeadFormVisible ? "pointer-events-none translate-y-4 opacity-0" : "translate-y-0 opacity-100"
+            }`}
+          >
+            Оставить заявку
+            <ArrowRight className="size-4" />
+          </a>
+
+          <a
+            href="#lead-form"
+            className={`fixed bottom-5 left-6 z-40 hidden min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:inline-flex ${
+              isScrolled && !isLeadFormVisible
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none translate-y-4 opacity-0"
             }`}
           >
             Оставить заявку
@@ -166,7 +196,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl animate-float">
+          <div className="relative mx-auto w-full max-w-sm sm:max-w-xl sm:animate-float">
             <div className="absolute -right-5 bottom-16 hidden rounded-3xl bg-white p-4 shadow-glow md:block">
               <div className="flex items-center gap-2 text-emerald-600">
                 <MessageCircle className="size-5" />

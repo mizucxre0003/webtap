@@ -14,7 +14,7 @@ export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
 }
 
 export function SectionShell({ className, ...props }: HTMLAttributes<HTMLElement>) {
-  return <section className={cn("px-4 py-16 sm:px-6 lg:px-8", className)} {...props} />;
+  return <section className={cn("px-4 py-12 sm:px-6 sm:py-16 lg:px-8", className)} {...props} />;
 }
 
 export function Container({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
