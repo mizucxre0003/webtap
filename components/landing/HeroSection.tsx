@@ -67,7 +67,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
   }
 
   return (
-    <SectionShell id="home" className="relative overflow-hidden pb-24 pt-6 sm:pb-10 sm:pt-8">
+    <SectionShell id="home" className="relative pb-24 pt-6 sm:pb-10 sm:pt-8">
       <div className="webtap-hero-bg" aria-hidden="true">
         <div className="webtap-hero-grid" />
         <div className="webtap-hero-orbit webtap-hero-orbit-one" />
@@ -79,7 +79,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
       <Container className="relative">
         <div className="relative z-40 h-[4.5rem]">
           <header
-            className={`fixed top-4 z-50 flex max-w-[calc(100vw-2rem)] items-center border border-black/5 bg-white/90 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
+            className={`fixed top-4 z-[100] flex max-w-[calc(100vw-2rem)] items-center border border-black/5 bg-white/90 shadow-[0_20px_60px_rgba(17,16,24,0.10)] backdrop-blur transition-all duration-300 ${
               compact
                 ? "left-4 w-16 justify-center rounded-[1.35rem] p-2"
                 : "left-4 right-4 mx-auto flex-wrap justify-between gap-3 rounded-[1.5rem] px-4 py-3 sm:max-w-7xl sm:rounded-full"
@@ -146,7 +146,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
 
           <a
             href="#lead-form"
-            className={`fixed inset-x-4 bottom-4 z-40 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:bg-brand-dark sm:hidden ${
+            className={`fixed inset-x-4 bottom-4 z-[90] inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:bg-brand-dark sm:hidden ${
               isLeadFormVisible ? "pointer-events-none translate-y-4 opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
@@ -156,7 +156,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
 
           <a
             href="#lead-form"
-            className={`fixed bottom-5 left-6 z-40 hidden min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:inline-flex ${
+            className={`fixed bottom-5 left-6 z-[90] hidden min-h-12 items-center gap-2 rounded-full bg-brand-ink px-5 text-sm font-black text-white shadow-[0_20px_60px_rgba(17,16,24,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:inline-flex ${
               isScrolled && !isLeadFormVisible
                 ? "translate-y-0 opacity-100"
                 : "pointer-events-none translate-y-4 opacity-0"
