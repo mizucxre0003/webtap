@@ -1,6 +1,6 @@
 import { Mail, MessageCircle, Send } from "lucide-react";
 import { Container } from "@/components/ui/Card";
-import { ownerWhatsappUrl } from "@/lib/whatsapp";
+import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
 
 const links = [
   ["Главная", "#home"],
@@ -37,7 +37,7 @@ export function Footer() {
           <div>
             <p className="mb-4 font-black">Контакты</p>
             <div className="space-y-3 text-sm text-white/65">
-              <a className="flex items-center gap-2 transition hover:text-white" href={ownerWhatsappUrl()} target="_blank" rel="noreferrer">
+              <a className="flex items-center gap-2 transition hover:text-white" href={ownerWhatsappRedirectUrl()} target="_blank" rel="noreferrer">
                 <MessageCircle className="size-4" />
                 WhatsApp
               </a>

@@ -9,12 +9,14 @@ import { PricingSection } from "@/components/landing/PricingSection";
 import { ProblemSection } from "@/components/landing/ProblemSection";
 import { ProcessSection } from "@/components/landing/ProcessSection";
 import { TapFlowSection } from "@/components/landing/TapFlowSection";
-import { ownerWhatsappUrl } from "@/lib/whatsapp";
+import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
 
 export default function Home() {
+  const whatsappHref = ownerWhatsappRedirectUrl();
+
   return (
     <main className="pb-20 sm:pb-0">
-      <HeroSection whatsappHref={ownerWhatsappUrl("Здравствуйте! Пишу с сайта WebTap.kz")} />
+      <HeroSection whatsappHref={whatsappHref} />
       <AudienceSection />
       <ProblemSection />
       <TapFlowSection />
@@ -22,7 +24,7 @@ export default function Home() {
       <FeaturesSection />
       <ProcessSection />
       <PricingSection />
-      <LeadFormSection whatsappHref={ownerWhatsappUrl("Здравствуйте! Пишу с сайта WebTap.kz")} />
+      <LeadFormSection whatsappHref={whatsappHref} />
       <FAQSection />
       <Footer />
     </main>

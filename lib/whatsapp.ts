@@ -1,3 +1,5 @@
+export const defaultOwnerWhatsappText = "Здравствуйте! Пишу с сайта WebTap.kz";
+
 export function normalizePhone(phone: string | null | undefined) {
   if (!phone) return "";
   const digits = phone.replace(/\D/g, "");
@@ -13,6 +15,10 @@ export function whatsappUrl(phone: string | null | undefined, text?: string) {
   return normalized ? `https://wa.me/${normalized}${query}` : "#";
 }
 
-export function ownerWhatsappUrl(text = "Здравствуйте! Пишу с сайта WebTap.kz") {
+export function ownerWhatsappUrl(text = defaultOwnerWhatsappText) {
   return whatsappUrl(process.env.WHATSAPP_PHONE, text);
+}
+
+export function ownerWhatsappRedirectUrl(text = defaultOwnerWhatsappText) {
+  return `/api/whatsapp?text=${encodeURIComponent(text)}`;
 }
