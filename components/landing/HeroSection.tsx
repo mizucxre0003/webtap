@@ -215,7 +215,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
           </div>
 
           <div className="relative mx-auto w-full max-w-full sm:max-w-xl sm:animate-float">
-            <div className="rounded-[1.5rem] border border-white/80 bg-white/85 p-4 shadow-soft backdrop-blur sm:hidden">
+            <div className="hidden rounded-[1.5rem] border border-white/80 bg-white/85 p-4 shadow-soft backdrop-blur sm:hidden">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 [&>p:first-child]:hidden [&>p:nth-child(2)]:mt-0">
                   <p className="text-xs font-black uppercase tracking-[0.14em] text-brand">WebTap page</p>
