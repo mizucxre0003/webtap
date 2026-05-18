@@ -173,7 +173,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
               <span className="sm:hidden">Сайт под заявки для бизнеса</span>
               <span className="hidden sm:inline">Сайт для бизнеса, который помогает получать заявки</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-black/65 sm:mt-6 sm:text-lg sm:leading-8">
+            <p className="hidden max-w-2xl text-black/65 sm:mt-6 sm:block sm:text-lg sm:leading-8">
               <span className="sm:hidden">
                 WebTap делает понятные страницы, где клиент видит услугу, доверие и сразу пишет в WhatsApp.
               </span>
@@ -184,7 +184,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
               </span>
             </p>
 
-            <div className="mt-5 rounded-2xl border border-brand/15 bg-white/85 px-4 py-3 shadow-sm sm:hidden">
+            <div className="mt-5 rounded-2xl border border-brand/15 bg-white/85 px-4 py-3 shadow-sm sm:hidden [&>p+p]:hidden">
               <p className="text-xs font-black uppercase tracking-[0.14em] text-brand">Запуск от 49 990 ₸</p>
               <p className="mt-1 text-sm font-semibold text-brand-ink">Далее обслуживание от 4 990 ₸/мес</p>
             </div>
@@ -217,7 +217,7 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
           <div className="relative mx-auto w-full max-w-full sm:max-w-xl sm:animate-float">
             <div className="rounded-[1.5rem] border border-white/80 bg-white/85 p-4 shadow-soft backdrop-blur sm:hidden">
               <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
+                <div className="min-w-0 [&>p:first-child]:hidden [&>p:nth-child(2)]:mt-0">
                   <p className="text-xs font-black uppercase tracking-[0.14em] text-brand">WebTap page</p>
                   <p className="mt-2 text-xl font-black leading-tight text-brand-ink">Услуга понятна сразу</p>
                 </div>

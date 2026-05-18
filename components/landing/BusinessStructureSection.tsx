@@ -20,9 +20,9 @@ export function BusinessStructureSection() {
             Что увидит ваш клиент на сайте
           </h2>
         </div>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="-mx-4 mt-8 flex snap-x gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] sm:mx-0 sm:mt-10 sm:grid sm:grid-cols-1 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-2 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
           {steps.map((step, index) => (
-            <Card key={step} className="relative overflow-hidden p-6">
+            <Card key={step} className="relative min-w-[78vw] snap-start overflow-hidden p-6 sm:min-w-0">
               <div className="absolute right-4 top-4 text-5xl font-black text-brand-mist">
                 {String(index + 1).padStart(2, "0")}
               </div>

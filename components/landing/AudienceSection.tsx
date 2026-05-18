@@ -31,9 +31,9 @@ export function AudienceSection() {
             Кому подойдёт сайт от WebTap
           </h2>
         </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="-mx-4 mt-8 flex snap-x gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
           {items.map(([title, Icon]) => (
-            <Card key={title} className="group p-5 transition hover:-translate-y-1 hover:shadow-glow">
+            <Card key={title} className="group min-w-[78vw] snap-start p-5 transition hover:-translate-y-1 hover:shadow-glow sm:min-w-0">
               <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-brand-mist text-brand transition group-hover:bg-brand group-hover:text-white">
                 <Icon className="size-6" />
               </div>
