@@ -323,6 +323,8 @@ model Settings {
   defaultYearlySupportPrice  Int      @default(51990)
   whatsapp                   String?
   email                      String?
+  instagram                  String?
+  telegram                   String?
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
 }

@@ -173,4 +173,6 @@ export const settingsSchema = z.object({
   defaultYearlySupportPrice: z.coerce.number().int().min(0),
   whatsapp: optionalText,
   email: optionalText,
+  instagram: optionalText,
+  telegram: optionalText,
 });

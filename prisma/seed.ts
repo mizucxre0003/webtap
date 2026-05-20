@@ -36,6 +36,8 @@ async function main() {
         defaultYearlySupportPrice: 51990,
         whatsapp: process.env.WHATSAPP_PHONE ?? "77000000000",
         email: email,
+        instagram: "https://instagram.com/",
+        telegram: "https://t.me/",
       },
     });
   }

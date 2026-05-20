@@ -52,14 +52,15 @@ const microSignals = ["Цена на виду", "WhatsApp в 1 тап", "FAQ б�
 export function TapFlowSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const previewRef = useRef<HTMLDivElement>(null);
+  const previewItemRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     const preview = previewRef.current;
-    if (!preview) return;
-    const step = window.innerWidth < 640 ? 148 : 176;
+    const item = previewItemRefs.current[activeIndex];
+    if (!preview || !item) return;
 
     preview.scrollTo({
-      top: activeIndex * step,
+      top: item.offsetTop - preview.offsetTop - (preview.clientHeight - item.offsetHeight) / 2,
       behavior: "smooth",
     });
   }, [activeIndex]);
@@ -148,6 +149,9 @@ export function TapFlowSection() {
                     {flow.map((item, index) => (
                       <div
                         key={item.title}
+                        ref={(node) => {
+                          previewItemRefs.current[index] = node;
+                        }}
                         className={`rounded-[1.35rem] border p-3 transition sm:p-4 ${
                           activeIndex === index
                             ? "border-brand/70 bg-white text-brand-ink shadow-[0_18px_40px_rgba(147,112,219,0.18)]"

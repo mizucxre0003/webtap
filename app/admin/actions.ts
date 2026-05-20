@@ -346,6 +346,7 @@ export async function updateSettingsAction(formData: FormData) {
   }
 
   revalidatePath("/admin/settings");
+  revalidatePath("/");
   withToast("/admin/settings", "updated");
 }
 

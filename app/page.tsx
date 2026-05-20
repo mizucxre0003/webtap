@@ -11,6 +11,8 @@ import { ProcessSection } from "@/components/landing/ProcessSection";
 import { TapFlowSection } from "@/components/landing/TapFlowSection";
 import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   const whatsappHref = ownerWhatsappRedirectUrl();
 
