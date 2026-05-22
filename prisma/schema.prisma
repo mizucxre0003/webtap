@@ -297,6 +297,25 @@ model Reminder {
   @@index([remindAt])
 }
 
+model Review {
+  id                String   @id @default(cuid())
+  clientName        String
+  businessName      String?
+  text              String
+  rating            Int      @default(5)
+  projectUrl        String?
+  instagramStoryUrl String
+  screenshotUrl     String?
+  isPublished       Boolean  @default(true)
+  sortOrder         Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([isPublished])
+  @@index([sortOrder])
+  @@index([createdAt])
+}
+
 model Note {
   id        String   @id @default(cuid())
   body      String

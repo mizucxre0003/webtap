@@ -51,16 +51,17 @@ export function AudienceSection() {
               key={title}
               className="group relative isolate min-h-[9.5rem] min-w-[78vw] snap-start overflow-hidden rounded-[1.5rem] bg-white shadow-[0_18px_55px_rgba(17,16,24,0.12)] ring-1 ring-black/5 transition sm:min-h-[10rem] sm:min-w-0"
             >
-              <div className={`absolute -right-3 bottom-0 top-2 w-[68%] transition duration-500 sm:-right-4 sm:w-[72%] ${imageClassName ?? ""}`}>
+              <div className={`absolute -right-2 bottom-1 top-3 w-[60%] transition duration-500 sm:-right-3 sm:w-[64%] ${imageClassName ?? ""}`}>
                 <Image
                   src={image}
                   alt=""
                   fill
-                  sizes="(max-width: 640px) 70vw, (max-width: 1024px) 36vw, 18vw"
-                  className="object-contain object-right-bottom"
+                  quality={100}
+                  sizes="(max-width: 640px) 58vw, (max-width: 1024px) 32vw, 16vw"
+                  className="object-contain object-right-bottom drop-shadow-[0_14px_24px_rgba(17,16,24,0.16)]"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/78 to-white/8" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/82 to-white/18" />
               <div className="absolute left-3 top-3 flex size-9 items-center justify-center rounded-xl bg-[#F5F5F7] text-brand shadow-sm ring-1 ring-black/5">
                 <Icon className="size-4" />
               </div>

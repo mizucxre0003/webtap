@@ -53,6 +53,25 @@ export const reminderTypes = [
 export const reminderStatuses = ["pending", "done", "cancelled"] as const;
 export const recurringExpenseStatuses = ["active", "paused", "cancelled"] as const;
 
+const urlOrPath = z.preprocess(
+  (value) => (String(value ?? "").trim() === "" ? undefined : value),
+  z.string().trim().refine(
+    (value) =>
+      value.startsWith("/") ||
+      value.startsWith("http://") ||
+      value.startsWith("https://"),
+    "Введите ссылку, которая начинается с https:// или /",
+  ).optional(),
+);
+
+const requiredUrlOrPath = z.string().trim().min(1, "Добавьте ссылку").refine(
+  (value) =>
+    value.startsWith("/") ||
+    value.startsWith("http://") ||
+    value.startsWith("https://"),
+  "Введите ссылку, которая начинается с https:// или /",
+);
+
 export const publicLeadSchema = z.object({
   name: z.string().trim().min(2, "Укажите имя"),
   phone: z.string().trim().min(6, "Укажите телефон или WhatsApp"),
@@ -164,6 +183,18 @@ export const recurringExpenseSchema = z.object({
   reminderDaysBefore: z.coerce.number().int().min(0).max(14).default(3),
   status: z.enum(recurringExpenseStatuses).default("active"),
   comment: optionalText,
+});
+
+export const reviewSchema = z.object({
+  clientName: z.string().trim().min(2, "Введите имя клиента"),
+  businessName: optionalText,
+  text: z.string().trim().min(10, "Введите текст отзыва"),
+  rating: z.coerce.number().int().min(1).max(5).default(5),
+  projectUrl: urlOrPath,
+  instagramStoryUrl: requiredUrlOrPath,
+  screenshotUrl: urlOrPath,
+  isPublished: z.preprocess((value) => value === "on" || value === "true", z.boolean()).default(false),
+  sortOrder: z.coerce.number().int().default(0),
 });
 
 export const settingsSchema = z.object({

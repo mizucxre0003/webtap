@@ -11,6 +11,7 @@ import {
   MonitorSmartphone,
   Receipt,
   Settings,
+  Star,
   Users,
   WalletCards,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const links = [
   { href: "/admin/expenses", label: "Расходы", icon: Receipt },
   { href: "/admin/subscriptions", label: "Обслуживание", icon: WalletCards },
   { href: "/admin/reminders", label: "Напоминания", icon: Bell },
+  { href: "/admin/reviews", label: "Отзывы", icon: Star },
   { href: "/admin/settings", label: "Настройки", icon: Settings },
 ];
 

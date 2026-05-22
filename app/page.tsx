@@ -8,6 +8,7 @@ import { LeadFormSection } from "@/components/landing/LeadFormSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { ProblemSection } from "@/components/landing/ProblemSection";
 import { ProcessSection } from "@/components/landing/ProcessSection";
+import { ReviewsSection } from "@/components/landing/ReviewsSection";
 import { TapFlowSection } from "@/components/landing/TapFlowSection";
 import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
 
@@ -23,6 +24,7 @@ export default function Home() {
       <ProblemSection />
       <TapFlowSection />
       <BusinessStructureSection />
+      <ReviewsSection />
       <FeaturesSection />
       <ProcessSection />
       <PricingSection />

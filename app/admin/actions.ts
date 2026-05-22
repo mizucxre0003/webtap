@@ -24,6 +24,7 @@ import {
   publicLeadSchema,
   recurringExpenseSchema,
   reminderSchema,
+  reviewSchema,
   settingsSchema,
   subscriptionSchema,
 } from "@/lib/validations";
@@ -325,6 +326,25 @@ export async function createReminderAction(formData: FormData) {
   withToast("/admin/reminders", "created");
 }
 
+export async function createReviewAction(formData: FormData) {
+  await requireAdmin();
+  const data = reviewSchema.parse(values(formData));
+  await prisma.review.create({ data });
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+  withToast("/admin/reviews", "created");
+}
+
+export async function updateReviewAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const data = reviewSchema.parse(values(formData));
+  await prisma.review.update({ where: { id }, data });
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+  withToast("/admin/reviews", "updated");
+}
+
 export async function updateReminderStatusAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");
@@ -483,6 +503,15 @@ export async function deleteReminderAction(formData: FormData) {
   await prisma.reminder.delete({ where: { id } });
   revalidatePath("/admin/reminders");
   withToast("/admin/reminders", "deleted");
+}
+
+export async function deleteReviewAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.review.delete({ where: { id } });
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+  withToast("/admin/reviews", "deleted");
 }
 
 export async function deleteRecurringExpenseAction(formData: FormData) {
