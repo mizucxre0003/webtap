@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, Send } from "lucide-react";
+import { FileText, Mail, MessageCircle, Send } from "lucide-react";
 import { Container } from "@/components/ui/Card";
 import { prisma } from "@/lib/prisma";
 import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
@@ -78,6 +78,10 @@ export async function Footer() {
               <a className="flex items-center gap-2 transition hover:text-white" href={`mailto:${email}`}>
                 <Mail className="size-4" />
                 {email}
+              </a>
+              <a className="flex items-center gap-2 transition hover:text-white" href="/legal/webtap-offer.pdf" target="_blank" rel="noreferrer">
+                <FileText className="size-4" />
+                Публичная оферта
               </a>
             </div>
           </div>
