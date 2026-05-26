@@ -1,0 +1,1373 @@
+/* css/theme-ecoframe.css - Тема Скандинавских Деревянных Домов (Светлая) */
+
+/* Применяется при body.theme-ecoframe */
+body.theme-ecoframe {
+    background-color: #FAF9F6;
+    color: #2D312E;
+    font-family: 'Inter', sans-serif;
+}
+
+body.theme-ecoframe h1,
+body.theme-ecoframe h2,
+body.theme-ecoframe h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+}
+
+/* Переменные темы */
+:root {
+    --eco-primary: #2E5A44;         /* Лесной зеленый */
+    --eco-primary-hover: #1E3D2D;
+    --eco-secondary: #C19A6B;       /* Теплый дуб */
+    --eco-secondary-hover: #A37F55;
+    --eco-bg: #FAF9F6;              /* Слоновая кость */
+    --eco-bg-light: #F2EFE9;        /* Мягкий бежевый */
+    --eco-text: #2D312E;            /* Темно-серый */
+    --eco-text-muted: #69706C;
+    --eco-border: rgba(46, 90, 68, 0.15);
+    --eco-shadow: 0 10px 30px rgba(46, 90, 68, 0.05);
+    --wa-green: #25D366;
+    --wa-green-hover: #20BA5A;
+}
+
+/* Шапка (Header) */
+.eco-header {
+    background: rgba(250, 249, 246, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--eco-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    flex-wrap: nowrap;
+}
+
+.eco-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--eco-primary);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.logo-leaf-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--eco-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.eco-logo span {
+    color: var(--eco-secondary);
+}
+
+.eco-nav {
+    display: flex;
+    gap: 24px;
+    flex-shrink: 1;
+}
+
+.eco-nav a {
+    text-decoration: none;
+    color: var(--eco-text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.eco-nav a:hover {
+    color: var(--eco-primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.eco-phone {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: var(--eco-text);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.eco-phone:hover {
+    color: var(--eco-primary);
+}
+
+.eco-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--wa-green);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.eco-btn-wa:hover {
+    background-color: var(--wa-green-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+.wa-icon-svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Герой-секция (Hero) */
+.eco-hero {
+    padding: 120px 0 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.eco-hero-container {
+    position: relative;
+    z-index: 2;
+}
+
+.eco-hero-content {
+    max-width: 650px;
+}
+
+.eco-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(46, 90, 68, 0.1);
+    color: var(--eco-primary);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.eco-hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.15;
+    color: var(--eco-primary);
+    margin-bottom: 20px;
+}
+
+.eco-hero-text {
+    font-size: 1.15rem;
+    color: var(--eco-text-muted);
+    margin-bottom: 35px;
+    max-width: 550px;
+}
+
+.eco-hero-btns {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 50px;
+}
+
+.eco-btn-primary {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--eco-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(46, 90, 68, 0.15);
+    transition: all 0.3s ease;
+}
+
+.eco-btn-primary:hover {
+    background-color: var(--eco-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(46, 90, 68, 0.25);
+}
+
+.eco-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background-color: transparent;
+    border: 2px solid var(--eco-border);
+    color: var(--eco-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.eco-btn-secondary:hover {
+    background-color: rgba(46, 90, 68, 0.05);
+    border-color: var(--eco-primary);
+    transform: translateY(-2px);
+}
+
+.btn-wa-circle {
+    width: 10px;
+    height: 10px;
+    background-color: var(--wa-green);
+    border-radius: 50%;
+    position: relative;
+}
+
+.btn-wa-circle::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--wa-green);
+    border-radius: 50%;
+    animation: waPulse 1.5s infinite;
+}
+
+@keyframes waPulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.eco-hero-features-strip {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--eco-border);
+    padding-top: 24px;
+}
+
+.strip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--eco-text);
+}
+
+.strip-icon {
+    font-size: 1.25rem;
+}
+
+/* Секции общего назначения */
+.eco-section {
+    padding: 100px 0;
+}
+
+.eco-bg-light {
+    background-color: var(--eco-bg-light);
+}
+
+.eco-section-heading {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 60px;
+}
+
+.eco-section-heading h2 {
+    font-size: 2.5rem;
+    color: var(--eco-primary);
+    margin-bottom: 16px;
+}
+
+.eco-section-heading p {
+    color: var(--eco-text-muted);
+    font-size: 1.05rem;
+}
+
+/* Грид преимуществ */
+.eco-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.eco-feature-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    transition: all 0.3s ease;
+}
+
+.eco-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(46, 90, 68, 0.08);
+}
+
+.feat-icon {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 48px;
+}
+
+.feat-svg {
+    width: 44px;
+    height: 44px;
+    stroke: var(--eco-primary);
+}
+
+.eco-feature-card h3 {
+    font-size: 1.35rem;
+    color: var(--eco-primary);
+    margin-bottom: 12px;
+}
+
+.eco-feature-card p {
+    color: var(--eco-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Каталог коттеджей */
+.eco-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.eco-project-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    transition: all 0.3s ease;
+}
+
+.eco-project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.06);
+}
+
+.project-img-placeholder {
+    height: 240px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.proj-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background-color: white;
+    color: var(--eco-primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.proj-icon-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+}
+
+.proj-svg-inner {
+    width: 56px;
+    height: 56px;
+    stroke: var(--eco-primary);
+    opacity: 0.85;
+}
+
+.project-details {
+    padding: 24px;
+}
+
+.project-details h3 {
+    font-size: 1.35rem;
+    color: var(--eco-primary);
+    margin-bottom: 12px;
+}
+
+.project-specs {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--eco-text-muted);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.project-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-price {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-label {
+    font-size: 0.75rem;
+    color: var(--eco-text-muted);
+}
+
+.price-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--eco-secondary);
+}
+
+.project-wa-btn {
+    text-decoration: none;
+    background-color: rgba(37, 211, 102, 0.1);
+    color: var(--wa-green-hover);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.project-wa-btn:hover {
+    background-color: var(--wa-green);
+    color: white;
+}
+
+/* Интерактивный калькулятор (Eco Calc) */
+.eco-calc-card {
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(46, 90, 68, 0.06);
+    border: 1px solid var(--eco-border);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.calc-steps {
+    margin-bottom: 30px;
+    min-height: 220px;
+}
+
+.calc-step {
+    display: none;
+}
+
+.calc-step.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.calc-step-title {
+    font-size: 1.35rem;
+    color: var(--eco-primary);
+    margin-bottom: 24px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700;
+}
+
+.calc-options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.calc-option {
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.calc-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.calc-option:hover {
+    border-color: var(--eco-primary);
+    background-color: rgba(46, 90, 68, 0.01);
+}
+
+.calc-option.active {
+    border-color: var(--eco-primary);
+    background-color: rgba(46, 90, 68, 0.04);
+}
+
+.option-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--eco-primary);
+}
+
+.option-sub {
+    font-size: 0.8rem;
+    color: var(--eco-text-muted);
+    line-height: 1.4;
+}
+
+.calc-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.btn-calc-prev,
+.btn-calc-next {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-calc-prev {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #555;
+}
+
+.btn-calc-prev:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-calc-next {
+    background-color: var(--eco-primary);
+    border: none;
+    color: white;
+}
+
+.btn-calc-next:hover:not(:disabled) {
+    background-color: var(--eco-primary-hover);
+}
+
+.calc-progress-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.calc-progress-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    transition: background-color 0.2s;
+}
+
+.calc-progress-dots .dot.active {
+    background-color: var(--eco-primary);
+}
+
+.calc-result-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    background-color: var(--eco-bg-light);
+    padding: 24px 30px;
+    border-radius: 12px;
+}
+
+.result-price-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-label {
+    font-size: 0.8rem;
+    color: var(--eco-text-muted);
+}
+
+.result-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--eco-primary);
+}
+
+.result-form {
+    display: flex;
+    gap: 12px;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.result-form input {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-width: 160px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-calc-submit-wa {
+    padding: 12px 24px;
+    background-color: var(--wa-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-calc-submit-wa:hover {
+    background-color: var(--wa-green-hover);
+}
+
+/* Формы обратной связи */
+.eco-contacts-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.eco-contacts-info h2 {
+    font-size: 2.2rem;
+    color: var(--eco-primary);
+    margin-bottom: 20px;
+    line-height: 1.25;
+}
+
+.eco-contacts-info > p {
+    color: var(--eco-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 40px;
+}
+
+.contact-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+.contact-svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--eco-primary);
+}
+
+.contact-item h4 {
+    font-size: 1.1rem;
+    color: var(--eco-primary);
+    margin-bottom: 4px;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.contact-item p {
+    color: var(--eco-text-muted);
+    font-size: 0.95rem;
+}
+
+.eco-contacts-form-wrapper {
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+}
+
+.eco-lead-form h3 {
+    font-size: 1.5rem;
+    color: var(--eco-primary);
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700;
+}
+
+.eco-lead-form p {
+    font-size: 0.85rem;
+    color: var(--eco-text-muted);
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    background-color: #fafafa;
+    color: var(--eco-text);
+    transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--eco-primary);
+    background-color: white;
+}
+
+.eco-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--wa-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.eco-submit-btn:hover {
+    background-color: var(--wa-green-hover);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Подвал (Footer) */
+.eco-footer {
+    background-color: #1E3228;
+    color: #E2E8E5;
+    padding: 40px 0;
+    font-size: 0.9rem;
+}
+
+.eco-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    color: #A5B5AD;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+/* ========================================== */
+/* НОВЫЕ БЛОКИ: УСЛУГИ, О КОМПАНИИ, ЭТАПЫ, ОТЗЫВЫ, FAQ */
+/* ========================================== */
+
+/* Услуги списком */
+.eco-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.eco-service-row {
+    display: grid;
+    grid-template-columns: 80px 1.2fr 2fr;
+    align-items: center;
+    padding: 30px 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    transition: all 0.3s ease;
+}
+.eco-service-row:hover {
+    transform: translateY(-2px);
+    border-color: var(--eco-primary);
+    box-shadow: 0 15px 35px rgba(46, 90, 68, 0.08);
+}
+.eco-service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--eco-secondary);
+}
+.eco-service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--eco-primary);
+    padding-right: 20px;
+}
+.eco-service-desc {
+    font-size: 0.95rem;
+    color: var(--eco-text-muted);
+    line-height: 1.6;
+}
+
+/* О компании */
+.eco-about-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+}
+.eco-about-content h2 {
+    font-size: 2.5rem;
+    color: var(--eco-primary);
+    margin: 16px 0 24px;
+    line-height: 1.2;
+}
+.eco-about-content p {
+    font-size: 1.05rem;
+    color: var(--eco-text-muted);
+    line-height: 1.7;
+}
+.eco-about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.stat-box {
+    background: var(--eco-bg-light);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    box-shadow: var(--eco-shadow);
+    transition: all 0.3s ease;
+}
+.stat-box:hover {
+    transform: translateY(-3px);
+    border-color: var(--eco-secondary);
+}
+.stat-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--eco-primary);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+.stat-text {
+    font-size: 0.9rem;
+    color: var(--eco-text-muted);
+    font-weight: 600;
+}
+
+/* Этапы работы */
+.eco-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+.eco-step-item {
+    background: white;
+    padding: 30px 24px;
+    border-radius: 16px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    position: relative;
+    transition: all 0.3s ease;
+}
+.eco-step-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--eco-primary);
+    box-shadow: 0 15px 35px rgba(46, 90, 68, 0.08);
+}
+.step-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(193, 154, 107, 0.15);
+    color: var(--eco-secondary-hover);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.eco-step-item h3 {
+    font-size: 1.25rem;
+    color: var(--eco-primary);
+    margin-bottom: 12px;
+}
+.eco-step-item p {
+    font-size: 0.85rem;
+    color: var(--eco-text-muted);
+    line-height: 1.6;
+}
+
+/* Отзывы с фото */
+.eco-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.eco-review-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    transition: all 0.3s ease;
+}
+.eco-review-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--eco-primary);
+}
+.rev-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    position: relative;
+}
+.rev-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--eco-bg-light);
+    color: var(--eco-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 1px solid rgba(46, 90, 68, 0.1);
+}
+.rev-user-info {
+    flex-grow: 1;
+}
+.rev-user-info h4 {
+    font-size: 1.1rem;
+    color: var(--eco-primary);
+    font-weight: 600;
+}
+.rev-user-info p {
+    font-size: 0.8rem;
+    color: var(--eco-text-muted);
+}
+.rev-rating {
+    color: #FFC107;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+.rev-text {
+    font-size: 0.95rem;
+    color: var(--eco-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* FAQ Accordion */
+body.theme-ecoframe .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+body.theme-ecoframe .faq-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--eco-shadow);
+    border: 1px solid rgba(46, 90, 68, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+body.theme-ecoframe .faq-item.active {
+    border-color: var(--eco-primary);
+}
+body.theme-ecoframe .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 24px 30px;
+    background: none;
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--eco-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: color 0.3s ease;
+}
+body.theme-ecoframe .faq-question:hover {
+    color: var(--eco-secondary-hover);
+}
+body.theme-ecoframe .faq-arrow {
+    width: 12px;
+    height: 12px;
+    border-bottom: 2px solid var(--eco-secondary);
+    border-right: 2px solid var(--eco-secondary);
+    transform: rotate(45deg);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+}
+body.theme-ecoframe .faq-item.active .faq-arrow {
+    transform: rotate(-135deg);
+}
+body.theme-ecoframe .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s ease;
+    padding: 0 30px;
+}
+body.theme-ecoframe .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 24px;
+}
+body.theme-ecoframe .faq-answer p {
+    font-size: 0.95rem;
+    color: var(--eco-text-muted);
+    line-height: 1.6;
+}
+
+/* ========================================== */
+/* АДАПТИВНОСТЬ ДЛЯ ТЕМЫ ECOFRAME              */
+/* ========================================== */
+@media (max-width: 992px) {
+    body.theme-ecoframe .header-container {
+        gap: 16px;
+    }
+
+    .eco-nav {
+        display: none; /* Скроем десктопное меню для демо */
+    }
+
+    .eco-phone {
+        display: none;
+    }
+
+    .eco-btn-wa {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+
+    .eco-features-grid,
+    .eco-catalog-grid,
+    .eco-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .eco-about-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .eco-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eco-contacts-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .calc-options-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .eco-hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body.theme-ecoframe .header-container {
+        height: auto;
+        padding: 14px 0;
+        gap: 12px;
+    }
+
+    .eco-logo {
+        font-size: 1.2rem;
+    }
+
+    body.theme-ecoframe .header-actions {
+        gap: 10px;
+        margin-left: auto;
+    }
+
+    .eco-btn-wa {
+        padding: 10px 14px;
+        font-size: 0.76rem;
+    }
+
+    .eco-features-grid,
+    .eco-catalog-grid,
+    .eco-steps-grid,
+    .eco-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eco-hero {
+        padding: 80px 0 60px;
+        min-height: auto;
+        background-position: center;
+    }
+
+    .eco-badge {
+        font-size: 0.72rem;
+        padding: 6px 12px;
+    }
+
+    .eco-hero-content {
+        max-width: none;
+    }
+
+    .eco-hero-content h1 {
+        font-size: 2.2rem;
+        text-wrap: balance;
+    }
+
+    .eco-hero-text {
+        font-size: 1rem;
+        margin-bottom: 28px;
+    }
+
+    .eco-hero-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .eco-btn-primary, .eco-btn-secondary {
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .eco-services-list {
+        gap: 14px;
+    }
+
+    .eco-service-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 22px 18px;
+    }
+
+    .eco-service-title {
+        padding-right: 0;
+        font-size: 1.15rem;
+    }
+
+    .eco-service-desc {
+        font-size: 0.9rem;
+    }
+
+    .eco-about-stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stat-box {
+        padding: 24px 18px;
+    }
+
+    .project-details {
+        padding: 18px;
+    }
+
+    .project-details h3 {
+        font-size: 1.15rem;
+    }
+
+    .project-specs {
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        margin-bottom: 18px;
+    }
+
+    .project-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .calc-result-panel {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+        gap: 18px;
+    }
+
+    .result-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .result-form input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .eco-calc-card {
+        padding: 22px 16px;
+        border-radius: 16px;
+    }
+
+    .calc-steps {
+        min-height: auto;
+    }
+
+    .calc-step-title {
+        font-size: 1.1rem;
+        margin-bottom: 18px;
+    }
+
+    .calc-option {
+        padding: 16px;
+    }
+
+    .calc-navigation {
+        gap: 12px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .btn-calc-prev,
+    .btn-calc-next {
+        width: calc(50% - 6px);
+        text-align: center;
+    }
+
+    .calc-progress-dots {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .result-value {
+        font-size: 1.5rem;
+    }
+
+    body.theme-ecoframe .faq-question {
+        padding: 18px 20px;
+        font-size: 1rem;
+        gap: 12px;
+    }
+
+    body.theme-ecoframe .faq-answer {
+        padding: 0 20px;
+    }
+
+    body.theme-ecoframe .faq-item.active .faq-answer {
+        padding-bottom: 18px;
+    }
+
+    .contact-item {
+        gap: 14px;
+    }
+
+    .eco-contacts-form-wrapper,
+    .eco-review-card {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .eco-section-heading {
+        margin-bottom: 36px;
+    }
+
+    .eco-section {
+        padding: 60px 0;
+    }
+    .eco-section-heading h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .eco-hero-content h1 {
+        font-size: 1.85rem;
+    }
+
+    .eco-section-heading h2,
+    .eco-contacts-info h2 {
+        font-size: 1.7rem;
+    }
+
+    .btn-calc-prev,
+    .btn-calc-next {
+        width: 100%;
+    }
+}

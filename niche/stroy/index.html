@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/niche/stroy/">
+    <title>Строительная Компания | Современные Решения</title>
+    <!-- Подключение шрифтов Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@500;700;800&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme-ecoframe.css">
+    <link rel="stylesheet" href="css/theme-monolith.css">
+    <link rel="stylesheet" href="css/theme-promstroy.css">
+</head>
+<body class="theme-ecoframe">
+    <a class="webtap-back-link" href="/" aria-label="Вернуться на главный сайт WebTap">
+        <span aria-hidden="true">←</span>
+        <span>На WebTap</span>
+    </a>
+
+    <!-- Анимационный оверлей перехода -->
+    <div class="transition-overlay" id="transition-overlay">
+        <div class="overlay-part part-1"></div>
+        <div class="overlay-part part-2"></div>
+        <div class="overlay-logo">
+            <span class="logo-spinner"></span>
+            <span class="logo-text">WEBTAP</span>
+        </div>
+    </div>
+
+    <!-- Демо-переключатель тем (Demo Switcher) -->
+    <div class="demo-switcher-container" id="demo-switcher">
+        <button class="switcher-toggle-btn" id="switcher-toggle" aria-label="Сменить дизайн">
+            <svg class="gear-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.14 12.94C19.18 12.63 19.2 12.32 19.2 12C19.2 11.68 19.18 11.37 19.14 11.06L21.39 9.3C21.59 9.14 21.65 8.86 21.52 8.63L19.4 4.96C19.27 4.73 18.99 4.64 18.76 4.73L16.11 5.8C15.56 5.38 14.95 5.03 14.28 4.75L13.88 1.93C13.84 1.68 13.62 1.5 13.38 1.5H9.17C8.93 1.5 8.72 1.68 8.68 1.93L8.28 4.75C7.61 5.03 7 5.38 6.45 5.8L3.8 4.73C3.57 4.64 3.29 4.73 3.16 4.96L1.04 8.63C0.91 8.86 0.97 9.14 1.17 9.3L3.42 11.06C3.38 11.37 3.36 11.69 3.36 12C3.36 12.31 3.38 12.63 3.42 12.94L1.17 14.7C0.97 14.86 0.91 15.14 1.04 15.37L3.16 19.04C3.29 19.27 3.57 19.36 3.8 19.27L6.45 18.2C7 18.62 7.61 18.97 8.28 19.25L8.68 22.07C8.72 22.32 8.93 22.5 9.17 22.5H13.38C13.62 22.5 13.84 22.32 13.88 22.07L14.28 19.25C14.95 18.97 15.56 18.62 16.11 18.2L18.76 19.27C18.99 19.36 19.27 19.27 19.4 19.04L21.52 15.37C21.65 15.14 21.59 14.86 21.39 14.7L19.14 12.94ZM11.28 15.6C9.29 15.6 7.68 13.99 7.68 12C7.68 10.01 9.29 8.4 11.28 8.4C13.27 8.4 14.88 10.01 14.88 12C14.88 13.99 13.27 15.6 11.28 15.6Z" fill="currentColor"/>
+            </svg>
+            <span class="switcher-btn-text">Варианты дизайна</span>
+            <span class="switcher-pulse"></span>
+        </button>
+        
+        <div class="switcher-drawer" id="switcher-drawer">
+            <div class="drawer-header">
+                <h3>Примеры реализации</h3>
+                <button class="drawer-close" id="drawer-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <p class="drawer-desc">Выберите стиль сайта, чтобы продемонстрировать клиенту гибкость дизайна под его задачи:</p>
+            
+            <div class="switcher-cards-list">
+                <!-- Карта 1: EcoFrame -->
+                <div class="switcher-card active" data-theme="theme-ecoframe">
+                    <div class="card-preview ecoframe-preview">
+                        <div class="preview-line"></div>
+                        <div class="preview-circle"></div>
+                    </div>
+                    <div class="card-info">
+                        <h4>EcoFrame</h4>
+                        <p class="card-style-tag">Скандинавский уют (Светлый)</p>
+                        <p class="card-desc-text">Дерево, мягкие тона, семейное тепло. Подходит для каркасных домов, дач, коттеджей.</p>
+                    </div>
+                </div>
+
+                <!-- Карта 2: Monolith -->
+                <div class="switcher-card" data-theme="theme-monolith">
+                    <div class="card-preview monolith-preview">
+                        <div class="preview-line"></div>
+                        <div class="preview-circle"></div>
+                    </div>
+                    <div class="card-info">
+                        <h4>Monolith Elite</h4>
+                        <p class="card-style-tag">Премиум Хай-Тек (Темный)</p>
+                        <p class="card-desc-text">Стекло, бетон, золото и минимализм. Подходит для эксклюзивных вилл, премиум архитекторов.</p>
+                    </div>
+                </div>
+
+                <!-- Карта 3: PromStroy -->
+                <div class="switcher-card" data-theme="theme-promstroy">
+                    <div class="card-preview promstroy-preview">
+                        <div class="preview-line"></div>
+                        <div class="preview-circle"></div>
+                    </div>
+                    <div class="card-info">
+                        <h4>PromStroy</h4>
+                        <p class="card-style-tag">Индустриальный (Контрастный)</p>
+                        <p class="card-desc-text">Оранжево-серые тона, строгая геометрия, фокус на сроки. Для коммерческих объектов и ангаров.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="drawer-footer">
+                <p>Все варианты содержат интерактивный расчет и автоматическую генерацию заявки в WhatsApp.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ВАРИАНТ 1: ECOFRAME (СКАНДИНАВСКИЕ ДОМА) -->
+    <!-- ========================================== -->
+    <div id="ecoframe-site" class="demo-site-container active-site">
+        <!-- Шапка -->
+        <header class="eco-header">
+            <div class="container header-container">
+                <a href="#" class="eco-logo">
+                    <span class="logo-leaf-dot"></span>
+                    <span class="logo-name">Eco<span>Frame</span></span>
+                </a>
+                <nav class="eco-nav">
+                    <a href="#eco-services">Услуги</a>
+                    <a href="#eco-catalog">Проекты</a>
+                    <a href="#eco-about">О компании</a>
+                    <a href="#eco-calc">Калькулятор</a>
+                    <a href="#eco-contacts">Контакты</a>
+                </nav>
+                <div class="header-actions">
+                    <span class="eco-phone">Демо-контакт</span>
+                    <a href="#" class="eco-btn-wa wa-link" data-origin="EcoFrame Header">
+                        <svg viewBox="0 0 24 24" class="wa-icon-svg" fill="currentColor">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.42 9.86-9.864.001-2.636-1.02-5.11-2.871-6.963C16.6 1.967 14.128.948 11.5.948c-5.44 0-9.866 4.42-9.869 9.866-.001 1.77.461 3.5 1.339 5.025l-.974 3.557 3.651-.958zm11.667-6.84c-.31-.155-1.838-.907-2.115-1.008-.277-.1-.479-.15-.68.15-.2.3-.777.98-.952 1.18-.175.2-.35.225-.66.07-.31-.155-1.307-.48-2.486-1.533-.918-.816-1.537-1.824-1.718-2.13-.18-.305-.019-.47.136-.623.14-.137.31-.36.465-.54.155-.18.207-.3.31-.5.103-.2.052-.375-.026-.53-.078-.155-.68-1.637-.93-2.236-.245-.589-.493-.509-.68-.519-.176-.01-.378-.01-.58-.01-.202 0-.53.075-.807.38-.277.305-1.058 1.035-1.058 2.525 0 1.49 1.085 2.93 1.237 3.13.152.2 2.134 3.26 5.17 4.57.72.31 1.282.496 1.72.636.723.23 1.381.196 1.902.118.58-.087 1.838-.75 2.099-1.479.262-.73.262-1.355.185-1.488-.077-.13-.28-.21-.59-.365z"/>
+                        </svg>
+                        Консультация
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- СЕКЦИЯ 1: Первый экран (Hero) -->
+        <section class="eco-hero" style="background-image: linear-gradient(180deg, rgba(250,249,246,0.7) 0%, rgba(250,249,246,0.95) 100%), url('assets/images/ecoframe_hero.png');">
+            <div class="container eco-hero-container">
+                <div class="eco-hero-content">
+                    <span class="eco-badge">Энергоэффективные эко-дома</span>
+                    <h1>Строительство теплых скандинавских домов под ключ</h1>
+                    <p class="eco-hero-text">Проектируем и возводим каркасные коттеджи за 90 дней с фиксированной стоимостью в договоре по всему Казахстану.</p>
+                    <div class="eco-hero-btns">
+                        <a href="#eco-calc" class="eco-btn-primary">Рассчитать стоимость</a>
+                        <a href="#" class="eco-btn-secondary wa-link" data-origin="EcoFrame Hero WhatsApp">
+                            <span class="btn-wa-circle"></span>
+                            Связаться в WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 2: Услуги списком -->
+        <section class="eco-section eco-bg-light" id="eco-services">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Наши строительные услуги</h2>
+                    <p>Полный цикл возведения загородного жилья без привлечения сторонних субподрядчиков</p>
+                </div>
+                <div class="eco-services-list">
+                    <div class="eco-service-row">
+                        <div class="eco-service-num">01</div>
+                        <div class="eco-service-title">Индивидуальное проектирование</div>
+                        <div class="eco-service-desc">Разрабатываем архитектурные и конструктивные разделы (АР, КР) под особенности вашего участка и образ жизни вашей семьи.</div>
+                    </div>
+                    <div class="eco-service-row">
+                        <div class="eco-service-num">02</div>
+                        <div class="eco-service-title">Монтаж фундамента любой сложности</div>
+                        <div class="eco-service-desc">Закладываем надежную основу здания: железобетонные сваи с гарантией несущей способности или утепленные монолитные шведские плиты.</div>
+                    </div>
+                    <div class="eco-service-row">
+                        <div class="eco-service-num">03</div>
+                        <div class="eco-service-title">Сборка силового каркаса и кровли</div>
+                        <div class="eco-service-desc">Используем калиброванный брус камерной сушки. Монтируем гидро-ветрозащиту и кровельные системы любой геометрии (кликфальц, черепица).</div>
+                    </div>
+                    <div class="eco-service-row">
+                        <div class="eco-service-num">04</div>
+                        <div class="eco-service-title">Комплексная внутренняя отделка</div>
+                        <div class="eco-service-desc">Прокладываем скрытые инженерные сети, производим обшивку экологичным деревом, устанавливаем двери, окна и сдаем готовый к заселению дом.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 3: Преимущества -->
+        <section class="eco-section" id="eco-features">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Преимущества домов EcoFrame</h2>
+                    <p>Создаем жилье, в котором легко дышится и тепло даже в суровые зимние морозы</p>
+                </div>
+                <div class="eco-features-grid">
+                    <div class="eco-feature-card">
+                        <div class="feat-icon">
+                            <svg class="feat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 10l9-7 9 7v11H3V10z"/><path d="M9 21v-8h6v8"/></svg>
+                        </div>
+                        <h3>Заводское производство</h3>
+                        <p>Все элементы силового каркаса изготавливаются на нашем сухом производстве с точностью до 1 мм.</p>
+                    </div>
+                    <div class="eco-feature-card">
+                        <div class="feat-icon">
+                            <svg class="feat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h3>Энергосбережение</h3>
+                        <p>Утепление стен 200 мм немецким базальтовым волокном сокращает расходы на отопление до 40%.</p>
+                    </div>
+                    <div class="eco-feature-card">
+                        <div class="feat-icon">
+                            <svg class="feat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Гарантия 15 лет</h3>
+                        <p>Несем полную юридическую ответственность за каждый узел, стропильную систему и фундамент.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 4: Портфолио с ценами -->
+        <section class="eco-section eco-bg-light" id="eco-catalog">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Популярные проекты и цены</h2>
+                    <p>Выберите готовое планировочное решение или закажите бесплатную адаптацию под ваш участок</p>
+                </div>
+                <div class="eco-catalog-grid">
+                    <!-- Проект 1 -->
+                    <div class="eco-project-card">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #e3ede4, #c9dcce);">
+                            <span class="proj-badge">Сканди-120</span>
+                            <span class="proj-icon-inner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="proj-svg-inner"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v11a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            </span>
+                        </div>
+                        <div class="project-details">
+                            <h3>Barnhouse Сканди-120</h3>
+                            <div class="project-specs">
+                                <span>120 м²</span>
+                                <span>3 спальни</span>
+                                <span>2 санузла</span>
+                            </div>
+                            <div class="project-bottom">
+                                <div class="project-price">
+                                    <span class="price-label">Стоимость от</span>
+                                    <span class="price-value">25 000 000 ₸</span>
+                                </div>
+                                <a href="#" class="project-wa-btn wa-link" data-project="Barnhouse Сканди-120" data-origin="EcoFrame Catalog">Узнать смету</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Проект 2 -->
+                    <div class="eco-project-card">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #ede7e3, #dcd1c9);">
+                            <span class="proj-badge">Нордик-160</span>
+                            <span class="proj-icon-inner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="proj-svg-inner"><path d="M12 2L3 17h18L12 2zM12 17v5"/></svg>
+                            </span>
+                        </div>
+                        <div class="project-details">
+                            <h3>Классик Нордик-160</h3>
+                            <div class="project-specs">
+                                <span>160 м²</span>
+                                <span>4 спальни</span>
+                                <span>2 санузла</span>
+                            </div>
+                            <div class="project-bottom">
+                                <div class="project-price">
+                                    <span class="price-label">Стоимость от</span>
+                                    <span class="price-value">33 000 000 ₸</span>
+                                </div>
+                                <a href="#" class="project-wa-btn wa-link" data-project="Классик Нордик-160" data-origin="EcoFrame Catalog">Узнать смету</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Проект 3 -->
+                    <div class="eco-project-card">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #e7edf0, #cadbe3);">
+                            <span class="proj-badge">Фьорд-85</span>
+                            <span class="proj-icon-inner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="proj-svg-inner"><path d="M2 12c4-4 6 4 10 0s6-4 10 0M2 17c4-4 6 4 10 0s6-4 10 0"/></svg>
+                            </span>
+                        </div>
+                        <div class="project-details">
+                            <h3>Мини-коттедж Фьорд-85</h3>
+                            <div class="project-specs">
+                                <span>85 м²</span>
+                                <span>2 спальни</span>
+                                <span>1 санузел</span>
+                            </div>
+                            <div class="project-bottom">
+                                <div class="project-price">
+                                    <span class="price-label">Стоимость от</span>
+                                    <span class="price-value">18 500 000 ₸</span>
+                                </div>
+                                <a href="#" class="project-wa-btn wa-link" data-project="Мини-коттедж Фьорд-85" data-origin="EcoFrame Catalog">Узнать смету</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 5: О компании (лет/объектов) -->
+        <section class="eco-section" id="eco-about">
+            <div class="container eco-about-layout">
+                <div class="eco-about-content">
+                    <span class="eco-badge">О застройщике</span>
+                    <h2>Качество скандинавских стандартов в Казахстане</h2>
+                    <p>Мы основали EcoFrame с идеей создавать энергоэффективные дома, которые прослужат поколениям. Наша команда контролирует весь процесс: от отбора пиломатериалов северных лесов до закручивания последнего самореза на фасаде.</p>
+                </div>
+                <div class="eco-about-stats">
+                    <div class="stat-box">
+                        <span class="stat-num">8</span>
+                        <span class="stat-text">Лет успешной работы</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num">180+</span>
+                        <span class="stat-text">Семей живут в наших домах</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 6: Этапы работ (4 шага) -->
+        <section class="eco-section eco-bg-light" id="eco-steps">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Простые этапы строительства</h2>
+                    <p>Четкий и прозрачный процесс возведения вашего дома от первой встречи до передачи ключей</p>
+                </div>
+                <div class="eco-steps-grid">
+                    <div class="eco-step-item">
+                        <div class="step-badge">Шаг 1</div>
+                        <h3>Проект и Договор</h3>
+                        <p>Встречаемся в офисе, утверждаем планировку и фасадные решения, фиксируем итоговую смету в договоре.</p>
+                    </div>
+                    <div class="eco-step-item">
+                        <div class="step-badge">Шаг 2</div>
+                        <h3>Обустройство фундамента</h3>
+                        <p>Монтируем долговечный свайный фундамент с обвязкой швеллером или заливаем теплую шведскую плиту.</p>
+                    </div>
+                    <div class="eco-step-item">
+                        <div class="step-badge">Шаг 3</div>
+                        <h3>Сборка домокомплекта</h3>
+                        <p>Доставляем детали каркаса на участок и возводим стены, перекрытия, кровлю и монтируем окна.</p>
+                    </div>
+                    <div class="eco-step-item">
+                        <div class="step-badge">Шаг 4</div>
+                        <h3>Внутренняя отделка</h3>
+                        <p>Проводим скрытую инженерию, утепляем контур, обшиваем стены деревом и торжественно сдаем ключи.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 7: Отзывы с фото -->
+        <section class="eco-section" id="eco-reviews">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Отзывы наших клиентов</h2>
+                    <p>Искренние истории людей, которые доверили нам строительство своего семейного гнезда</p>
+                </div>
+                <div class="eco-reviews-grid">
+                    <div class="eco-review-card">
+                        <div class="rev-header">
+                            <div class="rev-avatar">AA</div>
+                            <div class="rev-user-info">
+                                <h4>Клиент проекта</h4>
+                                <p>Частный заказчик</p>
+                            </div>
+                            <span class="rev-rating">★★★★★</span>
+                        </div>
+                        <p class="rev-text">"Удобный пример блока отзывов: можно показать впечатление клиента, сильные стороны проекта и формат результата после запуска сайта."</p>
+                    </div>
+                    <div class="eco-review-card">
+                        <div class="rev-header">
+                            <div class="rev-avatar">М</div>
+                            <div class="rev-user-info">
+                                <h4>Отзыв клиента</h4>
+                                <p>Демо-наполнение</p>
+                            </div>
+                            <span class="rev-rating">★★★★★</span>
+                        </div>
+                        <p class="rev-text">"Этот текст можно заменить на реальный кейс после подключения: сроки, формат работы и впечатление заказчика от результата."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 8: Заявка (квиз-калькулятор) -->
+        <section class="eco-section eco-bg-light" id="eco-calc">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Калькулятор стоимости вашего дома</h2>
+                    <p>Ответьте на 3 вопроса и получите расчет сметы в WhatsApp</p>
+                </div>
+                
+                <div class="eco-calc-card">
+                    <div class="calc-steps">
+                        <!-- Шаг 1 -->
+                        <div class="calc-step active" data-step="1">
+                            <h4 class="calc-step-title">Шаг 1: Выберите общую площадь дома</h4>
+                            <div class="calc-options-grid">
+                                <label class="calc-option active">
+                                    <input type="radio" name="eco-area" value="до 100 м²" checked data-price="18000000">
+                                    <span class="option-title">До 100 м²</span>
+                                    <span class="option-sub">Компактный загородный дом</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-area" value="100 - 150 м²" data-price="27000000">
+                                    <span class="option-title">100 — 150 м²</span>
+                                    <span class="option-sub">Самый популярный размер для семьи</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-area" value="более 150 м²" data-price="42000000">
+                                    <span class="option-title">Более 150 м²</span>
+                                    <span class="option-sub">Просторный двухэтажный коттедж</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Шаг 2 -->
+                        <div class="calc-step" data-step="2">
+                            <h4 class="calc-step-title">Шаг 2: Выберите комплектацию строительства</h4>
+                            <div class="calc-options-grid">
+                                <label class="calc-option active">
+                                    <input type="radio" name="eco-comp" value="Теплый контур" checked data-multiplier="1.0">
+                                    <span class="option-title">Теплый контур</span>
+                                    <span class="option-sub">Каркас, кровля, окна, внешняя отделка</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-comp" value="Под чистовую (Предчистовая)" data-multiplier="1.25">
+                                    <span class="option-title">Под чистовую</span>
+                                    <span class="option-sub">С разводкой коммуникаций и ГКЛ</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-comp" value="Под ключ" data-multiplier="1.45">
+                                    <span class="option-title">Под ключ</span>
+                                    <span class="option-sub">Полная внутренняя отделка деревом</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Шаг 3 -->
+                        <div class="calc-step" data-step="3">
+                            <h4 class="calc-step-title">Шаг 3: Какой тип фундамента необходим?</h4>
+                            <div class="calc-options-grid">
+                                <label class="calc-option active">
+                                    <input type="radio" name="eco-fund" value="Свайный" checked data-extra="800000">
+                                    <span class="option-title">Ж/Б Сваи</span>
+                                    <span class="option-sub">Для ровных участков, быстрый монтаж</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-fund" value="Ленточный" data-extra="1600000">
+                                    <span class="option-title">Ленточный мелкого заложения</span>
+                                    <span class="option-sub">Классический надежный вариант</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="eco-fund" value="Монолитная плита" data-extra="2400000">
+                                    <span class="option-title">Монолитная УШП плита</span>
+                                    <span class="option-sub">С встроенным водяным теплым полом</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-navigation">
+                        <button type="button" class="btn-calc-prev" disabled>Назад</button>
+                        <div class="calc-progress-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <button type="button" class="btn-calc-next">Далее</button>
+                    </div>
+
+                    <div class="calc-result-panel">
+                        <div class="result-price-block">
+                            <span class="result-label">Предварительный расчет стоимости:</span>
+                            <span class="result-value" id="eco-total-price">18 800 000 ₸</span>
+                        </div>
+                        <div class="result-form">
+                            <input type="text" id="eco-calc-name" placeholder="Ваше имя" required>
+                            <input type="tel" id="eco-calc-phone" class="phone-mask" placeholder="Ваш телефон" required>
+                            <button type="button" class="btn-calc-submit-wa" id="btn-eco-calc-submit">Получить расчет в WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 9: Часто задаваемые вопросы (FAQ) -->
+        <section class="eco-section" id="eco-faq">
+            <div class="container">
+                <div class="eco-section-heading">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Отвечаем на популярные вопросы о скандинавской технологии строительства</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">Сколько времени занимает строительство дома? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Строительство дома в комплектации «Под ключ» занимает в среднем от 45 до 90 дней. Проектирование и устройство фундамента длятся около 10-15 дней, сборка каркаса и кровли — 30 дней, а внутренняя отделка и коммуникации — до 40 дней.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Можно ли строить каркасный дом в зимний период? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Да. Каркасная технология не включает в себя так называемые «мокрые» процессы (замешивание кладочных растворов, штукатурка фасада), поэтому силовой каркас можно собирать при температуре до -15 градусов без потери качества.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Дает ли деревянный каркас усадку? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Наши дома не дают усадки. Мы применяем только калиброванный пиломатериал хвойных пород прошедший камерную сушку (влажность 12-14%). Отделку стен и установку окон можно проводить сразу после сборки каркаса.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 10: Контакты -->
+        <section class="eco-section eco-bg-light" id="eco-contacts">
+            <div class="container eco-contacts-container">
+                <div class="eco-contacts-info">
+                    <h2>Контакты подключаются после запуска</h2>
+                    <p>В демо-версии контактные данные скрыты. После подключения здесь появятся актуальные адрес, почта и каналы связи.</p>
+                    <div class="contact-details-list">
+                        <div class="contact-item">
+                            <span class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="contact-svg"><path d="M12 21s-8-4.5-8-11.8A8 8 0 0120 9.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="3"/></svg>
+                            </span>
+                            <div>
+                                <h4>Адрес офиса</h4>
+                                <p>Добавляется после подключения проекта</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="contact-svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            </span>
+                            <div>
+                                <h4>Электронная почта</h4>
+                                <p>Добавляется после подключения проекта</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eco-contacts-form-wrapper">
+                    <!-- Заявка в WhatsApp -->
+                    <form class="eco-lead-form" id="eco-lead-form">
+                        <h3>Записаться на экскурсию</h3>
+                        <p>Покажем строящиеся и готовые каркасные дома вживую</p>
+                        <div class="form-group">
+                            <input type="text" id="eco-form-name" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="eco-form-phone" class="phone-mask" placeholder="Номер телефона" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="eco-form-time">
+                                <option value="в ближайшее время">Связаться в ближайшее время</option>
+                                <option value="завтра утром">Удобно поговорить завтра утром</option>
+                                <option value="вечером">Удобно поговорить вечером</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="eco-submit-btn">Отправить заявку в WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подвал -->
+        <footer class="eco-footer">
+            <div class="container eco-footer-bottom">
+                <p>&copy; 2026 EcoFrame. Проектирование и строительство энергоэффективных каркасных домов в Казахстане.</p>
+                <div class="footer-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#" class="wa-link" data-origin="EcoFrame Footer">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ВАРИАНТ 2: MONOLITH ELITE (ПРЕМИУМ-ВИЛЛЫ) -->
+    <!-- ========================================== -->
+    <div id="monolith-site" class="demo-site-container">
+        <!-- Шапка -->
+        <header class="mono-header">
+            <div class="container header-container">
+                <a href="#" class="mono-logo">
+                    <span class="logo-text-mono">M O N O L I T H</span>
+                    <span class="logo-subtext">architecture & construction</span>
+                </a>
+                <nav class="mono-nav">
+                    <a href="#mono-services">Услуги</a>
+                    <a href="#mono-portfolio">Объекты</a>
+                    <a href="#mono-about">О застройщике</a>
+                    <a href="#mono-calc">Конфигуратор</a>
+                    <a href="#mono-contacts">Контакты</a>
+                </nav>
+                <div class="header-actions">
+                    <span class="mono-phone">Демо-контакт</span>
+                    <a href="#" class="mono-btn-wa wa-link" data-origin="Monolith Header">
+                        <span>VIP КОНСУЛЬТАЦИЯ</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- СЕКЦИЯ 1: Первый экран (Hero) -->
+        <section class="mono-hero" style="background-image: linear-gradient(90deg, rgba(18,18,18,0.92) 0%, rgba(18,18,18,0.7) 50%, rgba(18,18,18,0.92) 100%), url('assets/images/monolith_hero.png');">
+            <div class="container mono-hero-container">
+                <div class="mono-hero-content">
+                    <span class="mono-subtitle-top">ARCHITECTURE & LUXURY LIVING</span>
+                    <h1>Мы создаем новую монументальную архитектуру</h1>
+                    <p class="mono-hero-text">Индивидуальные монолитно-каркасные виллы премиум-класса. Авторский дизайн, инновационные инженерные системы по всему Казахстану.</p>
+                    <div class="mono-hero-btns">
+                        <a href="#mono-calc" class="mono-btn-primary">Конфигуратор виллы</a>
+                        <a href="#" class="mono-btn-secondary wa-link" data-origin="Monolith Hero WhatsApp">
+                            <span class="pulse-gold"></span>
+                            Связаться с архитектором в WA
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 2: Услуги списком -->
+        <section class="mono-section mono-bg-darker" id="mono-services">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Услуги архитектурного бюро</h2>
+                    <p>Полный комплекс премиальных услуг от первых эскизов до финишного декорирования интерьеров</p>
+                </div>
+                <div class="mono-services-grid">
+                    <div class="mono-service-box">
+                        <h4>Архитектурная концепция</h4>
+                        <p>Индивидуальная разработка объемно-пространственных решений, посадка здания на рельеф и фотореалистичная 3D-визуализация объекта.</p>
+                    </div>
+                    <div class="mono-service-box">
+                        <h4>Монолитное строительство</h4>
+                        <p>Заливка железобетонного безбалочного каркаса здания повышенной прочности, устройство перекрытий и фасадных стен.</p>
+                    </div>
+                    <div class="mono-service-box">
+                        <h4>Панорамное остекление</h4>
+                        <p>Монтаж большепролетных оконных конструкций Schuco с высокими показателями теплоизоляции и ветровой устойчивости.</p>
+                    </div>
+                    <div class="mono-service-box">
+                        <h4>Умный дом под ключ</h4>
+                        <p>Интеграция систем управления освещением, вентиляцией, кондиционированием и комплексной безопасности на базе стандарта KNX.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 3: Преимущества (Философия) -->
+        <section class="mono-section" id="mono-philosophy">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Безупречность в каждой детали</h2>
+                    <p>Философия вечной архитектуры, созданной из стекла, бетона и передовых технологий</p>
+                </div>
+                <div class="mono-philosophy-grid">
+                    <div class="mono-philosophy-card">
+                        <div class="mono-card-num">01</div>
+                        <h3>Свобода планировок</h3>
+                        <p>Монолитный железобетонный каркас позволяет создавать безопорные пролеты до 9 метров и панорамное остекление во всю стену.</p>
+                    </div>
+                    <div class="mono-philosophy-card">
+                        <div class="mono-card-num">02</div>
+                        <h3>Эксплуатируемые кровли</h3>
+                        <p>Проектируем плоские кровли с возможностью размещения лаунж-зон, джакузи, летних садов и систем скрытого водоотвода.</p>
+                    </div>
+                    <div class="mono-philosophy-card">
+                        <div class="mono-card-num">03</div>
+                        <h3>Умный дом & Экосистема</h3>
+                        <p>Полная автоматизация климата, освещения, безопасности, приточно-вытяжной вентиляции с рекуперацией и очисткой воздуха.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 4: Портфолио с ценами -->
+        <section class="mono-section mono-bg-darker" id="mono-portfolio">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Реализованные виллы</h2>
+                    <p>Эксклюзивные резиденции, подчеркивающие статус владельца</p>
+                </div>
+                <div class="mono-portfolio-list">
+                    <!-- Объект 1 -->
+                    <div class="mono-portfolio-item">
+                        <div class="portfolio-item-visual" style="background: linear-gradient(135deg, #333, #151515);">
+                            <span class="mono-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="mono-svg-inner"><path d="M3 22h18M5 22V10h14v12M12 2l9 8H3l9-8zM7 14v4M11 14v4M15 14v4M19 14v4"/></svg>
+                            </span>
+                        </div>
+                        <div class="portfolio-item-info">
+                            <span class="item-location">Локация проекта</span>
+                            <h3>Частная резиденция — 480 м²</h3>
+                            <p>Пример описания объекта: архитектурная концепция, ключевые материалы, особенности фасада и акценты на образе жизни владельца.</p>
+                            <div class="item-specs">
+                                <span><strong>Срок:</strong> 14 месяцев</span>
+                                <span><strong>Стоимость:</strong> по индивидуальному расчету</span>
+                            </div>
+                            <a href="#" class="mono-item-wa wa-link" data-project="Частная резиденция 480 м²" data-origin="Monolith Portfolio">Узнать бюджет проекта в WhatsApp &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Объект 2 -->
+                    <div class="mono-portfolio-item item-reverse">
+                        <div class="portfolio-item-visual" style="background: linear-gradient(135deg, #222, #0d0d0d);">
+                            <span class="mono-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="mono-svg-inner"><path d="M6 3h12l4 6-10 12L2 9zM2 9h20M12 3v18M12 3L6 9l6 12 6-12-6-6z"/></svg>
+                            </span>
+                        </div>
+                        <div class="portfolio-item-info">
+                            <span class="item-location">Премиальная локация</span>
+                            <h3>Авторская вилла — 620 м²</h3>
+                            <p>Пример карточки премиального объекта: большая площадь, терраса, технологичные инженерные решения и индивидуальная архитектура.</p>
+                            <div class="item-specs">
+                                <span><strong>Срок:</strong> 18 месяцев</span>
+                                <span><strong>Стоимость:</strong> по индивидуальному расчету</span>
+                            </div>
+                            <a href="#" class="mono-item-wa wa-link" data-project="Авторская вилла 620 м²" data-origin="Monolith Portfolio">Узнать бюджет проекта в WhatsApp &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 5: О компании -->
+        <section class="mono-section" id="mono-about">
+            <div class="container mono-about-container">
+                <div class="mono-about-left">
+                    <span class="mono-subtitle-top">О БЮРО</span>
+                    <h2>Создаем вечные монументы архитектуры</h2>
+                    <p>Monolith — это строительная компания полного цикла с собственным архитектурным бюро премиум-сегмента. Мы не строим типовые дома. Каждый наш объект — это штучное произведение искусства, спроектированное под личные потребности владельца.</p>
+                </div>
+                <div class="mono-about-right">
+                    <div class="mono-stat-card">
+                        <span class="mono-stat-number">10</span>
+                        <span class="mono-stat-label">Лет опыта в элитном сегменте</span>
+                    </div>
+                    <div class="mono-stat-card">
+                        <span class="mono-stat-number">45</span>
+                        <span class="mono-stat-label">Эксклюзивных вилл сдано в эксплуатацию</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 6: Этапы работ (4 шага) -->
+        <section class="mono-section mono-bg-darker" id="mono-steps">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Этапы реализации проекта</h2>
+                    <p>Сложные технологические процессы, разложенные на прозрачные и контролируемые шаги</p>
+                </div>
+                <div class="mono-steps-grid">
+                    <div class="mono-step-card">
+                        <div class="step-num-gold">01</div>
+                        <h3>Концепт & 3D</h3>
+                        <p>Разрабатываем архитектурные планировки, сажаем дом на рельеф участка, готовим 3D-фотореалистичные визуализации.</p>
+                    </div>
+                    <div class="mono-step-card">
+                        <div class="step-num-gold">02</div>
+                        <h3>Бетонный каркас</h3>
+                        <p>Заливаем фундаментную плиту, возводим монолитные пилоны и перекрытия из высокомарочного бетона.</p>
+                    </div>
+                    <div class="mono-step-card">
+                        <div class="step-num-gold">03</div>
+                        <h3>Фасады & Окна</h3>
+                        <p>Выполняем остекление Schuco, монтируем утепление и производим облицовку вентилируемого фасада сланцем.</p>
+                    </div>
+                    <div class="mono-step-card">
+                        <div class="step-num-gold">04</div>
+                        <h3>Инженерия & Отделка</h3>
+                        <p>Инсталлируем инженерию, настраиваем серверный шкаф Умного Дома, выполняем дизайнерский ремонт помещений.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 7: Отзывы с фото -->
+        <section class="mono-section" id="mono-reviews">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Отзывы резидентов</h2>
+                    <p>Наши клиенты — люди ценящие приватность, комфорт и индивидуальные технологичные решения</p>
+                </div>
+                <div class="mono-reviews-grid">
+                    <div class="mono-review-box">
+                        <div class="reviewer-meta">
+                            <div class="reviewer-avatar">Р</div>
+                            <div>
+                                <h4>Клиент проекта 01</h4>
+                                <p>Конфиденциальный отзыв</p>
+                            </div>
+                        </div>
+                        <p class="reviewer-text">"В этом блоке можно разместить обезличенный отзыв о ходе проектирования, качестве материалов и уровне сопровождения со стороны команды."</p>
+                    </div>
+                    <div class="mono-review-box">
+                        <div class="reviewer-meta">
+                            <div class="reviewer-avatar">КД</div>
+                            <div>
+                                <h4>Клиент проекта 02</h4>
+                                <p>Демо-отзыв</p>
+                            </div>
+                        </div>
+                        <p class="reviewer-text">"Этот пример показывает, как на сайте может выглядеть премиальный отзыв без раскрытия имен, адресов и других персональных данных."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 8: Заявка (конфигуратор виллы) -->
+        <section class="mono-section mono-bg-darker" id="mono-calc">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Конфигуратор премиального строительства</h2>
+                    <p>Спроектируйте предварительные параметры вашей виллы и получите индивидуальную сметную оценку</p>
+                </div>
+                
+                <div class="mono-calc-wrapper">
+                    <div class="mono-calc-options">
+                        <!-- Выбор площади -->
+                        <div class="calc-control-group">
+                            <label>Желаемая площадь виллы:</label>
+                            <div class="mono-radio-buttons">
+                                <label class="mono-btn-radio active">
+                                    <input type="radio" name="mono-area" value="300-450 м²" checked data-price="220000000"> 300 - 450 м²
+                                </label>
+                                <label class="mono-btn-radio">
+                                    <input type="radio" name="mono-area" value="450-700 м²" data-price="350000000"> 450 - 700 м²
+                                </label>
+                                <label class="mono-btn-radio">
+                                    <input type="radio" name="mono-area" value="более 700 м²" data-price="550000000"> Более 700 м²
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Остекление -->
+                        <div class="calc-control-group">
+                            <label>Вариант панорамного остекления:</label>
+                            <div class="mono-select-custom">
+                                <select id="mono-glass" data-multiplier="1.0">
+                                    <option value="Премиум алюминиевый профиль" data-multiplier="1.0">Алюминиевый профиль (Казахстан)</option>
+                                    <option value="Элитные системы Schuco (Германия)" data-multiplier="1.15">Элитные безрамные системы Schuco (Германия) (+15%)</option>
+                                    <option value="Смарт-стекло с изменяемой тонировкой" data-multiplier="1.30">Смарт-стекло с электрохромным затемнением (+30%)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Дополнительно -->
+                        <div class="calc-control-group">
+                            <label>Дополнительные премиум-опции:</label>
+                            <div class="mono-checkboxes">
+                                <label class="mono-checkbox-label">
+                                    <input type="checkbox" id="mono-opt-pool" value="Бассейн инфинити" data-price="30000000">
+                                    <span class="checkmark"></span>
+                                    <span>Уличный бассейн инфинити с подогревом (+30 млн ₸)</span>
+                                </label>
+                                <label class="mono-checkbox-label">
+                                    <input type="checkbox" id="mono-opt-smart" value="Система Smart Home" data-price="16000000">
+                                    <span class="checkmark"></span>
+                                    <span>Умный Дом уровня KNX (климат, свет, шторы) (+16 млн ₸)</span>
+                                </label>
+                                <label class="mono-checkbox-label">
+                                    <input type="checkbox" id="mono-opt-terrace" value="Эксплуатируемая кровля" data-price="20000000">
+                                    <span class="checkmark"></span>
+                                    <span>Эксплуатируемая терраса на крыше с лаунж-зоной (+20 млн ₸)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mono-calc-result">
+                        <div class="mono-result-box">
+                            <span class="mono-result-title">ПРИМЕРНЫЙ БЮДЖЕТ СТРОИТЕЛЬСТВА</span>
+                            <span class="mono-result-price" id="mono-total-price">220 000 000 ₸</span>
+                            <p class="mono-result-disclaimer">Включает: фундамент монолитная плита, железобетонный каркас, кирпичное заполнение стен, фасадную отделку и остекление.</p>
+                            
+                            <div class="mono-result-form">
+                                <input type="text" id="mono-calc-name" placeholder="Имя владельца" required>
+                                <input type="tel" id="mono-calc-phone" class="phone-mask" placeholder="Телефон для связи" required>
+                                <button type="button" class="mono-calc-submit-btn" id="btn-mono-calc-submit">Запросить концепцию в WhatsApp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 9: Часто задаваемые вопросы (FAQ) -->
+        <section class="mono-section" id="mono-faq">
+            <div class="container">
+                <div class="mono-section-heading">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Ответы на ключевые вопросы о технологиях возведения вилл</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">Какие марки бетона используются при заливке каркаса? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Мы используем исключительно сертифицированный тяжелый бетон марки М400 (класс прочности B30) со специальными добавками для повышенной водонепроницаемости (W8) и морозостойкости (F200).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Сколько времени занимает проектирование премиум-виллы? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Индивидуальное архитектурно-строительное проектирование занимает от 2 до 4 месяцев. Сюда входят: концептуальный эскиз, 3D-визуализация, конструктивные расчеты (КР), проектирование инженерных сетей (ИОС) и интеграция Smart Home.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Какая гарантия предоставляется на монолитный каркас? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Официальная юридическая гарантия на несущие монолитные железобетонные конструкции и целостность фундамента по нашему договору составляет 50 лет.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 10: Контакты -->
+        <section class="mono-section mono-bg-darker" id="mono-contacts">
+            <div class="container mono-contacts-container">
+                <div class="mono-contacts-left">
+                    <h2>Контакты подключаются после запуска</h2>
+                    <p>В демонстрационной версии страницы реальные контакты скрыты. После подключения сюда можно добавить адрес, почту и удобный канал для связи.</p>
+                    <div class="mono-contact-links">
+                        <p class="mono-c-link"><span>Адрес:</span> добавляется после подключения проекта</p>
+                        <p class="mono-c-link"><span>Почта:</span> добавляется после подключения проекта</p>
+                    </div>
+                </div>
+                <div class="mono-contacts-right">
+                    <form class="mono-vip-form" id="mono-lead-form">
+                        <h3>Заявка на индивидуальный проект</h3>
+                        <div class="mono-input-group">
+                            <input type="text" id="mono-form-name" required placeholder=" ">
+                            <label>Ваше Имя</label>
+                        </div>
+                        <div class="mono-input-group">
+                            <input type="tel" id="mono-form-phone" class="phone-mask" required placeholder=" ">
+                            <label>Телефон для связи</label>
+                        </div>
+                        <div class="mono-input-group">
+                            <input type="text" id="mono-form-budget" placeholder=" ">
+                            <label>Бюджет виллы (млн ₸)</label>
+                        </div>
+                        <button type="submit" class="mono-form-submit-btn">ОТПРАВИТЬ ЗАПРОС В WHATSAPP</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подвал -->
+        <footer class="mono-footer">
+            <div class="container mono-footer-content">
+                <p>&copy; 2026 MONOLITH. Все права защищены. Эксклюзивные архитектурные проекты в Казахстане.</p>
+                <a href="#" class="wa-link" data-origin="Monolith Footer">Конфиденциальность & WhatsApp</a>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ВАРИАНТ 3: PROMSTROY (ИНДУСТРИАЛЬНОЕ СТР.)  -->
+    <!-- ========================================== -->
+    <div id="promstroy-site" class="demo-site-container">
+        <!-- Шапка -->
+        <header class="prom-header">
+            <div class="container header-container">
+                <a href="#" class="prom-logo">
+                    <span class="logo-square">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="logo-square-svg"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+                    </span>
+                    <span class="logo-text">ПРОМ<span>СТРОЙ</span></span>
+                </a>
+                <nav class="prom-nav">
+                    <a href="#prom-services">Услуги</a>
+                    <a href="#prom-catalog">Объекты</a>
+                    <a href="#prom-about">О компании</a>
+                    <a href="#prom-calc">Расчет</a>
+                    <a href="#prom-contacts">Контакты</a>
+                </nav>
+                <div class="header-actions">
+                    <span class="prom-phone">Демо-контакт</span>
+                    <a href="#" class="prom-btn-wa wa-link" data-origin="PromStroy Header">
+                        <span class="prom-wa-badge">WhatsApp</span>
+                        <span class="prom-wa-text">Запросить КП</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- СЕКЦИЯ 1: Первый экран (Hero) -->
+        <section class="prom-hero" style="background-image: linear-gradient(135deg, rgba(11,25,44,0.95) 0%, rgba(11,25,44,0.8) 100%), url('assets/images/promstroy_hero.png');">
+            <div class="container prom-hero-container">
+                <div class="prom-hero-content">
+                    <div class="prom-tag-orange">СТРОИТЕЛЬСТВО ПО ГОСТ И СНиП</div>
+                    <h1>Проектирование и возведение быстровозводимых зданий</h1>
+                    <p class="prom-hero-text">Ангары, логистические центры, торговые павильоны, склады и офисы из металлоконструкций под ключ по всему Казахстану.</p>
+                    <div class="prom-hero-btns">
+                        <a href="#prom-calc" class="prom-btn-primary">Калькулятор стоимости</a>
+                        <a href="#" class="prom-btn-secondary wa-link" data-origin="PromStroy Hero WA">
+                            Запросить смету в WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 2: Услуги списком -->
+        <section class="prom-section prom-bg-grey" id="prom-services">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Услуги по коммерческому строительству</h2>
+                    <p>Генеральный подряд от разработки чертежей до ввода объектов в эксплуатацию</p>
+                </div>
+                <div class="prom-services-list">
+                    <div class="prom-service-item">
+                        <div class="prom-ser-head">
+                            <span class="prom-ser-dot"></span>
+                            <h4>Разработка разделов КМ и КМД</h4>
+                        </div>
+                        <p>Проектируем стальные несущие конструкции зданий по СНиП РК с высокой точностью для быстрого последующего монтажа.</p>
+                    </div>
+                    <div class="prom-service-item">
+                        <div class="prom-ser-head">
+                            <span class="prom-ser-dot"></span>
+                            <h4>Производство металлоконструкций</h4>
+                        </div>
+                        <p>Собственный завод по изготовлению металлических колонн, ферм, балок с антикоррозийной и дробеструйной обработкой.</p>
+                    </div>
+                    <div class="prom-service-item">
+                        <div class="prom-ser-head">
+                            <span class="prom-ser-dot"></span>
+                            <h4>Монтаж сэндвич-панелей и кровли</h4>
+                        </div>
+                        <p>Качественный быстрый монтаж стеновых и кровельных сэндвич-панелей с использованием профессионального грузоподъемного оборудования.</p>
+                    </div>
+                    <div class="prom-service-item">
+                        <div class="prom-ser-head">
+                            <span class="prom-ser-dot"></span>
+                            <h4>Устройство наливных промышленных полов</h4>
+                        </div>
+                        <p>Заливка износостойких бетонных полов с топпингом (упрочненным верхним слоем) для высокой нагрузки от техники и стеллажей.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 3: Преимущества -->
+        <section class="prom-section" id="prom-advantages">
+            <div class="container">
+                <div class="prom-advantages-grid">
+                    <div class="prom-adv-card">
+                        <span class="adv-number">12+</span>
+                        <h4>Лет на рынке Казахстана</h4>
+                        <p>Опыт ведения генерального подряда и сдачи промышленных объектов повышенной сложности.</p>
+                    </div>
+                    <div class="prom-adv-card">
+                        <span class="adv-number">120+</span>
+                        <h4>Сданных зданий</h4>
+                        <p>Склады класса А, логистические центры, автосервисы и торговые помещения по всей стране.</p>
+                    </div>
+                    <div class="prom-adv-card">
+                        <span class="adv-number">45</span>
+                        <h4>Дней — средний срок</h4>
+                        <p>Быстрый монтаж каркаса за счет собственного производства металлоконструкций и сборки болтовых соединений.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 4: Портфолио с ценами -->
+        <section class="prom-section prom-bg-grey" id="prom-catalog">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Портфолио коммерческих объектов</h2>
+                    <p>Реальные кейсы с указанием сроков строительства, размеров и итогового бюджета</p>
+                </div>
+                
+                <div class="prom-table-container">
+                    <table class="prom-portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>Тип объекта</th>
+                                <th>Характеристики</th>
+                                <th>Сроки сборки</th>
+                                <th>Стоимость под ключ</th>
+                                <th>Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="table-obj-title">Логистический комплекс</div>
+                                </td>
+                                <td>Площадь: 2400 м², Высота: 9 м, Сэндвич-панели 150 мм</td>
+                                <td>55 рабочих дней</td>
+                                <td><strong>160 000 000 ₸</strong></td>
+                                <td><a href="#" class="prom-table-link wa-link" data-project="Логистический комплекс 2400м²" data-origin="PromStroy Table">Запросить смету</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="table-obj-title">Холодный склад (Ангар)</div>
+                                </td>
+                                <td>Площадь: 1200 м², Оцинкованный профлист, Ленточный фундамент</td>
+                                <td>35 рабочих дней</td>
+                                <td><strong>65 000 000 ₸</strong></td>
+                                <td><a href="#" class="prom-table-link wa-link" data-project="Холодный склад 1200м²" data-origin="PromStroy Table">Запросить смету</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="table-obj-title">Автосервис / СТО на 6 постов</div>
+                                </td>
+                                <td>Площадь: 450 м², Высота: 4.5 м, Остекление фасада, Ворота</td>
+                                <td>28 рабочих дней</td>
+                                <td><strong>32 000 000 ₸</strong></td>
+                                <td><a href="#" class="prom-table-link wa-link" data-project="СТО на 6 постов" data-origin="PromStroy Table">Запросить смету</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 5: О компании -->
+        <section class="prom-section" id="prom-about">
+            <div class="container prom-about-layout">
+                <div class="prom-about-content">
+                    <div class="prom-tag-orange">НАДЕЖНЫЙ ГЕНПОДРЯДЧИК</div>
+                    <h2>Строительный холдинг «ПромСтрой»</h2>
+                    <p>Мы специализируемся на проектировании и строительстве быстровозводимых зданий из стальных конструкций. Наш холдинг объединяет проектный отдел, завод по металлообработке и 8 профессиональных монтажных бригад с допусками СРО РК.</p>
+                </div>
+                <div class="prom-about-stats">
+                    <div class="prom-stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-text">Лет опыта в индустриальном секторе</span>
+                    </div>
+                    <div class="prom-stat-item">
+                        <span class="stat-number">120+</span>
+                        <span class="stat-text">Реализованных объектов по РК</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 6: Этапы работ (4 шага) -->
+        <section class="prom-section prom-bg-grey" id="prom-steps">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Этапы реализации коммерческих объектов</h2>
+                    <p>От проектирования КМД до успешного прохождения проверки технадзора</p>
+                </div>
+                <div class="prom-steps-grid">
+                    <div class="prom-step-card">
+                        <div class="step-icon-badge">01</div>
+                        <h3>Проектирование КМД</h3>
+                        <p>Разрабатываем детальные сборочные чертежи металлических узлов на базе проекта КМ за 7-10 дней.</p>
+                    </div>
+                    <div class="prom-step-card">
+                        <div class="step-icon-badge">02</div>
+                        <h3>Заводское производство</h3>
+                        <p>Изготавливаем элементы каркаса на собственном заводе, проводим антикоррозийную обработку и маркировку.</p>
+                    </div>
+                    <div class="prom-step-card">
+                        <div class="step-icon-badge">03</div>
+                        <h3>Сборка каркаса</h3>
+                        <p>Осуществляем доставку металлоконструкций и производим сборку на болтовые соединения без лишней сварки.</p>
+                    </div>
+                    <div class="prom-step-card">
+                        <div class="step-icon-badge">04</div>
+                        <h3>Сдача в эксплуатацию</h3>
+                        <p>Обшиваем каркас сэндвич-панелями, устраиваем промышленные топпинговые полы, сдаем объект технадзору.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 7: Отзывы с фото -->
+        <section class="prom-section" id="prom-reviews">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Отзывы корпоративных клиентов</h2>
+                    <p>Кейсы успешного запуска складов, СТО и торговых центров в эксплуатацию</p>
+                </div>
+                <div class="prom-reviews-grid">
+                    <div class="prom-review-card">
+                        <div class="prom-rev-header">
+                            <span class="company-logo-avatar">KL</span>
+                            <div>
+                                <h4>ТОО «KAZ-Logistics»</h4>
+                                <p>г. Караганда</p>
+                            </div>
+                        </div>
+                        <p class="prom-rev-text">"Сотрудничаем с ПромСтрой по строительству логистических терминалов. Построили склад класса А площадью 2400 кв.м. за 55 дней. Работы выполнены строго по ГОСТу, исполнительная документация предоставлена в полном объеме."</p>
+                    </div>
+                    <div class="prom-review-card">
+                        <div class="prom-rev-header">
+                            <span class="company-logo-avatar">AL</span>
+                            <div>
+                                <h4>ТОО «АвтоЛидер»</h4>
+                                <p>г. Актобе</p>
+                            </div>
+                        </div>
+                        <p class="prom-rev-text">"Заказывали строительство СТО на 6 постов с остеклением фасада. Собрали здание за рекордные 28 дней. Бетонный пол с топпингом выдерживает высокие нагрузки от тяжелой техники."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 8: Заявка (калькулятор стоимости) -->
+        <section class="prom-section prom-bg-grey" id="prom-calc">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Калькулятор стоимости коммерческого объекта</h2>
+                    <p>Укажите основные параметры здания для формирования сметного коммерческого предложения</p>
+                </div>
+                
+                <div class="prom-calc-box">
+                    <div class="prom-calc-inputs">
+                        <!-- Назначение здания -->
+                        <div class="prom-input-field">
+                            <label for="prom-type">Назначение объекта:</label>
+                            <select id="prom-type">
+                                <option value="Утепленный склад (Сэндвич-панели)" data-base="65000">Утепленный склад / Ангар (Сэндвич-панели)</option>
+                                <option value="Холодный склад (Профнастил)" data-base="42000">Холодный склад / Профнастил</option>
+                                <option value="Торговый центр (Остекление)" data-base="85000">Торговый центр / Автосалон с остеклением</option>
+                            </select>
+                        </div>
+                        <!-- Площадь -->
+                        <div class="prom-input-field">
+                            <label for="prom-area-range">Требуемая площадь: <span id="prom-area-val">800</span> м²</label>
+                            <input type="range" id="prom-area-range" min="100" max="5000" step="50" value="800">
+                        </div>
+                        <!-- Высота потолков -->
+                        <div class="prom-input-field">
+                            <label for="prom-height">Высота до низа несущих конструкций (м):</label>
+                            <select id="prom-height" data-multiplier="1.0">
+                                <option value="до 4.5 метров" data-multiplier="1.0">До 4.5 метров</option>
+                                <option value="4.5 - 6.0 метров" data-multiplier="1.08">От 4.5 до 6.0 метров (+8%)</option>
+                                <option value="более 6.0 метров" data-multiplier="1.18">От 6.0 до 12 метров (+18%)</option>
+                            </select>
+                        </div>
+                        <!-- Ворота -->
+                        <div class="prom-input-field">
+                            <label for="prom-gates">Количество ворот (промышленных проемов):</label>
+                            <input type="number" id="prom-gates" min="1" max="15" value="2">
+                        </div>
+                    </div>
+                    
+                    <div class="prom-calc-estimation">
+                        <div class="est-header">Ориентировочный расчет цены</div>
+                        <div class="est-main-price" id="prom-total-price">52 360 000 ₸</div>
+                        
+                        <div class="est-stats">
+                            <div class="est-stat-row">
+                                <span>Металлоемкость каркаса (прим.):</span>
+                                <span id="prom-steel-weight">~32 тонн</span>
+                            </div>
+                            <div class="est-stat-row">
+                                <span>Примерный срок монтажа:</span>
+                                <span id="prom-days">38 дней</span>
+                            </div>
+                        </div>
+                        
+                        <div class="prom-calc-form">
+                            <div class="form-inputs-row">
+                                <input type="text" id="prom-calc-name" placeholder="Контактное лицо" required>
+                                <input type="tel" id="prom-calc-phone" class="phone-mask" placeholder="Телефон" required>
+                            </div>
+                            <button type="button" class="prom-submit-wa" id="btn-prom-calc-submit">Получить КП в WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 9: Часто задаваемые вопросы (FAQ) -->
+        <section class="prom-section" id="prom-faq">
+            <div class="container">
+                <div class="prom-section-heading">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Профессиональные ответы для главных инженеров и инвесторов коммерческих проектов</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">Каковы сроки разработки рабочих чертежей КМД? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>В зависимости от общей металлоемкости конструкции, разработка детализированных сборочных чертежей КМД занимает от 7 до 15 рабочих дней после согласования технического задания и проекта КМ.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Входят ли логистические расходы в смету? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Да. Мы осуществляем логистику металлоконструкций и сэндвич-панелей с нашего производства в любой регион Казахстана и сразу закладываем транспортные затраты в финальный договор подряда.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Работает ли ваша компания с НДС? <span class="faq-arrow"></span></button>
+                        <div class="faq-answer">
+                            <p>Да. Все наши расчеты включают НДС 12%. Мы предоставляем полный пакет закрывающих бухгалтерских документов, актов выполненных работ (форма 2-В) и справок о стоимости (форма 3-В).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ 10: Контакты -->
+        <section class="prom-section prom-bg-grey" id="prom-contacts">
+            <div class="container prom-contacts-layout">
+                <div class="prom-contacts-info">
+                    <h2>Контакты подключаются после запуска</h2>
+                    <p>В этой демонстрационной версии скрыты реальные реквизиты. После подключения здесь можно разместить контакты технического отдела и каналы приема ТЗ.</p>
+                    <div class="prom-c-details">
+                        <p><strong>Адрес ПТО:</strong> добавляется после подключения проекта</p>
+                        <p><strong>Телефон отдела продаж:</strong> добавляется после подключения проекта</p>
+                        <p><strong>Email для ТЗ:</strong> добавляется после подключения проекта</p>
+                    </div>
+                </div>
+                <div class="prom-contacts-form-box">
+                    <form class="prom-b2b-form" id="prom-lead-form">
+                        <h3>Заказать расчет по ТЗ</h3>
+                        <p>Отправьте заявку и мы свяжемся с вами в WhatsApp для обмена чертежами</p>
+                        <div class="prom-form-field">
+                            <input type="text" id="prom-form-company" placeholder="Название компании / БИН">
+                        </div>
+                        <div class="prom-form-field">
+                            <input type="text" id="prom-form-name" placeholder="Имя контактного лица" required>
+                        </div>
+                        <div class="prom-form-field">
+                            <input type="tel" id="prom-form-phone" class="phone-mask" placeholder="Телефон" required>
+                        </div>
+                        <button type="submit" class="prom-form-submit-btn">Отправить ТЗ и связаться в WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подвал -->
+        <footer class="prom-footer">
+            <div class="container prom-footer-bottom">
+                <p>&copy; 2026 ТОО «ПРОМСТРОЙ». Проектирование и монтаж быстровозводимых конструкций любой сложности в Казахстане.</p>
+                <a href="#" class="wa-link" data-origin="PromStroy Footer">Связаться в WhatsApp</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Подключение JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

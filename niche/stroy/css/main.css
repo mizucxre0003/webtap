@@ -1,0 +1,506 @@
+/* css/main.css - Базовые стили, свитчер тем и анимации переходов */
+
+/* Сброс базовых стилей */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    background-color: #fcfbfa;
+    color: #333;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Скрытие и показ сайтов-примеров */
+.demo-site-container {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.demo-site-container.active-site {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* ========================================== */
+/* АНИМАЦИОННЫЙ ОВЕРЛЕЙ ПЕРЕХОДА (TRANSITION) */
+/* ========================================== */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.transition-overlay .overlay-part {
+    width: 100%;
+    height: 50%;
+    background-color: #121212;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.transition-overlay .part-1 {
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+.transition-overlay .part-2 {
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+.transition-overlay .overlay-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    font-size: 1.5rem;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10001;
+}
+
+.logo-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #ff7a00;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Состояния анимации перехода */
+.transition-overlay.animating {
+    pointer-events: all;
+}
+
+.transition-overlay.animating .part-1,
+.transition-overlay.animating .part-2 {
+    transform: scaleY(1);
+}
+
+.transition-overlay.animating .overlay-logo {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.3s;
+}
+
+/* ========================================== */
+/* ДЕМО-ПЕРЕКЛЮЧАТЕЛЬ (SWITCHER CONTAINER)    */
+/* ========================================== */
+.demo-switcher-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+.webtap-back-link {
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    border-radius: 30px;
+    background: rgba(18, 18, 18, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.webtap-back-link:hover {
+    transform: translateY(-2px);
+    background: rgba(18, 18, 18, 0.94);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
+}
+
+.switcher-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #121212;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.switcher-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.gear-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.6s ease;
+}
+
+.switcher-toggle-btn:hover .gear-icon {
+    transform: rotate(90deg);
+}
+
+.switcher-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 2px solid #ff7a00;
+    opacity: 0;
+    pointer-events: none;
+    animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+}
+
+/* Боковая панель переключателя (Drawer) */
+.switcher-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    transform: translateX(110%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10000;
+}
+
+.switcher-drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.drawer-header h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #121212;
+}
+
+.drawer-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.drawer-close:hover {
+    color: #121212;
+}
+
+.drawer-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.switcher-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Карточки вариантов дизайна */
+.switcher-card {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: #fff;
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.switcher-card:hover {
+    border-color: #d1d1d1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+}
+
+.switcher-card.active {
+    border-color: #ff7a00;
+    background: rgba(255, 122, 0, 0.02);
+}
+
+.card-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.ecoframe-preview {
+    background: linear-gradient(135deg, #2e5a44, #c19a6b);
+}
+.monolith-preview {
+    background: linear-gradient(135deg, #121212, #d4af37);
+}
+.promstroy-preview {
+    background: linear-gradient(135deg, #0b192c, #ff7a00);
+}
+
+.preview-line {
+    position: absolute;
+    width: 70%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    top: 20px;
+    left: 10px;
+    border-radius: 2px;
+}
+.preview-circle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50%;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-info h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #121212;
+}
+
+.card-style-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ff7a00;
+}
+
+.card-desc-text {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.drawer-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.drawer-footer p {
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Кастомный скроллбар для списка карточек */
+.switcher-cards-list::-webkit-scrollbar {
+    width: 6px;
+}
+.switcher-cards-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.switcher-cards-list::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+}
+.switcher-cards-list::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+/* Адаптивность для свитчера */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .demo-switcher-container {
+        left: 16px;
+        right: 16px;
+        bottom: 12px;
+    }
+
+    .webtap-back-link {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        min-height: 42px;
+        padding: 10px 14px;
+        border-radius: 18px;
+        font-size: 0.8rem;
+        width: fit-content;
+        margin: 12px 0 0 16px;
+    }
+
+    .switcher-drawer {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: min(78vh, 640px);
+        padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+        border-left: none;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.16);
+        transform: translateY(110%);
+    }
+
+    .switcher-drawer.open {
+        transform: translateY(0);
+    }
+
+    .drawer-header {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+        padding-bottom: 10px;
+    }
+
+    .switcher-toggle-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        border-radius: 18px;
+    }
+
+    .switcher-card {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .card-preview {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+@media (max-width: 480px) {
+    .switcher-drawer {
+        width: 100%;
+        height: min(82vh, 680px);
+        padding: 18px 14px calc(18px + env(safe-area-inset-bottom, 0px));
+    }
+    .demo-switcher-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+    }
+    .webtap-back-link {
+        margin-left: 12px;
+    }
+    .switcher-toggle-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+    }
+}

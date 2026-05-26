@@ -1,0 +1,1049 @@
+/* css/theme-promstroy.css - Тема Промышленного Строительства (Контрастная/Индустриальная) */
+
+/* Применяется при body.theme-promstroy */
+body.theme-promstroy {
+    background-color: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Inter', sans-serif;
+}
+
+body.theme-promstroy h1,
+body.theme-promstroy h2,
+body.theme-promstroy h3,
+body.theme-promstroy h4 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+}
+
+/* Переменные темы */
+:root {
+    --prom-primary: #0B192C;        /* Глубокий индустриальный синий */
+    --prom-primary-hover: #152A47;
+    --prom-accent: #FF7A00;         /* Сигнальный оранжевый */
+    --prom-accent-hover: #E06B00;
+    --prom-bg: #FFFFFF;
+    --prom-bg-grey: #F4F6F9;        /* Холодный серый */
+    --prom-text: #1E293B;           /* Темно-синий текст */
+    --prom-text-muted: #57657A;
+    --prom-border: #CBD5E1;
+    --prom-shadow: 0 4px 20px rgba(11, 25, 44, 0.05);
+    --wa-orange: #FF7A00;
+    --wa-orange-hover: #E06B00;
+}
+
+/* Шапка (Header) */
+.prom-header {
+    background-color: var(--prom-primary);
+    border-bottom: 3px solid var(--prom-accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    color: white;
+}
+
+.prom-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.logo-square {
+    background-color: var(--prom-accent);
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.logo-square-svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.prom-logo .logo-text {
+    font-family: 'Archivo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.prom-logo .logo-text span {
+    color: var(--prom-accent);
+}
+
+body.theme-promstroy .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    flex-wrap: nowrap;
+}
+
+.prom-nav {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 1;
+}
+
+.prom-nav a {
+    text-decoration: none;
+    color: #94A3B8;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.prom-nav a:hover {
+    color: white;
+}
+
+body.theme-promstroy .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.prom-phone {
+    font-family: 'Archivo', sans-serif;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.prom-phone:hover {
+    color: var(--prom-accent);
+}
+
+.prom-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.prom-wa-badge {
+    background-color: #25D366;
+    color: white;
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.prom-wa-text {
+    background-color: var(--prom-accent);
+    color: white;
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.prom-btn-wa:hover .prom-wa-text {
+    background-color: var(--prom-accent-hover);
+}
+
+/* Герой-секция (Hero) */
+.prom-hero {
+    padding: 140px 0 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.prom-hero-container {
+    position: relative;
+    z-index: 2;
+}
+
+.prom-hero-content {
+    max-width: 750px;
+}
+
+.prom-tag-orange {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--prom-accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.prom-hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+}
+
+.prom-hero-text {
+    font-size: 1.15rem;
+    color: #94A3B8;
+    margin-bottom: 40px;
+    max-width: 650px;
+    line-height: 1.6;
+}
+
+.prom-hero-btns {
+    display: flex;
+    gap: 16px;
+}
+
+.prom-btn-primary {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--prom-accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+.prom-btn-primary:hover {
+    background-color: var(--prom-accent-hover);
+    transform: translateY(-1px);
+}
+
+.prom-btn-secondary {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+.prom-btn-secondary:hover {
+    background-color: white;
+    color: var(--prom-primary);
+}
+
+/* Статистика / Преимущества */
+.prom-section {
+    padding: 100px 0;
+}
+
+.prom-bg-grey {
+    background-color: var(--prom-bg-grey);
+}
+
+.prom-section-heading {
+    margin-bottom: 60px;
+}
+
+.prom-section-heading h2 {
+    font-size: 2.3rem;
+    color: var(--prom-primary);
+    margin-bottom: 12px;
+}
+
+.prom-section-heading p {
+    color: var(--prom-text-muted);
+    font-size: 1.05rem;
+}
+
+.prom-advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.prom-adv-card {
+    background-color: var(--prom-bg-grey);
+    border-left: 5px solid var(--prom-accent);
+    padding: 35px 30px;
+}
+
+.adv-number {
+    font-family: 'Archivo', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--prom-primary);
+    line-height: 1;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.prom-adv-card h4 {
+    font-size: 1.15rem;
+    color: var(--prom-primary);
+    margin-bottom: 8px;
+}
+
+.prom-adv-card p {
+    font-size: 0.9rem;
+    color: var(--prom-text-muted);
+    line-height: 1.6;
+}
+
+/* Таблица Портфолио */
+.prom-table-container {
+    overflow-x: auto;
+    background-color: white;
+    box-shadow: var(--prom-shadow);
+    border: 1px solid #E2E8F0;
+}
+
+.prom-portfolio-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 750px;
+}
+
+.prom-portfolio-table th {
+    background-color: var(--prom-primary);
+    color: white;
+    padding: 20px 24px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.prom-portfolio-table td {
+    padding: 24px;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 0.95rem;
+}
+
+.prom-portfolio-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+.table-obj-title {
+    font-weight: 700;
+    color: var(--prom-primary);
+}
+
+.prom-table-link {
+    color: var(--prom-accent);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.prom-table-link:hover {
+    border-bottom-color: var(--prom-accent);
+}
+
+/* Калькулятор сметы (Prom Calc) */
+.prom-calc-box {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    background-color: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    border: 1px solid #E2E8F0;
+}
+
+.prom-calc-inputs {
+    padding: 40px;
+}
+
+.prom-input-field {
+    margin-bottom: 30px;
+}
+
+.prom-input-field label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--prom-primary);
+    margin-bottom: 12px;
+}
+
+.prom-input-field select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--prom-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.prom-input-field input[type="range"] {
+    width: 100%;
+    accent-color: var(--prom-accent);
+    cursor: pointer;
+}
+
+.prom-input-field input[type="number"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--prom-border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+/* Правая сторона калькулятора - сметная карточка */
+.prom-calc-estimation {
+    background-color: var(--prom-primary);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.est-header {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #94A3B8;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.est-main-price {
+    font-family: 'Archivo', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--prom-accent);
+    margin-bottom: 30px;
+    letter-spacing: -0.02em;
+}
+
+.est-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 35px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+}
+
+.est-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.est-stat-row span:first-child {
+    color: #94A3B8;
+}
+
+.est-stat-row span:last-child {
+    font-weight: 700;
+}
+
+.prom-calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-inputs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.prom-calc-form input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 16px;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+}
+
+.prom-calc-form input:focus {
+    border-color: var(--prom-accent);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prom-submit-wa {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--prom-accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.prom-submit-wa:hover {
+    background-color: var(--prom-accent-hover);
+}
+
+/* Контакты / B2B Форма */
+.prom-contacts-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.prom-contacts-info h2 {
+    font-size: 2.5rem;
+    color: var(--prom-primary);
+    margin-bottom: 24px;
+}
+
+.prom-contacts-info p {
+    color: var(--prom-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.prom-c-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.prom-c-details p {
+    margin-bottom: 0 !important;
+    font-size: 0.95rem;
+}
+
+.prom-c-details p strong {
+    color: var(--prom-primary);
+}
+
+.prom-contacts-form-box {
+    background-color: white;
+    padding: 45px;
+    box-shadow: var(--prom-shadow);
+    border: 1px solid #E2E8F0;
+}
+
+.prom-b2b-form h3 {
+    font-size: 1.4rem;
+    color: var(--prom-primary);
+    margin-bottom: 8px;
+}
+
+.prom-b2b-form p {
+    font-size: 0.85rem;
+    color: var(--prom-text-muted);
+    margin-bottom: 24px;
+}
+
+.prom-form-field {
+    margin-bottom: 16px;
+}
+
+.prom-form-field input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--prom-border);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.prom-form-field input:focus {
+    border-color: var(--prom-accent);
+}
+
+.prom-form-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--prom-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.prom-form-submit-btn:hover {
+    background-color: var(--prom-primary-hover);
+}
+
+/* Подвал */
+.prom-footer {
+    background-color: var(--prom-primary);
+    color: #94A3B8;
+    padding: 40px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.85rem;
+}
+
+.prom-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.prom-footer-bottom a {
+    color: var(--prom-accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.prom-footer-bottom a:hover {
+    color: white;
+}
+
+/* ========================================== */
+/* НОВЫЕ БЛОКИ: УСЛУГИ, О КОМПАНИИ, ЭТАПЫ, ОТЗЫВЫ, FAQ */
+/* ========================================== */
+
+/* Услуги списком */
+.prom-services-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.prom-service-item {
+    background: white;
+    border: 1px solid var(--prom-border);
+    padding: 35px;
+    box-shadow: var(--prom-shadow);
+    transition: all 0.3s ease;
+}
+.prom-service-item:hover {
+    border-color: var(--prom-accent);
+    transform: translateY(-3px);
+}
+.prom-ser-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.prom-ser-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--prom-accent);
+    border-radius: 50%;
+}
+.prom-service-item h4 {
+    font-size: 1.2rem;
+    color: var(--prom-primary);
+    font-weight: 800;
+}
+.prom-service-item p {
+    font-size: 0.9rem;
+    color: var(--prom-text-muted);
+    line-height: 1.6;
+}
+
+/* О компании */
+.prom-about-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+}
+.prom-about-content h2 {
+    font-size: 2.5rem;
+    color: var(--prom-primary);
+    margin: 16px 0 24px;
+    line-height: 1.2;
+}
+.prom-about-content p {
+    font-size: 1.05rem;
+    color: var(--prom-text-muted);
+    line-height: 1.7;
+}
+.prom-about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.prom-stat-item {
+    background: var(--prom-bg-grey);
+    border-left: 5px solid var(--prom-accent);
+    padding: 30px;
+    box-shadow: var(--prom-shadow);
+}
+.prom-stat-item .stat-number {
+    font-family: 'Archivo', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--prom-primary);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+}
+.prom-stat-item .stat-text {
+    font-size: 0.9rem;
+    color: var(--prom-text-muted);
+    font-weight: 600;
+}
+
+/* Этапы работы */
+.prom-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+.prom-step-card {
+    background: white;
+    border: 1px solid var(--prom-border);
+    padding: 30px 24px;
+    transition: all 0.3s ease;
+}
+.prom-step-card:hover {
+    border-color: var(--prom-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+.prom-step-card .step-icon-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--prom-primary);
+    color: white;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.prom-step-card h3 {
+    font-size: 1.15rem;
+    color: var(--prom-primary);
+    margin-bottom: 12px;
+}
+.prom-step-card p {
+    font-size: 0.85rem;
+    color: var(--prom-text-muted);
+    line-height: 1.6;
+}
+
+/* Отзывы */
+.prom-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.prom-review-card {
+    background: var(--prom-bg-grey);
+    border-top: 4px solid var(--prom-accent);
+    padding: 40px;
+    box-shadow: var(--prom-shadow);
+}
+.prom-rev-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.company-logo-avatar {
+    width: 50px;
+    height: 50px;
+    background: var(--prom-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    border-radius: 4px;
+}
+.prom-rev-header h4 {
+    font-size: 1.1rem;
+    color: var(--prom-primary);
+    font-weight: 800;
+}
+.prom-rev-header p {
+    font-size: 0.8rem;
+    color: var(--prom-text-muted);
+}
+.prom-rev-text {
+    font-size: 0.95rem;
+    color: var(--prom-text-muted);
+    line-height: 1.6;
+}
+
+/* FAQ Accordion */
+body.theme-promstroy .faq-list {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+body.theme-promstroy .faq-item {
+    background: white;
+    border: 1px solid var(--prom-border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+body.theme-promstroy .faq-item.active {
+    border-color: var(--prom-accent);
+}
+body.theme-promstroy .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 22px 28px;
+    background: none;
+    border: none;
+    font-family: 'Archivo', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--prom-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: color 0.2s ease;
+}
+body.theme-promstroy .faq-question:hover {
+    color: var(--prom-accent);
+}
+body.theme-promstroy .faq-arrow {
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid var(--prom-primary);
+    border-right: 2px solid var(--prom-primary);
+    transform: rotate(45deg);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+}
+body.theme-promstroy .faq-item.active .faq-arrow {
+    transform: rotate(-135deg);
+    border-color: var(--prom-accent);
+}
+body.theme-promstroy .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s ease;
+    padding: 0 28px;
+}
+body.theme-promstroy .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 24px;
+}
+body.theme-promstroy .faq-answer p {
+    font-size: 0.9rem;
+    color: var(--prom-text-muted);
+    line-height: 1.6;
+}
+
+/* ========================================== */
+/* АДАПТИВНОСТЬ ДЛЯ ТЕМЫ PROMSTROY            */
+/* ========================================== */
+@media (max-width: 992px) {
+    body.theme-promstroy .header-container {
+        gap: 16px;
+    }
+
+    .prom-nav {
+        display: none;
+    }
+
+    .prom-phone {
+        display: none;
+    }
+
+    .prom-btn-wa {
+        transform-origin: right center;
+    }
+
+    .prom-advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .prom-services-list,
+    .prom-about-layout,
+    .prom-steps-grid,
+    .prom-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prom-calc-box {
+        grid-template-columns: 1fr;
+    }
+    .prom-contacts-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .prom-hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body.theme-promstroy .header-container {
+        height: auto;
+        padding: 14px 0;
+        gap: 12px;
+    }
+
+    .prom-logo .logo-text {
+        font-size: 1.2rem;
+    }
+
+    body.theme-promstroy .header-actions {
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .prom-wa-badge,
+    .prom-wa-text {
+        padding: 9px 10px;
+        font-size: 0.68rem;
+    }
+
+    .prom-hero {
+        min-height: auto;
+        padding: 90px 0 70px;
+        background-position: center;
+    }
+
+    .prom-hero-content {
+        max-width: none;
+    }
+
+    .prom-hero-content h1 {
+        font-size: 2.2rem;
+        text-wrap: balance;
+    }
+
+    .prom-hero-text {
+        font-size: 1rem;
+        margin-bottom: 28px;
+    }
+
+    .prom-hero-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .prom-btn-primary, .prom-btn-secondary {
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .prom-service-item,
+    .prom-stat-item,
+    .prom-review-card {
+        padding: 22px 18px;
+    }
+
+    .prom-service-item h4,
+    .prom-step-card h3 {
+        font-size: 1.05rem;
+    }
+
+    .prom-table-container {
+        margin: 0 -4px;
+    }
+
+    .prom-table-container {
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+
+    .prom-calc-inputs,
+    .prom-calc-estimation,
+    .prom-contacts-form-box {
+        padding: 24px 18px;
+    }
+
+    .prom-section-heading {
+        margin-bottom: 36px;
+    }
+
+    .est-main-price {
+        font-size: 2.1rem;
+    }
+
+    .est-stat-row {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    body.theme-promstroy .faq-question {
+        padding: 18px 20px;
+        font-size: 1rem;
+        gap: 12px;
+    }
+
+    body.theme-promstroy .faq-answer {
+        padding: 0 20px;
+    }
+
+    body.theme-promstroy .faq-item.active .faq-answer {
+        padding-bottom: 18px;
+    }
+
+    .prom-section {
+        padding: 60px 0;
+    }
+
+    .form-inputs-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .prom-hero-content h1,
+    .prom-contacts-info h2,
+    .prom-section-heading h2 {
+        font-size: 1.8rem;
+    }
+}

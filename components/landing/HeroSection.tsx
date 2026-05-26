@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Menu, MessageCircle, X } from "lucide-react";
 import { Container, SectionShell } from "@/components/ui/Card";
 import heroBg from "@/images/assets/hero-bg.webp";
@@ -23,6 +23,11 @@ const navLinks = [
   ["Заявка", "#lead-form"],
   ["FAQ", "#faq"],
   ["Контакты", "#contacts"],
+] as const;
+
+const demoLinks = [
+  ["Бьюти-салон", "/niche/beauty"],
+  ["Строительная", "/niche/stroy"],
 ] as const;
 
 function HeroOfferCard({ whatsappHref }: { whatsappHref: string }) {
@@ -77,7 +82,9 @@ function HeroOfferCard({ whatsappHref }: { whatsappHref: string }) {
 export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [demosOpen, setDemosOpen] = useState(false);
   const [isLeadFormVisible, setIsLeadFormVisible] = useState(false);
+  const demosMenuRef = useRef<HTMLDivElement>(null);
   const compact = isScrolled && !menuOpen;
 
   useEffect(() => {
@@ -105,8 +112,29 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!demosOpen) return;
+
+    function onPointerDown(event: PointerEvent) {
+      if (demosMenuRef.current?.contains(event.target as Node)) return;
+      setDemosOpen(false);
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setDemosOpen(false);
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [demosOpen]);
+
   function closeMenu() {
     setMenuOpen(false);
+    setDemosOpen(false);
   }
 
   return (
@@ -181,6 +209,30 @@ export function HeroSection({ whatsappHref }: { whatsappHref: string }) {
                   {label}
                 </a>
               ))}
+              <div className="relative" ref={demosMenuRef}>
+                <button
+                  type="button"
+                  aria-expanded={demosOpen}
+                  className="flex cursor-pointer items-center rounded-2xl px-3 py-2 transition hover:bg-white hover:text-brand-ink lg:px-0 lg:py-0 lg:hover:bg-transparent"
+                  onClick={() => setDemosOpen((current) => !current)}
+                >
+                  Примеры
+                </button>
+                {demosOpen && (
+                  <div className="mt-1 grid gap-1 rounded-[1.1rem] bg-white p-2 text-sm shadow-[0_18px_50px_rgba(17,16,24,0.12)] ring-1 ring-black/5 lg:absolute lg:left-1/2 lg:top-full lg:mt-3 lg:w-48 lg:-translate-x-1/2">
+                    {demoLinks.map(([label, href]) => (
+                      <a
+                        key={label}
+                        href={href}
+                        className="rounded-xl px-3 py-2 text-black/65 transition hover:bg-brand-mist hover:text-brand-ink"
+                        onClick={closeMenu}
+                      >
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </nav>
 
             <div className={`flex shrink-0 items-center gap-2 ${compact ? "" : "ml-auto"}`}>

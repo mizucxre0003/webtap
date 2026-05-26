@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "npm run niche:sync && prisma generate && next build",
     "start": "next start -H 0.0.0.0 -p ${PORT:-3000}",
     "typecheck": "tsc --noEmit",
+    "niche:sync": "npm run niche:beauty && npm run niche:stroy",
+    "niche:beauty": "npm ci --prefix niche/beauty && npm run build --prefix niche/beauty",
+    "niche:stroy": "node scripts/copy-niche-stroy.mjs",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "prisma:migrate": "prisma migrate dev",
