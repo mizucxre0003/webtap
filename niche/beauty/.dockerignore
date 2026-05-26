@@ -1,0 +1,14 @@
+.git
+.github
+dist
+node_modules
+npm-debug.log*
+*.local
+.env
+.env.*
+README.md
+src/assets/images/favicon.png
+src/assets/images/hero-editorial-beauty.png
+src/assets/images/gallery-beauty-result-01.png
+src/assets/images/gallery-process-03.png
+src/assets/images/gallery-salon-detail-02.png
