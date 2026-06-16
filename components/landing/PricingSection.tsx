@@ -1,60 +1,41 @@
-import { CheckCircle2 } from "lucide-react";
-import { LinkButton } from "@/components/ui/Button";
-import { Card, Container, SectionShell } from "@/components/ui/Card";
+import { ArrowRight } from "lucide-react";
+import { RevealAnimation } from "@/components/landing/RevealAnimation";
+import { Container, SectionShell } from "@/components/ui/Card";
 
-const support = [
-  "мелкие правки",
-  "обновление контактов",
-  "обновление текстов",
-  "контроль работоспособности",
-  "помощь с изменениями",
-  "поддержка после запуска",
-];
+const formats = ["Лендинг", "Корпоративный сайт", "Индивидуальный digital-проект"];
 
 export function PricingSection() {
   return (
-    <SectionShell id="pricing" className="bg-brand-mist">
+    <SectionShell id="pricing" className="bg-[#0a0a0a] text-white">
       <Container>
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-brand">Стоимость</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-brand-ink sm:text-5xl">
-              Стоимость запуска
+        <RevealAnimation className="grid gap-12 border-y border-white/12 py-12 lg:grid-cols-12 lg:py-20">
+          <div className="lg:col-span-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">07 / Стоимость</p>
+            <h2 className="mt-5 text-[clamp(2rem,4.4vw,5.2rem)] font-semibold leading-[0.96] tracking-[-0.035em]">
+              Стоимость зависит от задачи, а не от количества экранов
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-black/60 sm:mt-5 sm:text-lg sm:leading-8">
-              Итоговая стоимость зависит от сложности проекта, количества блоков,
-              текстов, дизайна и дополнительных функций.
-            </p>
           </div>
-          <Card className="border-brand/15 p-5 sm:p-7">
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-brand">Главный оффер</p>
-            <h3 className="mt-3 text-3xl font-black leading-tight text-brand-ink sm:text-4xl">
-              Запуск сайта от 49 990 ₸
-            </h3>
-            <div className="mt-6 grid gap-3">
-              <div className="rounded-3xl bg-brand-mist p-4 text-lg font-black text-brand-ink">
-                Запуск от 49 990 ₸
-              </div>
-              <div className="rounded-3xl bg-brand-mist p-4 text-base font-bold text-brand-ink">
-                Далее от 4 990 ₸/мес
-              </div>
-              <div className="rounded-3xl bg-brand-mist p-4 text-base font-bold text-brand-ink">
-                Годовое обслуживание от 51 990 ₸/год
-              </div>
-            </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {support.map((item) => (
-                <div key={item} className="flex min-w-0 items-center gap-2 text-sm font-semibold text-black/65">
-                  <CheckCircle2 className="size-4 shrink-0 text-brand" />
-                  <span className="break-words">{item}</span>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <p className="text-lg leading-8 text-white/62">
+              После короткого брифа мы оцениваем структуру, объём дизайна, разработку и необходимые интеграции.
+              Вы получаете понятный состав работ, сроки и фиксированную стоимость проекта.
+            </p>
+            <div className="mt-8 grid gap-2">
+              {formats.map((format) => (
+                <div key={format} className="border border-white/12 px-4 py-3 text-sm font-semibold text-white/78">
+                  {format}
                 </div>
               ))}
             </div>
-            <LinkButton href="#lead-form" className="mt-7 w-full">
-              Узнать стоимость моего сайта
-            </LinkButton>
-          </Card>
-        </div>
+            <a
+              href="#lead-form"
+              className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded bg-white px-5 text-sm font-semibold text-black transition hover:bg-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Получить оценку проекта
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
+        </RevealAnimation>
       </Container>
     </SectionShell>
   );

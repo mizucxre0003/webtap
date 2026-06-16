@@ -1,4 +1,4 @@
-export const defaultOwnerWhatsappText = "Здравствуйте! Пишу с сайта WebTap.kz";
+export const defaultOwnerWhatsappText = "Здравствуйте! Пишу с сайта WebTap.kz. Хочу обсудить проект.";
 
 export function normalizePhone(phone: string | null | undefined) {
   if (!phone) return "";

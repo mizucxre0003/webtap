@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       id: lead.id,
-      message: "Заявка отправлена. Я свяжусь с вами в WhatsApp.",
+      message: "Заявка отправлена. Мы свяжемся с вами и обсудим задачу.",
     });
   } catch (error) {
     console.error("Lead submit error", error);

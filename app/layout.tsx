@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,20 +14,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WebTap — сайты для бизнеса под заявки",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://webtap.kz"),
+  title: "WebTap — дизайн и разработка сайтов для бизнеса",
   description:
-    "WebTap создаёт понятные сайты и страницы для услуг, экспертов и малого бизнеса с заявками в WhatsApp.",
+    "WebTap проектирует и разрабатывает современные сайты для компаний: стратегия, UX/UI-дизайн, адаптивная разработка и запуск.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "WebTap — дизайн и разработка сайтов для бизнеса",
+    description:
+      "Стратегия, UX/UI-дизайн, адаптивная разработка и запуск сайтов для компаний.",
+    url: "/",
+    siteName: "WebTap",
+    locale: "ru_KZ",
+    type: "website",
+  },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [
+      {
+        url: "/favicon.webp?v=2",
+        type: "image/webp",
+      },
+    ],
+    shortcut: "/favicon.webp?v=2",
+    apple: "/favicon.webp?v=2",
   },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ru">

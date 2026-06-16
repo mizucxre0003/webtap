@@ -21,7 +21,7 @@ import type {
 import { cn } from "@/lib/utils";
 
 const field =
-  "min-h-12 w-full max-w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-base text-brand-ink outline-none transition placeholder:text-black/35 focus:border-brand focus:ring-4 focus:ring-brand/15 sm:min-h-11 sm:py-2.5 sm:text-sm";
+  "min-h-12 w-full max-w-full rounded border border-black/10 bg-white px-4 py-3 text-base text-brand-ink outline-none transition placeholder:text-black/35 focus:border-black/45 focus:ring-4 focus:ring-black/10 sm:min-h-11 sm:py-2.5 sm:text-sm";
 
 type OptionProps = {
   value?: string | number;
@@ -167,8 +167,8 @@ export function Select({
         aria-required={required}
         className={cn(
           field,
-          "group flex items-center justify-between gap-3 text-left shadow-[0_14px_40px_rgba(147,112,219,0.10)] hover:-translate-y-0.5 hover:border-brand/50 hover:shadow-[0_18px_52px_rgba(147,112,219,0.16)] disabled:cursor-not-allowed disabled:opacity-60",
-          open && "border-brand ring-4 ring-brand/15",
+          "group flex items-center justify-between gap-3 text-left disabled:cursor-not-allowed disabled:opacity-60",
+          open && "border-black/45 ring-4 ring-black/10",
           selectedOption?.disabled && "text-black/45",
           className,
         )}
@@ -177,8 +177,8 @@ export function Select({
         <span className="truncate">{selectedOption?.label || "Выберите"}</span>
         <span
           className={cn(
-            "grid h-7 w-7 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand transition",
-            open && "rotate-180 bg-brand text-white",
+            "grid h-7 w-7 shrink-0 place-items-center rounded bg-black/5 text-black transition",
+            open && "rotate-180 bg-black text-white",
           )}
           aria-hidden="true"
         >
@@ -190,7 +190,7 @@ export function Select({
         <div
           role="listbox"
           aria-labelledby={controlId}
-          className="absolute left-0 top-[calc(100%+8px)] z-50 max-h-72 w-full min-w-[14rem] overflow-y-auto rounded-3xl border border-brand/15 bg-white p-1.5 shadow-[0_24px_70px_rgba(17,16,24,0.18)]"
+          className="absolute left-0 top-[calc(100%+8px)] z-50 max-h-72 w-full min-w-[14rem] overflow-y-auto rounded border border-black/10 bg-white p-1.5 shadow-[0_24px_70px_rgba(0,0,0,0.22)]"
         >
           {options.map((option) => {
             const selected = option.value === selectedValue;
@@ -203,8 +203,8 @@ export function Select({
                 aria-selected={selected}
                 disabled={option.disabled}
                 className={cn(
-                  "flex min-h-10 w-full items-center justify-between gap-3 rounded-2xl px-3 py-2 text-left text-sm font-semibold text-brand-ink transition hover:bg-brand-mist disabled:cursor-not-allowed disabled:text-black/35",
-                  selected && "bg-brand text-white hover:bg-brand",
+                  "flex min-h-10 w-full items-center justify-between gap-3 rounded px-3 py-2 text-left text-sm font-semibold text-brand-ink transition hover:bg-brand-mist disabled:cursor-not-allowed disabled:text-black/35",
+                  selected && "bg-black text-white hover:bg-black",
                 )}
                 onClick={() => chooseOption(option)}
               >

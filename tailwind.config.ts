@@ -10,16 +10,16 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#9370DB",
-          dark: "#5B3CA8",
-          ink: "#111018",
-          mist: "#F8F5FF",
-          soft: "#F5F5F7",
+          DEFAULT: "#E8E8E5",
+          dark: "#A3A3A3",
+          ink: "#0A0A0A",
+          mist: "#E8E8E5",
+          soft: "#F5F5F2",
         },
       },
       boxShadow: {
-        soft: "0 24px 70px rgba(17, 16, 24, 0.12)",
-        glow: "0 18px 60px rgba(147, 112, 219, 0.28)",
+        soft: "0 24px 70px rgba(0, 0, 0, 0.12)",
+        glow: "0 18px 60px rgba(255, 255, 255, 0.12)",
       },
       borderRadius: {
         "4xl": "2rem",

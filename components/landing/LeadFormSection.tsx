@@ -1,132 +1,35 @@
-"use client";
+import { ContactForm } from "@/components/landing/ContactForm";
+import { RevealAnimation } from "@/components/landing/RevealAnimation";
+import { Container, SectionShell } from "@/components/ui/Card";
 
-import { useState, useTransition } from "react";
-import { MessageCircle, Send } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, Container, SectionShell } from "@/components/ui/Card";
-import { Input, Label, Select, Textarea } from "@/components/ui/Form";
-
-type FormState = {
-  status: "idle" | "success" | "error";
-  message?: string;
+type LeadFormSectionProps = {
+  whatsappHref: string;
 };
 
-export function LeadFormSection({ whatsappHref }: { whatsappHref: string }) {
-  const [state, setState] = useState<FormState>({ status: "idle" });
-  const [isPending, startTransition] = useTransition();
-
-  function onSubmit(formData: FormData) {
-    startTransition(async () => {
-      setState({ status: "idle" });
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = (await response.json()) as { message?: string };
-      if (!response.ok) {
-        setState({ status: "error", message: data.message ?? "Не получилось отправить заявку" });
-        return;
-      }
-      setState({
-        status: "success",
-        message: "Заявка отправлена. Мы свяжемся с вами в WhatsApp.",
-      });
-      const form = document.getElementById("webtap-lead-form") as HTMLFormElement | null;
-      form?.reset();
-    });
-  }
-
+export function LeadFormSection({ whatsappHref }: LeadFormSectionProps) {
   return (
-    <SectionShell id="lead-form" className="bg-white/80">
+    <SectionShell id="lead-form" className="bg-[#111111] text-white">
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-brand">Заявка</p>
-            <h2 className="mt-3 text-3xl font-black text-brand-ink sm:text-5xl">
-              Расскажите, какой сайт нужен вашему бизнесу
+        <RevealAnimation className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">08 / Контакт</p>
+            <h2 className="mt-5 text-[clamp(2rem,4.4vw,5.2rem)] font-semibold leading-[0.96] tracking-[-0.035em]">
+              Давайте сделаем сайт, который соответствует уровню вашего бизнеса
             </h2>
-            <p className="mt-5 text-lg leading-8 text-black/60">
-              Оставьте контакты и пару деталей. Мы посмотрим нишу, задачу и подскажем
-              примерную стоимость запуска.
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/62">
+              Расскажите о задаче. Мы изучим проект и предложим подходящий формат работы.
             </p>
+            <div className="mt-10 flex flex-wrap gap-2 text-xs uppercase tracking-[0.18em] text-white/42">
+              <span className="border border-white/12 px-3 py-2">Strategy</span>
+              <span className="border border-white/12 px-3 py-2">Design</span>
+              <span className="border border-white/12 px-3 py-2">Development</span>
+            </div>
           </div>
-          <Card>
-            <form
-              id="webtap-lead-form"
-              action={onSubmit}
-              className="grid gap-4 sm:grid-cols-2"
-            >
-              <Label>
-                Имя
-                <Input name="name" required placeholder="Ваше имя" />
-              </Label>
-              <Label>
-                Телефон / WhatsApp
-                <Input name="phone" required placeholder="+7..." />
-              </Label>
-              <Label className="sm:col-span-2">
-                Ниша бизнеса
-                <Input name="businessNiche" required placeholder="Например: салон красоты, ремонт, курс" />
-              </Label>
-              <Label>
-                Что нужно
-                <Select name="siteType" required defaultValue="">
-                  <option value="" disabled>
-                    Выберите вариант
-                  </option>
-                  <option>сайт для услуги</option>
-                  <option>страница для рекламы</option>
-                  <option>сайт для записи/заявок</option>
-                  <option>не знаю, нужна консультация</option>
-                </Select>
-              </Label>
-              <Label>
-                Примерный бюджет
-                <Select name="budgetRange" required defaultValue="">
-                  <option value="" disabled>
-                    Выберите бюджет
-                  </option>
-                  <option>49 990 - 80 000 ₸</option>
-                  <option>80 000 - 150 000 ₸</option>
-                  <option>150 000 ₸+</option>
-                </Select>
-              </Label>
-              <Label className="sm:col-span-2">
-                Комментарий
-                <Textarea name="comment" placeholder="Что важно показать на сайте?" />
-              </Label>
-              <div className="grid gap-3 sm:col-span-2 sm:grid-cols-2">
-                <Button disabled={isPending} className="w-full">
-                  <Send className="size-4" />
-                  {isPending ? "Отправляем..." : "Оставить заявку"}
-                </Button>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_18px_48px_rgba(16,185,129,0.24)] transition hover:-translate-y-0.5 hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                >
-                  <MessageCircle className="size-4" />
-                  Написать в WhatsApp
-                </a>
-              </div>
-              <div className="sm:col-span-2">
-                {state.message ? (
-                  <p
-                    className={`mt-4 rounded-2xl px-4 py-3 text-sm font-semibold ${
-                      state.status === "success"
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-red-50 text-red-700"
-                    }`}
-                  >
-                    {state.message}
-                  </p>
-                ) : null}
-              </div>
-            </form>
-          </Card>
-        </div>
+
+          <div className="border border-white/12 bg-[#0a0a0a] p-5 sm:p-7 lg:col-span-5 lg:col-start-8">
+            <ContactForm whatsappHref={whatsappHref} />
+          </div>
+        </RevealAnimation>
       </Container>
     </SectionShell>
   );

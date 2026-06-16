@@ -1,15 +1,13 @@
-import { AudienceSection } from "@/components/landing/AudienceSection";
-import { BusinessStructureSection } from "@/components/landing/BusinessStructureSection";
-import { FAQSection } from "@/components/landing/FAQSection";
-import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { Footer } from "@/components/landing/Footer";
 import { HeroSection } from "@/components/landing/HeroSection";
+import { IndustriesSection } from "@/components/landing/IndustriesSection";
 import { LeadFormSection } from "@/components/landing/LeadFormSection";
+import { PositioningSection } from "@/components/landing/PositioningSection";
 import { PricingSection } from "@/components/landing/PricingSection";
-import { ProblemSection } from "@/components/landing/ProblemSection";
 import { ProcessSection } from "@/components/landing/ProcessSection";
-import { ReviewsSection } from "@/components/landing/ReviewsSection";
-import { TapFlowSection } from "@/components/landing/TapFlowSection";
+import { SelectedWorkSection } from "@/components/landing/SelectedWorkSection";
+import { ServicesSection } from "@/components/landing/ServicesSection";
+import { WhyWebTapSection } from "@/components/landing/WhyWebTapSection";
 import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
@@ -18,18 +16,16 @@ export default function Home() {
   const whatsappHref = ownerWhatsappRedirectUrl();
 
   return (
-    <main className="pb-20 sm:pb-0">
+    <main className="bg-[#0a0a0a] text-white">
       <HeroSection whatsappHref={whatsappHref} />
-      <AudienceSection />
-      <ProblemSection />
-      <TapFlowSection />
-      <BusinessStructureSection />
-      <ReviewsSection />
-      <FeaturesSection />
+      <SelectedWorkSection />
+      <PositioningSection />
+      <ServicesSection />
+      <WhyWebTapSection />
       <ProcessSection />
+      <IndustriesSection />
       <PricingSection />
       <LeadFormSection whatsappHref={whatsappHref} />
-      <FAQSection />
       <Footer />
     </main>
   );

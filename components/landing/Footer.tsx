@@ -1,15 +1,15 @@
+import Image from "next/image";
 import { FileText, Mail, MessageCircle, Send } from "lucide-react";
 import { Container } from "@/components/ui/Card";
 import { prisma } from "@/lib/prisma";
 import { ownerWhatsappRedirectUrl } from "@/lib/whatsapp";
+import newLogo from "@/images/assets/new-logo.webp";
 
 const links = [
-  ["Главная", "#home"],
-  ["Для кого", "#audience"],
-  ["Что мы делаем", "#tap-flow"],
-  ["Условия", "#pricing"],
-  ["Заявка", "#lead-form"],
-  ["FAQ", "#faq"],
+  ["Кейсы", "#cases"],
+  ["Услуги", "#services"],
+  ["Процесс", "#process"],
+  ["О студии", "#studio"],
   ["Контакты", "#contacts"],
 ] as const;
 
@@ -39,30 +39,36 @@ export async function Footer() {
   const email = settings?.email?.trim() || "hello@webtap.kz";
   const instagramHref = normalizedContactUrl(settings?.instagram, "https://instagram.com/", "https://instagram.com/");
   const telegramHref = normalizedContactUrl(settings?.telegram, "https://t.me/", "https://t.me/");
+  const year = new Date().getFullYear();
 
   return (
-    <footer id="contacts" className="px-4 pb-24 pt-10 sm:px-6 sm:pb-8 lg:px-8">
+    <footer id="contacts" className="border-t border-white/12 bg-[#0a0a0a] px-5 py-12 text-white sm:px-8 lg:px-14">
       <Container>
-        <div className="grid gap-8 rounded-[1.5rem] bg-brand-ink p-5 text-white sm:rounded-[2rem] sm:p-8 lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
-          <div>
-            <p className="text-2xl font-black">{brandName}</p>
-            <p className="mt-4 max-w-md leading-7 text-white/60">
-              Сайты и страницы для малого бизнеса. Запуск от 49 990 ₸, далее обслуживание от 4 990 ₸/мес.
+        <div className="grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <a href="#home" className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em]">
+              <Image src={newLogo} alt="" className="size-11 object-contain" />
+              {brandName}
+            </a>
+            <p className="mt-5 max-w-md text-base leading-7 text-white/58">
+              Премиальный дизайн и разработка сайтов для компаний, которым важны репутация, структура и точный цифровой образ.
             </p>
           </div>
-          <div>
-            <p className="mb-4 font-black">Разделы</p>
-            <div className="grid gap-2 text-sm text-white/65 sm:grid-cols-2">
+
+          <nav className="lg:col-span-2 lg:col-start-7" aria-label="Навигация в подвале">
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/38">Разделы</p>
+            <div className="grid gap-3 text-sm text-white/62">
               {links.map(([label, href]) => (
                 <a key={label} href={href} className="transition hover:text-white">
                   {label}
                 </a>
               ))}
             </div>
-          </div>
-          <div>
-            <p className="mb-4 font-black">Контакты</p>
-            <div className="space-y-3 text-sm text-white/65">
+          </nav>
+
+          <div className="lg:col-span-3 lg:col-start-10">
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/38">Контакты</p>
+            <div className="grid gap-3 text-sm text-white/62">
               <a className="flex items-center gap-2 transition hover:text-white" href={ownerWhatsappRedirectUrl()} target="_blank" rel="noreferrer">
                 <MessageCircle className="size-4" />
                 WhatsApp
@@ -85,6 +91,11 @@ export async function Footer() {
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/12 pt-6 text-xs uppercase tracking-[0.18em] text-white/34 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {year} {brandName}</span>
+          <span>Web design & development — Kazakhstan</span>
         </div>
       </Container>
     </footer>
